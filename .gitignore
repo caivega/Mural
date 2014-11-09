@@ -1,10 +1,18 @@
+# Xcode
 .DS_Store
-.DS_store
-
-xcode/build
-xcode/CinderCanvas.xcodeproj/project.xcworkspace/contents.xcworkspacedata
-xcode/CinderCanvas.xcodeproj/project.xcworkspace/xcuserdata/sean.xcuserdatad/UserInterfaceState.xcuserstate
-xcode/CinderCanvas.xcodeproj/project.xcworkspace/xcuserdata/sean.xcuserdatad/WorkspaceSettings.xcsettings
-xcode/CinderCanvas.xcodeproj/xcuserdata/sean.xcuserdatad/xcschemes/CinderCanvas.xcscheme
-xcode/CinderCanvas.xcodeproj/xcuserdata/sean.xcuserdatad/xcschemes/xcschememanagement.plist
-CinderCanvas.xccheckout
+build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+*.xcworkspace
+!default.xcworkspace
+xcuserdata
+profile
+*.moved-aside
+DerivedData
+.idea/
