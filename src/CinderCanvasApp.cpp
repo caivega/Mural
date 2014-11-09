@@ -2,13 +2,12 @@
 #include "cinder/gl/gl.h"
 
 using namespace ci;
-using namespace ci::app;
-using namespace std;
 
-class CinderCanvasApp : public AppNative {
-  public:
+class CinderCanvasApp : public app::AppNative
+{
+public:
 	void setup();
-	void mouseDown( MouseEvent event );	
+    void mouseDown(app::MouseEvent event);
 	void update();
 	void draw();
 };
@@ -17,7 +16,7 @@ void CinderCanvasApp::setup()
 {
 }
 
-void CinderCanvasApp::mouseDown( MouseEvent event )
+void CinderCanvasApp::mouseDown(app::MouseEvent event)
 {
 }
 
@@ -28,7 +27,7 @@ void CinderCanvasApp::update()
 void CinderCanvasApp::draw()
 {
 	// clear out the window with black
-	gl::clear( Color( 0, 0, 0 ) ); 
+    gl::clear(Color(0, 0, 0));
 }
 
-CINDER_APP_NATIVE( CinderCanvasApp, RendererGl )
+CINDER_APP_NATIVE(CinderCanvasApp, app::RendererGl)
