@@ -1,0 +1,9 @@
+.DS_Store
+.DS_store
+
+xcode/build
+xcode/CinderCanvas.xcodeproj/project.xcworkspace/contents.xcworkspacedata
+xcode/CinderCanvas.xcodeproj/project.xcworkspace/xcuserdata/sean.xcuserdatad/UserInterfaceState.xcuserstate
+xcode/CinderCanvas.xcodeproj/project.xcworkspace/xcuserdata/sean.xcuserdatad/WorkspaceSettings.xcsettings
+xcode/CinderCanvas.xcodeproj/xcuserdata/sean.xcuserdatad/xcschemes/CinderCanvas.xcscheme
+xcode/CinderCanvas.xcodeproj/xcuserdata/sean.xcuserdatad/xcschemes/xcschememanagement.plist
