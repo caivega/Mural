@@ -12,6 +12,11 @@
 		00B784B40FF439BC000DE1D7 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B00FF439BC000DE1D7 /* AudioToolbox.framework */; };
 		00B784B50FF439BC000DE1D7 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B10FF439BC000DE1D7 /* AudioUnit.framework */; };
 		00B784B60FF439BC000DE1D7 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B20FF439BC000DE1D7 /* CoreAudio.framework */; };
+		14390A4B1A0EF67600A8008D /* AppViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14390A491A0EF67600A8008D /* AppViewController.cpp */; };
+		14390A4E1A0EF6AF00A8008D /* JavaScriptView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14390A4C1A0EF6AF00A8008D /* JavaScriptView.cpp */; };
+		14390A571A0F004000A8008D /* scripts in Resources */ = {isa = PBXBuildFile; fileRef = 14390A561A0F004000A8008D /* scripts */; };
+		14390A601A0F081800A8008D /* duktape.c in Sources */ = {isa = PBXBuildFile; fileRef = 14390A5C1A0F081800A8008D /* duktape.c */; };
+		14390A611A0F081800A8008D /* JavaScript.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14390A5E1A0F081800A8008D /* JavaScript.cpp */; };
 		5323E6B20EAFCA74003A9687 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B10EAFCA74003A9687 /* CoreVideo.framework */; };
 		5323E6B60EAFCA7E003A9687 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B50EAFCA7E003A9687 /* QTKit.framework */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -27,6 +32,16 @@
 		00B784B20FF439BC000DE1D7 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		0E7778188AC649DC99906A3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		14390A491A0EF67600A8008D /* AppViewController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AppViewController.cpp; path = ../src/AppViewController.cpp; sourceTree = "<group>"; };
+		14390A4A1A0EF67600A8008D /* AppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppViewController.h; path = ../src/AppViewController.h; sourceTree = "<group>"; };
+		14390A4C1A0EF6AF00A8008D /* JavaScriptView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = JavaScriptView.cpp; path = ../src/JavaScriptView.cpp; sourceTree = "<group>"; };
+		14390A4D1A0EF6AF00A8008D /* JavaScriptView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JavaScriptView.h; path = ../src/JavaScriptView.h; sourceTree = "<group>"; };
+		14390A551A0EF74A00A8008D /* Global.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Global.h; path = ../src/Global.h; sourceTree = "<group>"; };
+		14390A561A0F004000A8008D /* scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = scripts; path = ../resources/scripts; sourceTree = "<group>"; };
+		14390A5C1A0F081800A8008D /* duktape.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duktape.c; sourceTree = "<group>"; };
+		14390A5D1A0F081800A8008D /* duktape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duktape.h; sourceTree = "<group>"; };
+		14390A5E1A0F081800A8008D /* JavaScript.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JavaScript.cpp; sourceTree = "<group>"; };
+		14390A5F1A0F081800A8008D /* JavaScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JavaScript.h; sourceTree = "<group>"; };
 		20516ADA7B5C43A5B05F9D44 /* CinderCanvasApp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = CinderCanvasApp.cpp; path = ../src/CinderCanvasApp.cpp; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
@@ -67,7 +82,13 @@
 		080E96DDFE201D6D7F000001 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				14390A5B1A0F081800A8008D /* JavaScript */,
 				20516ADA7B5C43A5B05F9D44 /* CinderCanvasApp.cpp */,
+				14390A491A0EF67600A8008D /* AppViewController.cpp */,
+				14390A4A1A0EF67600A8008D /* AppViewController.h */,
+				14390A4C1A0EF6AF00A8008D /* JavaScriptView.cpp */,
+				14390A4D1A0EF6AF00A8008D /* JavaScriptView.h */,
+				14390A551A0EF74A00A8008D /* Global.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -94,6 +115,18 @@
 				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
 			);
 			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		14390A5B1A0F081800A8008D /* JavaScript */ = {
+			isa = PBXGroup;
+			children = (
+				14390A5C1A0F081800A8008D /* duktape.c */,
+				14390A5D1A0F081800A8008D /* duktape.h */,
+				14390A5E1A0F081800A8008D /* JavaScript.cpp */,
+				14390A5F1A0F081800A8008D /* JavaScript.h */,
+			);
+			name = JavaScript;
+			path = ../src/JavaScript;
 			sourceTree = "<group>";
 		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
@@ -129,6 +162,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				14390A561A0F004000A8008D /* scripts */,
 				D3DF879870F349C2A32E127F /* CinderApp.icns */,
 				0E7778188AC649DC99906A3C /* Info.plist */,
 			);
@@ -198,6 +232,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF3C680FFEC842D2BDA578DC /* CinderApp.icns in Resources */,
+				14390A571A0F004000A8008D /* scripts in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,6 +243,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14390A601A0F081800A8008D /* duktape.c in Sources */,
+				14390A4B1A0EF67600A8008D /* AppViewController.cpp in Sources */,
+				14390A611A0F081800A8008D /* JavaScript.cpp in Sources */,
+				14390A4E1A0EF6AF00A8008D /* JavaScriptView.cpp in Sources */,
 				C55B6F466378486C820D8FAA /* CinderCanvasApp.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,0 +1,48 @@
+//
+//  AppViewController.h
+//  CinderCanvas
+//
+//  Created by Sean on 11/9/14.
+//
+//
+
+#ifndef CinderCanvas_AppViewController_h
+#define CinderCanvas_AppViewController_h
+
+#include "Global.h"
+#include "JavaScriptView.h"
+
+namespace mural
+{
+    
+    class AppViewController
+    {
+    public:
+        JavaScriptView *view;
+        
+    public:
+        void initWithScript(const String& path, int width = 640, int height = 480, const String& title = "Mural");
+        void initWithScripts(const StringList& paths, int width = 640, int height = 480, const String& title = "Mural");
+        
+        void update();
+        void draw();
+        
+        static AppViewController& getInstance()
+        {
+            static AppViewController instance;
+            return instance;
+        }
+        
+    private:
+        AppViewController() {}
+        AppViewController(AppViewController const&) {}
+        void operator=(AppViewController const&) {}
+        
+        ~AppViewController();
+    };
+    
+}
+
+#define theAppController mural::AppViewController::getInstance()
+
+#endif /* defined(__CinderCanvas__AppViewController__) */
