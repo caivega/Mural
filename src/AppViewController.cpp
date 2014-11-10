@@ -33,7 +33,7 @@ namespace mural
     
     void AppViewController::update()
     {
-        
+        view->update();
     }
     void AppViewController::draw()
     {

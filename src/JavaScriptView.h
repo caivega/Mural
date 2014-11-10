@@ -33,6 +33,7 @@ namespace mural
         // Methods
         void loadScriptAtPath(const String& path);
         void boot();
+        void update();
 
         // Event callbacks
 

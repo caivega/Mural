@@ -73,6 +73,16 @@ namespace mural
         
     }
     
+    void JavaScriptView::update()
+    {
+        // RAF
+        duk_push_global_object(this->jsGlobalContext);
+        duk_get_prop_string(this->jsGlobalContext, -1, MURAL_JS_NAMESPACE);
+        duk_get_prop_string(this->jsGlobalContext, -1, "tickAnimFrame");
+        duk_call(this->jsGlobalContext, 0);
+        duk_pop_n(this->jsGlobalContext, 3);
+    }
+    
     void JavaScriptView::defineProperties()
     {
         // Set properties to __MURAL__
