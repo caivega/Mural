@@ -70,10 +70,10 @@ namespace mural
     
     void JavaScriptView::boot()
     {
-        
+        ctx = new CanvasContext();
     }
     
-    void JavaScriptView::update()
+    void JavaScriptView::tickAndDraw()
     {
         // RAF
         duk_push_global_object(this->jsGlobalContext);
@@ -81,6 +81,9 @@ namespace mural
         duk_get_prop_string(this->jsGlobalContext, -1, "tickAnimFrame");
         duk_call(this->jsGlobalContext, 0);
         duk_pop_n(this->jsGlobalContext, 3);
+        
+        // [Test]
+        ctx->strokeRect(32, 32, 64, 64);
     }
     
     void JavaScriptView::defineProperties()
