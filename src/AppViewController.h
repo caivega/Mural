@@ -24,8 +24,7 @@ namespace mural
         void initWithScript(const String& path, int width = 640, int height = 480, const String& title = "Mural");
         void initWithScripts(const StringList& paths, int width = 640, int height = 480, const String& title = "Mural");
         
-        void update();
-        void draw();
+        void tickAndDraw();
         
         static AppViewController& getInstance()
         {

@@ -9,7 +9,6 @@ public:
     void prepareSettings(Settings *settings);
 	void setup();
     void mouseDown(app::MouseEvent event);
-	void update();
 	void draw();
 };
 
@@ -26,14 +25,9 @@ void CinderCanvasApp::mouseDown(app::MouseEvent event)
 {
 }
 
-void CinderCanvasApp::update()
-{
-    theAppController.update();
-}
-
 void CinderCanvasApp::draw()
 {
-    theAppController.draw();
+    theAppController.tickAndDraw();
 }
 
 CINDER_APP_NATIVE(CinderCanvasApp, app::RendererGl)

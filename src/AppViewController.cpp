@@ -30,13 +30,8 @@ namespace mural
         }
         view->boot();
     }
-    
-    void AppViewController::update()
+    void AppViewController::tickAndDraw()
     {
-        view->update();
-    }
-    void AppViewController::draw()
-    {
-        gl::clear(Color(0, 0, 0));
+        view->tickAndDraw();
     }
 }
