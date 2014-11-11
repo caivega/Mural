@@ -17,6 +17,7 @@
 		14390A571A0F004000A8008D /* scripts in Resources */ = {isa = PBXBuildFile; fileRef = 14390A561A0F004000A8008D /* scripts */; };
 		14390A601A0F081800A8008D /* duktape.c in Sources */ = {isa = PBXBuildFile; fileRef = 14390A5C1A0F081800A8008D /* duktape.c */; };
 		14390A611A0F081800A8008D /* JavaScript.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14390A5E1A0F081800A8008D /* JavaScript.cpp */; };
+		14B2CD431A11C0A800778064 /* CanvasContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14B2CD411A11C0A800778064 /* CanvasContext.cpp */; };
 		5323E6B20EAFCA74003A9687 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B10EAFCA74003A9687 /* CoreVideo.framework */; };
 		5323E6B60EAFCA7E003A9687 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B50EAFCA7E003A9687 /* QTKit.framework */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -42,6 +43,8 @@
 		14390A5D1A0F081800A8008D /* duktape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duktape.h; sourceTree = "<group>"; };
 		14390A5E1A0F081800A8008D /* JavaScript.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JavaScript.cpp; sourceTree = "<group>"; };
 		14390A5F1A0F081800A8008D /* JavaScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JavaScript.h; sourceTree = "<group>"; };
+		14B2CD411A11C0A800778064 /* CanvasContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CanvasContext.cpp; path = ../src/Canvas/CanvasContext.cpp; sourceTree = "<group>"; };
+		14B2CD421A11C0A800778064 /* CanvasContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CanvasContext.h; path = ../src/Canvas/CanvasContext.h; sourceTree = "<group>"; };
 		20516ADA7B5C43A5B05F9D44 /* CinderCanvasApp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = CinderCanvasApp.cpp; path = ../src/CinderCanvasApp.cpp; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
@@ -89,6 +92,8 @@
 				14390A4C1A0EF6AF00A8008D /* JavaScriptView.cpp */,
 				14390A4D1A0EF6AF00A8008D /* JavaScriptView.h */,
 				14390A551A0EF74A00A8008D /* Global.h */,
+				14B2CD411A11C0A800778064 /* CanvasContext.cpp */,
+				14B2CD421A11C0A800778064 /* CanvasContext.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -246,6 +251,7 @@
 				14390A601A0F081800A8008D /* duktape.c in Sources */,
 				14390A4B1A0EF67600A8008D /* AppViewController.cpp in Sources */,
 				14390A611A0F081800A8008D /* JavaScript.cpp in Sources */,
+				14B2CD431A11C0A800778064 /* CanvasContext.cpp in Sources */,
 				14390A4E1A0EF6AF00A8008D /* JavaScriptView.cpp in Sources */,
 				C55B6F466378486C820D8FAA /* CinderCanvasApp.cpp in Sources */,
 			);
