@@ -84,6 +84,11 @@ namespace mural
         
         // [Test]
         ctx->strokeRect(32, 32, 64, 64);
+        ctx->beginPath();
+        ctx->moveTo(72, 72);
+        ctx->lineTo(72, 128);
+        ctx->closePath();
+        ctx->stroke();
     }
     
     void JavaScriptView::defineProperties()

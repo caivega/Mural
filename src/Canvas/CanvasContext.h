@@ -76,6 +76,8 @@ namespace mural
         CanvasContext();
         ~CanvasContext();
         
+        void beginPath();
+        void closePath();
         void moveTo(float x, float y);
         void lineTo(float x, float y);
         void strokeRect(float x, float y, float w, float h);
