@@ -45,7 +45,7 @@ namespace mural
     } CompositeOperation;
 
     struct CanvasState {
-        CGAffineTransform transform;
+//        CGAffineTransform transform;
         
         CompositeOperation globalCompositeOperation;
         Color fillColor;
@@ -63,11 +63,13 @@ namespace mural
 //        EJFontDescriptor *font;
         
         Path2d *clipPath;
+        std::vector<Vec2f> pathVertices;
     };
     
     class CanvasContext
     {
         Path2d *path;
+        CompositeOperation globalCompositeOperation;
         
         int stateIndex;
         CanvasState stateStack[CANVAS_STATE_STACK_SIZE];
@@ -76,6 +78,8 @@ namespace mural
         CanvasContext();
         ~CanvasContext();
         
+        void save();
+        void restore();
         void beginPath();
         void closePath();
         void moveTo(float x, float y);
@@ -84,6 +88,13 @@ namespace mural
         void fillRect(float x, float y, float w, float h);
         void stroke();
         void fill();
+        void clearRect(float x, float y, float w, float h);
+        
+        void resetClip();
+        
+        void setLineWidth(float width);
+        void setStrokeColor(const Color& c);
+        void setFillColor(const Color& c);
     };
 
 }

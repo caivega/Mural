@@ -88,6 +88,9 @@ namespace mural
         ctx->moveTo(72, 72);
         ctx->lineTo(72, 128);
         ctx->closePath();
+        
+        ctx->setStrokeColor(Color(1.0f, 1.0f, 1.0f));
+        ctx->setLineWidth(4.0f);
         ctx->stroke();
     }
     
