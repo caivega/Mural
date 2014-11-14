@@ -17,6 +17,7 @@ namespace mural
     
     class AppViewController
     {
+        bool booted;
     public:
         JavaScriptView *view;
         
@@ -33,7 +34,7 @@ namespace mural
         }
         
     private:
-        AppViewController() {}
+        AppViewController(): booted(false) {}
         AppViewController(AppViewController const&) {}
         void operator=(AppViewController const&) {}
         

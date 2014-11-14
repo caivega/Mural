@@ -20,7 +20,6 @@ namespace mural
     {
         view = new JavaScriptView(width, height, title);
         view->loadScriptAtPath(path);
-        view->boot();
     }
     void AppViewController::initWithScripts(const StringList& paths, int width, int height, const String& title)
     {
@@ -28,10 +27,15 @@ namespace mural
         for (auto it = paths.begin(); it != paths.end(); ++it) {
             view->loadScriptAtPath(it->c_str());
         }
-        view->boot();
     }
     void AppViewController::tickAndDraw()
     {
-        view->tickAndDraw();
+        if (booted) {
+            view->tickAndDraw();
+        }
+        else {
+            view->boot();
+            booted = true;
+        }
     }
 }
