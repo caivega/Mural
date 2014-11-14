@@ -70,7 +70,26 @@ namespace mural
     
     void JavaScriptView::boot()
     {
+        // [Test]
         ctx = new CanvasContext();
+
+        ctx->strokeRect(32, 32, 64, 64);
+        ctx->beginPath();
+        ctx->moveTo(72, 72);
+        ctx->lineTo(72, 128);
+        ctx->closePath();
+        
+        ctx->setStrokeColor(Color(1.0f, 1.0f, 1.0f));
+        ctx->setLineWidth(4.0f);
+        ctx->stroke();
+        
+        ctx->beginPath();
+        ctx->moveTo(120, 32);
+        ctx->lineTo(120, 64);
+        ctx->lineTo(160, 32);
+        ctx->closePath();
+        ctx->setFillColor(Color(1.0f, 0.0f, 1.0f));
+        ctx->fill();
     }
     
     void JavaScriptView::tickAndDraw()
@@ -81,17 +100,6 @@ namespace mural
         duk_get_prop_string(this->jsGlobalContext, -1, "tickAnimFrame");
         duk_call(this->jsGlobalContext, 0);
         duk_pop_n(this->jsGlobalContext, 3);
-        
-        // [Test]
-        ctx->strokeRect(32, 32, 64, 64);
-        ctx->beginPath();
-        ctx->moveTo(72, 72);
-        ctx->lineTo(72, 128);
-        ctx->closePath();
-        
-        ctx->setStrokeColor(Color(1.0f, 1.0f, 1.0f));
-        ctx->setLineWidth(4.0f);
-        ctx->stroke();
     }
     
     void JavaScriptView::defineProperties()
