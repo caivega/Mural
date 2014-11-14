@@ -18,23 +18,18 @@ namespace mural
         
         state->globalAlpha = 1;
         state->globalCompositeOperation = kCompositeOperationSourceOver;
-//        state->transform = CGAffineTransformIdentity;
+        state->transform = MatrixAffine2f::identity();
         state->lineWidth = 1;
         state->lineCap = kLineCapButt;
         state->lineJoin = kLineJoinMiter;
         state->miterLimit = 10;
-        state->clipPath = nullptr;
-        
-        path = new Path2d();
+        state->paths.push_back(Path2d());
+
+        paths.push_back(Path2d());
     }
-    
+
     CanvasContext::~CanvasContext()
     {
-        for (int i = 0; i < stateIndex + 1; ++i) {
-            delete stateStack[i].clipPath;
-        }
-        
-        delete path;
     }
     
     void CanvasContext::save()
@@ -51,70 +46,69 @@ namespace mural
     
     void CanvasContext::restore()
     {
-        if( stateIndex == 0 ) {	return; }
+        if (stateIndex == 0) { return; }
         
         CompositeOperation oldCompositeOp = state->globalCompositeOperation;
-        Path2d *oldClipPath = state->clipPath;
-        
-        // Clean up current state
-        if (state->clipPath && state->clipPath != stateStack[stateIndex-1].clipPath) {
-            resetClip();
-        }
-        state->clipPath = nullptr;
         
         // Load state from stack
         stateIndex--;
         state = &stateStack[stateIndex];
         
-//        path->transform = state->transform;
-        
         // Set Composite op, if different
         if (state->globalCompositeOperation != oldCompositeOp) {
             globalCompositeOperation = state->globalCompositeOperation;
-        }
-        
-        // Render clip path, if present and different
-        if (state->clipPath && state->clipPath != oldClipPath) {
-            gl::draw(*(state->clipPath));
         }
     }
     
     void CanvasContext::beginPath()
     {
-        path->clear();
+        paths.push_back(Path2d());
     }
     
     void CanvasContext::closePath()
     {
-        path->close();
+        if (!paths.empty()) {
+            paths.back().close();
+        }
     }
     
     void CanvasContext::moveTo(float x, float y)
     {
-        // FIXME: Create a new path if current one is already used
-        path->moveTo(x, y);
+        Path2d p;
+        p.moveTo(x, y);
+        paths.push_back(p);
     }
     
     void CanvasContext::lineTo(float x, float y)
     {
-        path->lineTo(x, y);
+        paths.back().lineTo(x, y);
     }
     
     void CanvasContext::stroke()
     {
         gl::color(state->strokeColor);
         gl::lineWidth(state->lineWidth);
-        gl::draw(*path);
+        for (auto it = paths.begin(); it != paths.end(); ++it) {
+            if (!it->empty()) {
+                gl::draw(*it);
+            }
+        }
     }
     
     void CanvasContext::fill()
     {
         gl::color(state->fillColor);
-        gl::drawSolid(*path);
+        for (auto it = paths.begin(); it != paths.end(); ++it) {
+            if (!it->empty()) {
+                gl::drawSolid(*it);
+            }
+        }
     }
     
     void CanvasContext::clearRect(float x, float y, float w, float h)
     {
+        gl::color(1.0f, 1.0f, 1.0f);
+        gl::drawSolidRect(Rectf(x, y, w, h));
     }
     
     void CanvasContext::strokeRect(float x, float y, float w, float h)
@@ -125,19 +119,6 @@ namespace mural
     void CanvasContext::fillRect(float x, float y, float w, float h)
     {
         gl::drawSolidRect(Rectf(x, y, x + w, y + h));
-    }
-    
-    void CanvasContext::resetClip()
-    {
-        if (state->clipPath) {
-//            [self flushBuffers];
-            state->clipPath = nullptr;
-            
-//            glDepthMask(GL_TRUE);
-//            glClear(GL_DEPTH_BUFFER_BIT);
-//            glDepthMask(GL_FALSE);
-//            glDepthFunc(GL_ALWAYS);
-        }
     }
     
     void CanvasContext::setLineWidth(float width)
