@@ -67,9 +67,6 @@ namespace mural
     
     class CanvasContext
     {
-        std::vector<Path2d> paths;
-        CompositeOperation globalCompositeOperation;
-        
         int stateIndex;
         CanvasState stateStack[CANVAS_STATE_STACK_SIZE];
         CanvasState *state;

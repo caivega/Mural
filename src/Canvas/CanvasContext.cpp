@@ -24,8 +24,6 @@ namespace mural
         state->lineJoin = kLineJoinMiter;
         state->miterLimit = 10;
         state->paths.push_back(Path2d());
-
-        paths.push_back(Path2d());
     }
 
     CanvasContext::~CanvasContext()
@@ -47,48 +45,42 @@ namespace mural
     void CanvasContext::restore()
     {
         if (stateIndex == 0) { return; }
-        
-        CompositeOperation oldCompositeOp = state->globalCompositeOperation;
-        
+
         // Load state from stack
         stateIndex--;
         state = &stateStack[stateIndex];
-        
-        // Set Composite op, if different
-        if (state->globalCompositeOperation != oldCompositeOp) {
-            globalCompositeOperation = state->globalCompositeOperation;
-        }
     }
     
     void CanvasContext::beginPath()
     {
-        paths.push_back(Path2d());
+        state->paths.push_back(Path2d());
     }
     
     void CanvasContext::closePath()
     {
-        if (!paths.empty()) {
-            paths.back().close();
+        if (!state->paths.empty()) {
+            state->paths.back().close();
         }
+        state->paths.push_back(Path2d());
     }
     
     void CanvasContext::moveTo(float x, float y)
     {
         Path2d p;
         p.moveTo(x, y);
-        paths.push_back(p);
+        state->paths.push_back(p);
     }
     
     void CanvasContext::lineTo(float x, float y)
     {
-        paths.back().lineTo(x, y);
+        state->paths.back().lineTo(x, y);
     }
     
     void CanvasContext::stroke()
     {
         gl::color(state->strokeColor);
         gl::lineWidth(state->lineWidth);
-        for (auto it = paths.begin(); it != paths.end(); ++it) {
+        for (auto it = state->paths.begin(); it != state->paths.end(); ++it) {
             if (!it->empty()) {
                 gl::draw(*it);
             }
@@ -98,7 +90,7 @@ namespace mural
     void CanvasContext::fill()
     {
         gl::color(state->fillColor);
-        for (auto it = paths.begin(); it != paths.end(); ++it) {
+        for (auto it = state->paths.begin(); it != state->paths.end(); ++it) {
             if (!it->empty()) {
                 gl::drawSolid(*it);
             }
