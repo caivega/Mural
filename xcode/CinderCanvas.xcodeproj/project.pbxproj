@@ -17,6 +17,8 @@
 		14390A571A0F004000A8008D /* scripts in Resources */ = {isa = PBXBuildFile; fileRef = 14390A561A0F004000A8008D /* scripts */; };
 		14390A601A0F081800A8008D /* duktape.c in Sources */ = {isa = PBXBuildFile; fileRef = 14390A5C1A0F081800A8008D /* duktape.c */; };
 		14390A611A0F081800A8008D /* JavaScript.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14390A5E1A0F081800A8008D /* JavaScript.cpp */; };
+		148428201A1778CD003180D5 /* AssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1484281E1A1778CD003180D5 /* AssetManager.cpp */; };
+		148428231A177A47003180D5 /* media in Resources */ = {isa = PBXBuildFile; fileRef = 148428221A177A47003180D5 /* media */; };
 		14B2CD431A11C0A800778064 /* CanvasContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14B2CD411A11C0A800778064 /* CanvasContext.cpp */; };
 		5323E6B20EAFCA74003A9687 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B10EAFCA74003A9687 /* CoreVideo.framework */; };
 		5323E6B60EAFCA7E003A9687 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B50EAFCA7E003A9687 /* QTKit.framework */; };
@@ -44,6 +46,10 @@
 		14390A5D1A0F081800A8008D /* duktape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duktape.h; sourceTree = "<group>"; };
 		14390A5E1A0F081800A8008D /* JavaScript.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JavaScript.cpp; sourceTree = "<group>"; };
 		14390A5F1A0F081800A8008D /* JavaScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JavaScript.h; sourceTree = "<group>"; };
+		1484281E1A1778CD003180D5 /* AssetManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AssetManager.cpp; sourceTree = "<group>"; };
+		1484281F1A1778CD003180D5 /* AssetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetManager.h; sourceTree = "<group>"; };
+		148428211A177906003180D5 /* AsyncImageLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AsyncImageLoader.h; sourceTree = "<group>"; };
+		148428221A177A47003180D5 /* media */ = {isa = PBXFileReference; lastKnownFileType = folder; name = media; path = ../resources/media; sourceTree = "<group>"; };
 		14B2CD411A11C0A800778064 /* CanvasContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CanvasContext.cpp; path = ../src/Canvas/CanvasContext.cpp; sourceTree = "<group>"; };
 		14B2CD421A11C0A800778064 /* CanvasContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CanvasContext.h; path = ../src/Canvas/CanvasContext.h; sourceTree = "<group>"; };
 		20516ADA7B5C43A5B05F9D44 /* CinderCanvasApp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = CinderCanvasApp.cpp; path = ../src/CinderCanvasApp.cpp; sourceTree = "<group>"; };
@@ -87,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				140C92B41A16E5F400A65D4F /* Tests */,
+				1484281D1A1778CD003180D5 /* AssetManager */,
 				14390A5B1A0F081800A8008D /* JavaScript */,
 				20516ADA7B5C43A5B05F9D44 /* CinderCanvasApp.cpp */,
 				14390A491A0EF67600A8008D /* AppViewController.cpp */,
@@ -128,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				140C92B51A16E62600A65D4F /* BasicClock.h */,
+				148428211A177906003180D5 /* AsyncImageLoader.h */,
 			);
 			name = Tests;
 			path = ../src/Tests;
@@ -143,6 +151,16 @@
 			);
 			name = JavaScript;
 			path = ../src/JavaScript;
+			sourceTree = "<group>";
+		};
+		1484281D1A1778CD003180D5 /* AssetManager */ = {
+			isa = PBXGroup;
+			children = (
+				1484281E1A1778CD003180D5 /* AssetManager.cpp */,
+				1484281F1A1778CD003180D5 /* AssetManager.h */,
+			);
+			name = AssetManager;
+			path = ../src/AssetManager;
 			sourceTree = "<group>";
 		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
@@ -178,6 +196,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				148428221A177A47003180D5 /* media */,
 				14390A561A0F004000A8008D /* scripts */,
 				D3DF879870F349C2A32E127F /* CinderApp.icns */,
 				0E7778188AC649DC99906A3C /* Info.plist */,
@@ -247,6 +266,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				148428231A177A47003180D5 /* media in Resources */,
 				AF3C680FFEC842D2BDA578DC /* CinderApp.icns in Resources */,
 				14390A571A0F004000A8008D /* scripts in Resources */,
 			);
@@ -259,6 +279,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				148428201A1778CD003180D5 /* AssetManager.cpp in Sources */,
 				14390A601A0F081800A8008D /* duktape.c in Sources */,
 				14390A4B1A0EF67600A8008D /* AppViewController.cpp in Sources */,
 				14390A611A0F081800A8008D /* JavaScript.cpp in Sources */,
