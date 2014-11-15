@@ -10,6 +10,7 @@
 
 // Tests
 #include "Tests/BasicClock.h"
+#include "Tests/AsyncImageLoader.h"
 
 #if defined(WIN32)
 #  define OS_NAME "Windows"
@@ -77,7 +78,8 @@ namespace mural
         gl::clear(ColorA::white(), false);
 
         // [Tests]
-        BasicClock();
+//        BasicClock();
+        AsyncImageLoader();
     }
 
     void JavaScriptView::tickAndDraw()
