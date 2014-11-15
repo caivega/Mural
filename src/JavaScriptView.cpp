@@ -8,6 +8,9 @@
 
 #include "JavaScriptView.h"
 
+// Modules
+#include "Canvas/BindingCanvasContext.h"
+
 // Tests
 #include "Tests/BasicClock.h"
 #include "Tests/AsyncImageLoader.h"
@@ -53,9 +56,7 @@ namespace mural
         // Setup event callbacks
 
         // Register built-in
-        //        js_register_utils(jsGlobalContext);
-        //        js_register_LocalStorage(jsGlobalContext);
-        //        js_register_Image(jsGlobalContext);
+        js_register_CanvasContext(this->jsGlobalContext);
 
         // Load boot script
         this->loadScriptAtPath(ci::app::AppBasic::getResourcePath(MURAL_BOOT_JS).c_str());
@@ -79,7 +80,7 @@ namespace mural
 
         // [Tests]
 //        BasicClock();
-        AsyncImageLoader();
+//        AsyncImageLoader();
     }
 
     void JavaScriptView::tickAndDraw()

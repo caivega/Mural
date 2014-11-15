@@ -19,6 +19,7 @@
 		14390A611A0F081800A8008D /* JavaScript.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14390A5E1A0F081800A8008D /* JavaScript.cpp */; };
 		148428201A1778CD003180D5 /* AssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1484281E1A1778CD003180D5 /* AssetManager.cpp */; };
 		148428231A177A47003180D5 /* media in Resources */ = {isa = PBXBuildFile; fileRef = 148428221A177A47003180D5 /* media */; };
+		148428261A178B04003180D5 /* BindingCanvasContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 148428241A178B04003180D5 /* BindingCanvasContext.cpp */; };
 		14B2CD431A11C0A800778064 /* CanvasContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14B2CD411A11C0A800778064 /* CanvasContext.cpp */; };
 		5323E6B20EAFCA74003A9687 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B10EAFCA74003A9687 /* CoreVideo.framework */; };
 		5323E6B60EAFCA7E003A9687 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B50EAFCA7E003A9687 /* QTKit.framework */; };
@@ -50,6 +51,8 @@
 		1484281F1A1778CD003180D5 /* AssetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetManager.h; sourceTree = "<group>"; };
 		148428211A177906003180D5 /* AsyncImageLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AsyncImageLoader.h; sourceTree = "<group>"; };
 		148428221A177A47003180D5 /* media */ = {isa = PBXFileReference; lastKnownFileType = folder; name = media; path = ../resources/media; sourceTree = "<group>"; };
+		148428241A178B04003180D5 /* BindingCanvasContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BindingCanvasContext.cpp; path = ../src/Canvas/BindingCanvasContext.cpp; sourceTree = "<group>"; };
+		148428251A178B04003180D5 /* BindingCanvasContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BindingCanvasContext.h; path = ../src/Canvas/BindingCanvasContext.h; sourceTree = "<group>"; };
 		14B2CD411A11C0A800778064 /* CanvasContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CanvasContext.cpp; path = ../src/Canvas/CanvasContext.cpp; sourceTree = "<group>"; };
 		14B2CD421A11C0A800778064 /* CanvasContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CanvasContext.h; path = ../src/Canvas/CanvasContext.h; sourceTree = "<group>"; };
 		20516ADA7B5C43A5B05F9D44 /* CinderCanvasApp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = CinderCanvasApp.cpp; path = ../src/CinderCanvasApp.cpp; sourceTree = "<group>"; };
@@ -95,14 +98,13 @@
 				140C92B41A16E5F400A65D4F /* Tests */,
 				1484281D1A1778CD003180D5 /* AssetManager */,
 				14390A5B1A0F081800A8008D /* JavaScript */,
+				148428271A178B0E003180D5 /* Canvas */,
 				20516ADA7B5C43A5B05F9D44 /* CinderCanvasApp.cpp */,
 				14390A491A0EF67600A8008D /* AppViewController.cpp */,
 				14390A4A1A0EF67600A8008D /* AppViewController.h */,
 				14390A4C1A0EF6AF00A8008D /* JavaScriptView.cpp */,
 				14390A4D1A0EF6AF00A8008D /* JavaScriptView.h */,
 				14390A551A0EF74A00A8008D /* Global.h */,
-				14B2CD411A11C0A800778064 /* CanvasContext.cpp */,
-				14B2CD421A11C0A800778064 /* CanvasContext.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -161,6 +163,17 @@
 			);
 			name = AssetManager;
 			path = ../src/AssetManager;
+			sourceTree = "<group>";
+		};
+		148428271A178B0E003180D5 /* Canvas */ = {
+			isa = PBXGroup;
+			children = (
+				14B2CD411A11C0A800778064 /* CanvasContext.cpp */,
+				14B2CD421A11C0A800778064 /* CanvasContext.h */,
+				148428241A178B04003180D5 /* BindingCanvasContext.cpp */,
+				148428251A178B04003180D5 /* BindingCanvasContext.h */,
+			);
+			name = Canvas;
 			sourceTree = "<group>";
 		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
@@ -284,6 +297,7 @@
 				14390A4B1A0EF67600A8008D /* AppViewController.cpp in Sources */,
 				14390A611A0F081800A8008D /* JavaScript.cpp in Sources */,
 				14B2CD431A11C0A800778064 /* CanvasContext.cpp in Sources */,
+				148428261A178B04003180D5 /* BindingCanvasContext.cpp in Sources */,
 				14390A4E1A0EF6AF00A8008D /* JavaScriptView.cpp in Sources */,
 				C55B6F466378486C820D8FAA /* CinderCanvasApp.cpp in Sources */,
 			);
