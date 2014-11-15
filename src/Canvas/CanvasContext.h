@@ -22,7 +22,7 @@ namespace mural
         kLineCapRound,
         kLineCapSquare
     } LineCap;
-    
+
     typedef enum {
         kLineJoinMiter,
         kLineJoinBevel,
@@ -46,25 +46,20 @@ namespace mural
 
     struct CanvasState {
         MatrixAffine2f transform;
-        
-        CompositeOperation globalCompositeOperation;
-        Color fillColor;
-//        NSObject<EJFillable> *fillObject;
-        Color strokeColor;
-        float globalAlpha;
-        
+
+        CompositeOperation globalCompositeOperation = CompositeOperation::kCompositeOperationSourceOver;
+        Color fillStyle = Color(0.0f, 0.0f, 0.0f);
+        Color strokeStyle = Color(0.0f, 0.0f, 0.0f);
+        float globalAlpha = 1.0f;
+
         float lineWidth;
-        LineCap lineCap;
-        LineJoin lineJoin;
-        float miterLimit;
-        
-//        EJTextAlign textAlign;
-//        EJTextBaseline textBaseline;
-//        EJFontDescriptor *font;
-        
+        LineCap lineCap = LineCap::kLineCapButt;
+        LineJoin lineJoin = LineJoin::kLineJoinMiter;
+        float miterLimit = 10.0f;
+
         std::vector<Path2d> paths;
     };
-    
+
     class CanvasContext
     {
         int stateIndex;
@@ -73,7 +68,7 @@ namespace mural
     public:
         CanvasContext();
         ~CanvasContext();
-        
+
         void save();
         void restore();
         void beginPath();
@@ -85,7 +80,7 @@ namespace mural
         void stroke();
         void fill();
         void clearRect(float x, float y, float w, float h);
-        
+
         void setLineWidth(float width);
         void setStrokeColor(const Color& c);
         void setFillColor(const Color& c);

@@ -22,10 +22,10 @@
 namespace mural
 {
     JavaScriptView::JavaScriptView(int width, int height, const String& title):
-        jsGlobalContext(nullptr),
-        lang("en"),
-        width(width),
-        height(height)
+    jsGlobalContext(nullptr),
+    lang("en"),
+    width(width),
+    height(height)
     {
         // Create the global JS context
         this->jsGlobalContext = duk_create_heap_default();
@@ -38,36 +38,36 @@ namespace mural
 
         // To make JavaScript objects accessible in C++
         jsRefSetup(this->jsGlobalContext);
-        
+
         // Load shim for duktape
         this->loadScriptAtPath(ci::app::AppBasic::getResourcePath(MURAL_SHIM_JS).c_str());
-        
+
         this->defineProperties();
-        
+
         // Setup OpenGL context
-        
+
         // Setup event callbacks
-        
+
         // Register built-in
-//        js_register_utils(jsGlobalContext);
-//        js_register_LocalStorage(jsGlobalContext);
-//        js_register_Image(jsGlobalContext);
-        
+        //        js_register_utils(jsGlobalContext);
+        //        js_register_LocalStorage(jsGlobalContext);
+        //        js_register_Image(jsGlobalContext);
+
         // Load boot script
         this->loadScriptAtPath(ci::app::AppBasic::getResourcePath(MURAL_BOOT_JS).c_str());
     }
-    
+
     JavaScriptView::~JavaScriptView()
     {
         duk_destroy_heap(this->jsGlobalContext);
     }
-    
+
     void JavaScriptView::loadScriptAtPath(const String& path)
     {
         duk_eval_file(this->jsGlobalContext, path.c_str());
         duk_pop(this->jsGlobalContext);
     }
-    
+
     void JavaScriptView::boot()
     {
         // [Test]
@@ -78,11 +78,11 @@ namespace mural
         ctx->moveTo(72, 72);
         ctx->lineTo(72, 128);
         ctx->closePath();
-        
+
         ctx->setStrokeColor(Color(1.0f, 1.0f, 1.0f));
         ctx->setLineWidth(4.0f);
         ctx->stroke();
-        
+
         ctx->beginPath();
         ctx->moveTo(120, 32);
         ctx->lineTo(120, 64);
@@ -91,7 +91,7 @@ namespace mural
         ctx->setFillColor(Color(1.0f, 0.0f, 1.0f));
         ctx->fill();
     }
-    
+
     void JavaScriptView::tickAndDraw()
     {
         // RAF
@@ -101,20 +101,20 @@ namespace mural
         duk_call(this->jsGlobalContext, 0);
         duk_pop_n(this->jsGlobalContext, 3);
     }
-    
+
     void JavaScriptView::defineProperties()
     {
         // Set properties to __MURAL__
         duk_push_global_object(this->jsGlobalContext);
         duk_get_prop_string(this->jsGlobalContext, -1, MURAL_JS_NAMESPACE); /* __MURAL__ */
-        
+
         // - screenWidth
         duk_push_int(this->jsGlobalContext, width);
         duk_put_prop_string(this->jsGlobalContext, -2, "screenWidth");
         // - screenHeight
         duk_push_int(this->jsGlobalContext, height);
         duk_put_prop_string(this->jsGlobalContext, -2, "screenHeight");
-        
+
         // - language
         duk_push_string(this->jsGlobalContext, this->lang.c_str());
         duk_put_prop_string(this->jsGlobalContext, -2, "language");
@@ -130,7 +130,7 @@ namespace mural
         // - platform
         duk_push_string(this->jsGlobalContext, OS_NAME);
         duk_put_prop_string(this->jsGlobalContext, -2, "platform");
-        
+
         // Leave global scope
         duk_pop_2(this->jsGlobalContext);
     }

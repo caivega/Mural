@@ -19,33 +19,28 @@
 
 namespace mural
 {
-
     class JavaScriptView
     {
         duk_context *jsGlobalContext;
-        
         // [Test]
         CanvasContext *ctx;
-
     public:
         int width, height;
-        
+
         String lang;
-        
+
         JavaScriptView(int width, int height, const String& title);
         ~JavaScriptView();
-        
+
         // Methods
         void loadScriptAtPath(const String& path);
         void boot();
         void tickAndDraw();
 
         // Event callbacks
-
     private:
         void defineProperties();
     };
-
 }
 
 #endif /* defined(__CinderCanvas__JavaScriptView__) */
