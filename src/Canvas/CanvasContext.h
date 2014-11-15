@@ -118,7 +118,7 @@ namespace mural
         float getGlobalAlpha();
     };
 
-    void stringToColorRGBA(const std::string& color, int& r, int& g, int& b, float& a);
+    void stringToColorRGBA(const std::string& color, float& r, float& g, float& b, float& a);
 }
 
 #endif /* defined(__CinderCanvas__CanvasContext__) */

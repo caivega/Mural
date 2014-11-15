@@ -30,16 +30,15 @@ namespace mural
 
         state->paths.push_back(Path2d());
 
-        int aa = 0, bb = 0, cc = 0;
-        float dd = 0.0f;
+        float aa = 0.0f, bb = 0.0f, cc = 0.0f, dd = 0.0f;
         stringToColorRGBA("#abc", aa, bb, cc, dd);
-        printf("color: %d, %d, %d, %f\n", aa, bb, cc, dd);
+        printf("color: %f, %f, %f, %f\n", aa, bb, cc, dd);
         stringToColorRGBA("#abcdef", aa, bb, cc, dd);
-        printf("color: %d, %d, %d, %f\n", aa, bb, cc, dd);
+        printf("color: %f, %f, %f, %f\n", aa, bb, cc, dd);
         stringToColorRGBA("rgb(0, 255, 0)", aa, bb, cc, dd);
-        printf("color: %d, %d, %d, %f\n", aa, bb, cc, dd);
+        printf("color: %f, %f, %f, %f\n", aa, bb, cc, dd);
         stringToColorRGBA("rgba(120, 60, 30, 0.6)", aa, bb, cc, dd);
-        printf("color: %d, %d, %d, %f\n", aa, bb, cc, dd);
+        printf("color: %f, %f, %f, %f\n", aa, bb, cc, dd);
     }
 
     CanvasContext::~CanvasContext()
@@ -190,17 +189,17 @@ namespace mural
         return state->globalAlpha;
     }
 
-    void stringToColorRGBA(const std::string& color, int& r, int& g, int& b, float& a)
+    void stringToColorRGBA(const std::string& color, float& r, float& g, float& b, float& a)
     {
         int length = color.size();
         if (length < 3) {
-            r = g = b = 0;
+            r = g = b = 0.0f;
             a = 1.0f;
             return;
         }
 
         std::string str = "ffffff";
-        int components[] = { 0, 0, 0 };
+        float components[] = { 0.0f, 0.0f, 0.0f };
 
         // #f0f format
         if (color[0] == '#' && length == 4) {
@@ -208,9 +207,9 @@ namespace mural
             str[2] = str[3] = color[2];
             str[4] = str[5] = color[3];
 
-            r = std::stoi(str.substr(0, 2), 0, 16);
-            g = std::stoi(str.substr(2, 2), 0, 16);
-            b = std::stoi(str.substr(4, 2), 0, 16);
+            r = std::stoi(str.substr(0, 2), 0, 16) / 255.0f;
+            g = std::stoi(str.substr(2, 2), 0, 16) / 255.0f;
+            b = std::stoi(str.substr(4, 2), 0, 16) / 255.0f;
             a = 1.0f;
         }
 
@@ -218,9 +217,9 @@ namespace mural
         else if (color[0] == '#' && length == 7) {
             str = color.substr(1, 6);
 
-            r = std::stoi(str.substr(0, 2), 0, 16);
-            g = std::stoi(str.substr(2, 2), 0, 16);
-            b = std::stoi(str.substr(4, 2), 0, 16);
+            r = std::stoi(str.substr(0, 2), 0, 16) / 255.0f;
+            g = std::stoi(str.substr(2, 2), 0, 16) / 255.0f;
+            b = std::stoi(str.substr(4, 2), 0, 16) / 255.0f;
             a = 1.0f;
         }
 
@@ -246,9 +245,9 @@ namespace mural
                 }
             }
 
-            r = components[0];
-            g = components[1];
-            b = components[2];
+            r = components[0] / 255.0f;
+            g = components[1] / 255.0f;
+            b = components[2] / 255.0f;
         }
     }
 }
