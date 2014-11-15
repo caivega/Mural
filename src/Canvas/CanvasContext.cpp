@@ -16,6 +16,18 @@ namespace mural
         stateIndex = 0;
         state = &stateStack[stateIndex];
 
+        state->globalCompositeOperation = CompositeOperation::kCompositeOperationSourceOver;
+        state->fillStyle = Color::black();
+        state->strokeStyle = Color::black();
+        state->globalAlpha = 1.0f;
+
+        state->lineWidth = 1.0f;
+        state->lineCap = LineCap::kLineCapButt;
+        state->lineJoin = LineJoin::kLineJoinMiter;
+        state->miterLimit = 10.0f;
+
+        state->font = Font::getDefault();
+
         state->paths.push_back(Path2d());
     }
 
