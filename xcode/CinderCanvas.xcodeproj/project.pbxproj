@@ -33,6 +33,7 @@
 		00B784B20FF439BC000DE1D7 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		0E7778188AC649DC99906A3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		140C92B51A16E62600A65D4F /* BasicClock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BasicClock.h; sourceTree = "<group>"; };
 		14390A491A0EF67600A8008D /* AppViewController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AppViewController.cpp; path = ../src/AppViewController.cpp; sourceTree = "<group>"; };
 		14390A4A1A0EF67600A8008D /* AppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppViewController.h; path = ../src/AppViewController.h; sourceTree = "<group>"; };
 		14390A4C1A0EF6AF00A8008D /* JavaScriptView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = JavaScriptView.cpp; path = ../src/JavaScriptView.cpp; sourceTree = "<group>"; };
@@ -85,6 +86,7 @@
 		080E96DDFE201D6D7F000001 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				140C92B41A16E5F400A65D4F /* Tests */,
 				14390A5B1A0F081800A8008D /* JavaScript */,
 				20516ADA7B5C43A5B05F9D44 /* CinderCanvasApp.cpp */,
 				14390A491A0EF67600A8008D /* AppViewController.cpp */,
@@ -120,6 +122,15 @@
 				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
 			);
 			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		140C92B41A16E5F400A65D4F /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				140C92B51A16E62600A65D4F /* BasicClock.h */,
+			);
+			name = Tests;
+			path = ../src/Tests;
 			sourceTree = "<group>";
 		};
 		14390A5B1A0F081800A8008D /* JavaScript */ = {
