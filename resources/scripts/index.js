@@ -1,16 +1,7 @@
 print('Script start');
 
-var tickCound = 0;
- (function animate() {
-     if ((tickCound++) > 60) {
-         tickCound = 0;
-         console.log('RAF');
-     }
-     requestAnimationFrame(animate);
- })();
+window.CanvasContext = __MURAL__.CanvasContext;
 
-var count = 0;
-setInterval(function() {
-    count++;
-    console.log('count: ' + count);
-}, 1000);
+var context = new CanvasContext();
+
+context.arc(32, 32, 32, 0, Math.PI, true);
