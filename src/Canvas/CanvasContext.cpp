@@ -29,6 +29,17 @@ namespace mural
         state->font = Font::getDefault();
 
         state->paths.push_back(Path2d());
+
+        int aa = 0, bb = 0, cc = 0;
+        float dd = 0.0f;
+        stringToColorRGBA("#abc", aa, bb, cc, dd);
+        printf("color: %d, %d, %d, %f\n", aa, bb, cc, dd);
+        stringToColorRGBA("#abcdef", aa, bb, cc, dd);
+        printf("color: %d, %d, %d, %f\n", aa, bb, cc, dd);
+        stringToColorRGBA("rgb(0, 255, 0)", aa, bb, cc, dd);
+        printf("color: %d, %d, %d, %f\n", aa, bb, cc, dd);
+        stringToColorRGBA("rgba(120, 60, 30, 0.6)", aa, bb, cc, dd);
+        printf("color: %d, %d, %d, %f\n", aa, bb, cc, dd);
     }
 
     CanvasContext::~CanvasContext()
@@ -177,5 +188,67 @@ namespace mural
     float CanvasContext::getGlobalAlpha()
     {
         return state->globalAlpha;
+    }
+
+    void stringToColorRGBA(const std::string& color, int& r, int& g, int& b, float& a)
+    {
+        int length = color.size();
+        if (length < 3) {
+            r = g = b = 0;
+            a = 1.0f;
+            return;
+        }
+
+        std::string str = "ffffff";
+        int components[] = { 0, 0, 0 };
+
+        // #f0f format
+        if (color[0] == '#' && length == 4) {
+            str[0] = str[1] = color[1];
+            str[2] = str[3] = color[2];
+            str[4] = str[5] = color[3];
+
+            r = std::stoi(str.substr(0, 2), 0, 16);
+            g = std::stoi(str.substr(2, 2), 0, 16);
+            b = std::stoi(str.substr(4, 2), 0, 16);
+            a = 1.0f;
+        }
+
+        // #ff00ff format
+        else if (color[0] == '#' && length == 7) {
+            str = color.substr(1, 6);
+
+            r = std::stoi(str.substr(0, 2), 0, 16);
+            g = std::stoi(str.substr(2, 2), 0, 16);
+            b = std::stoi(str.substr(4, 2), 0, 16);
+            a = 1.0f;
+        }
+
+        // rgb(255,0,255) or rgba(255,0,255,0.5) format
+        else if ((color[0] == 'r' || color[0] == 'R') && (color[1] == 'g' || color[1] == 'G')) {
+            int component = 0;
+            for (int i = 4; i < length - 1 && component < 4; i++) {
+                if (component == 3) {
+                    // If we have an alpha component, copy the rest of the wide
+                    // string into a char array and use atof() to parse it.
+                    char alpha[8] = { 0,0,0,0, 0,0,0,0 };
+                    for (int j = 0; i + j < length - 1 && j < 7; j++) {
+                        alpha[j] = color[i + j];
+                    }
+                    a = atof(alpha);
+                    component++;
+                }
+                else if (isdigit(color[i])) {
+                    components[component] = components[component] * 10 + (color[i] - '0');
+                }
+                else if (color[i] == ',' || color[i] == ')') {
+                    component++;
+                }
+            }
+
+            r = components[0];
+            g = components[1];
+            b = components[2];
+        }
     }
 }
