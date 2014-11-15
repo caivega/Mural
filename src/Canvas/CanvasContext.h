@@ -71,19 +71,23 @@ namespace mural
 
         void save();
         void restore();
+
         void beginPath();
         void closePath();
+
         void moveTo(float x, float y);
         void lineTo(float x, float y);
         void strokeRect(float x, float y, float w, float h);
         void fillRect(float x, float y, float w, float h);
+
         void stroke();
         void fill();
+
         void clearRect(float x, float y, float w, float h);
 
         void setLineWidth(float width);
-        void setStrokeColor(const Color& c);
-        void setFillColor(const Color& c);
+        void setStrokeStyle(const Color& c);
+        void setFillStyle(const Color& c);
     };
 
 }

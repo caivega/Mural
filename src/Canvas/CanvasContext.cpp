@@ -118,12 +118,12 @@ namespace mural
         state->lineWidth = width;
     }
 
-    void CanvasContext::setStrokeColor(const Color &c)
+    void CanvasContext::setStrokeStyle(const Color &c)
     {
         state->strokeStyle = c;
     }
 
-    void CanvasContext::setFillColor(const Color &c)
+    void CanvasContext::setFillStyle(const Color &c)
     {
         state->fillStyle = c;
     }
