@@ -78,8 +78,7 @@ namespace mural
 
     void CanvasContext::stroke()
     {
-        gl::color(state->strokeStyle);
-        gl::lineWidth(state->lineWidth);
+        gl::color(state->strokeStyle.r, state->strokeStyle.g, state->strokeStyle.b, state->globalAlpha);
         for (auto it = state->paths.begin(); it != state->paths.end(); ++it) {
             if (!it->empty()) {
                 gl::draw(*it);
@@ -89,7 +88,7 @@ namespace mural
 
     void CanvasContext::fill()
     {
-        gl::color(state->fillStyle);
+        gl::color(state->fillStyle.r, state->fillStyle.g, state->fillStyle.b, state->globalAlpha);
         for (auto it = state->paths.begin(); it != state->paths.end(); ++it) {
             if (!it->empty()) {
                 gl::drawSolid(*it);
@@ -99,7 +98,7 @@ namespace mural
 
     void CanvasContext::clearRect(float x, float y, float w, float h)
     {
-        gl::color(1.0f, 1.0f, 1.0f);
+        gl::color(1.0f, 1.0f, 1.0f, 1.0f);
         gl::drawSolidRect(Rectf(x, y, w, h));
     }
 
@@ -126,15 +125,26 @@ namespace mural
     void CanvasContext::setLineWidth(float width)
     {
         state->lineWidth = width;
+        gl::lineWidth(state->lineWidth);
     }
 
-    void CanvasContext::setStrokeStyle(const Color &c)
+    void CanvasContext::setStrokeStyle(float r, float g, float b)
     {
-        state->strokeStyle = c;
+        state->strokeStyle.set(r, g, b);
     }
 
-    void CanvasContext::setFillStyle(const Color &c)
+    void CanvasContext::setFillStyle(float r, float g, float b)
     {
-        state->fillStyle = c;
+        state->fillStyle.set(r, g, b);
+    }
+
+    void CanvasContext::setGlobalAlpha(float a)
+    {
+        state->globalAlpha = a;
+    }
+
+    float CanvasContext::getGlobalAlpha()
+    {
+        return state->globalAlpha;
     }
 }

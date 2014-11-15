@@ -48,8 +48,8 @@ namespace mural
         MatrixAffine2f transform = MatrixAffine2f::identity();
 
         CompositeOperation globalCompositeOperation = CompositeOperation::kCompositeOperationSourceOver;
-        Color fillStyle = Color(0.0f, 0.0f, 0.0f);
-        Color strokeStyle = Color(0.0f, 0.0f, 0.0f);
+        Color fillStyle = Color::black();
+        Color strokeStyle = Color::black();
         float globalAlpha = 1.0f;
 
         float lineWidth = 1.0f;
@@ -93,10 +93,11 @@ namespace mural
         void clearRect(float x, float y, float w, float h);
 
         void setLineWidth(float width);
-        void setStrokeStyle(const Color& c);
-        void setFillStyle(const Color& c);
+        void setStrokeStyle(float r, float g, float b);
+        void setFillStyle(float r, float g, float b);
+        void setGlobalAlpha(float a);
+        float getGlobalAlpha();
     };
-
 }
 
 #endif /* defined(__CinderCanvas__CanvasContext__) */
