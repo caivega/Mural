@@ -45,7 +45,7 @@ namespace mural
     } CompositeOperation;
 
     struct CanvasState {
-        MatrixAffine2f transform;
+        MatrixAffine2f transform = MatrixAffine2f::identity();
 
         CompositeOperation globalCompositeOperation = CompositeOperation::kCompositeOperationSourceOver;
         Color fillStyle = Color(0.0f, 0.0f, 0.0f);
