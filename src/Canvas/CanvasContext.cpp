@@ -113,6 +113,16 @@ namespace mural
         gl::drawSolidRect(Rectf(x, y, x + w, y + h));
     }
 
+    void CanvasContext::strokeText(const std::string &text, float x, float y)
+    {
+        gl::drawString(text, Vec2f(x, y), state->strokeStyle, state->font);
+    }
+
+    void CanvasContext::fillText(const std::string &text, float x, float y)
+    {
+        gl::drawString(text, Vec2f(x, y), state->fillStyle, state->font);
+    }
+
     void CanvasContext::setLineWidth(float width)
     {
         state->lineWidth = width;

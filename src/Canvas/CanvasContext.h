@@ -84,6 +84,9 @@ namespace mural
         void strokeRect(float x, float y, float w, float h);
         void fillRect(float x, float y, float w, float h);
 
+        void strokeText(const std::string& text, float x, float y);
+        void fillText(const std::string& text, float x, float y);
+
         void stroke();
         void fill();
 
