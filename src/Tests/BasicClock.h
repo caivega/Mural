@@ -38,6 +38,19 @@ void BasicClock()
         ctx->arc(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2, 5, 0, PI * 2, true);
         ctx->fill();
     };
+    auto drawNumerals = [&] {
+        int numerals[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+        float angle = 0;
+//        float numeralWidth = 0;
+        for (int i = 0; i < 12; ++i) {
+            angle = PI / 6 * (numerals[i] - 3);
+            ctx->strokeText(
+                std::to_string(numerals[i]),
+                CANVAS_WIDTH / 2 + cos(angle) * HAND_RADIUS,
+                CANVAS_HEIGHT / 2 + sin(angle) * HAND_RADIUS
+            );
+        }
+    };
     auto drawHand = [&](float loc, bool isHour) {
         float angle = (PI * 2) * (loc / 60) - PI / 2;
         float handRadius = isHour ?
@@ -61,6 +74,7 @@ void BasicClock()
         drawCircle();
         drawCenter();
         drawHands();
+        drawNumerals();
     };
 
     drawClock();
