@@ -73,6 +73,7 @@ namespace mural
 
     void JavaScriptView::boot()
     {
+        gl::enableAlphaBlending();
         gl::clear(ColorA::white(), false);
 
         // [Tests]
