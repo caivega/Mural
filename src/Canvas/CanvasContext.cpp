@@ -7,6 +7,7 @@
 //
 
 #include "CanvasContext.h"
+#include <sstream>
 
 namespace mural
 {
@@ -41,6 +42,8 @@ namespace mural
         printf("color: %f, %f, %f, %f\n", aa, bb, cc, dd);
         stringToColorRGBA("hsla(90, 100%, 50%, 1)", aa, bb, cc, dd);
         printf("color: %f, %f, %f, %f\n", aa, bb, cc, dd);
+
+        printf("color string: %s", colorRGBAToString(1.0f, 0.0f, 1.0f).c_str());
     }
 
     CanvasContext::~CanvasContext()
@@ -171,14 +174,38 @@ namespace mural
         gl::lineWidth(state->lineWidth);
     }
 
+    void CanvasContext::setStrokeStyle(const std::string& c)
+    {
+        float r, g, b, a;
+        stringToColorRGBA(c, r, g, b, a);
+        state->strokeStyle.set(r, g, b);
+    }
+
     void CanvasContext::setStrokeStyle(float r, float g, float b)
     {
         state->strokeStyle.set(r, g, b);
     }
 
+    std::string CanvasContext::getStrokeStyle()
+    {
+        return colorRGBAToString(state->strokeStyle.r, state->strokeStyle.g, state->strokeStyle.b);
+    }
+
+    void CanvasContext::setFillStyle(const std::string& c)
+    {
+        float r, g, b, a;
+        stringToColorRGBA(c, r, g, b, a);
+        state->fillStyle.set(r, g, b);
+    }
+
     void CanvasContext::setFillStyle(float r, float g, float b)
     {
         state->fillStyle.set(r, g, b);
+    }
+
+    std::string CanvasContext::getFillStyle()
+    {
+        return colorRGBAToString(state->fillStyle.r, state->fillStyle.g, state->fillStyle.b);
     }
 
     void CanvasContext::setGlobalAlpha(float a)
@@ -281,6 +308,19 @@ namespace mural
             }
             colorHSLAToColorRGBA(hsla[0] / 360.0f, hsla[1] / 100.0f, hsla[2] / 100.0f, hsla[3], r, g, b, a);
         }
+    }
+
+    std::string colorRGBAToString(float r, float g, float b)
+    {
+        std::stringstream stream;
+
+        stream << std::setfill ('0') << std::setw(2) << std::hex << (int)(r * 255.0f);
+        stream << std::setfill ('0') << std::setw(2) << std::hex << (int)(g * 255.0f);
+        stream << std::setfill ('0') << std::setw(2) << std::hex << (int)(b * 255.0f);
+
+        std::string result("0x");
+
+        return result += stream.str();
     }
 
     void colorHSLAToColorRGBA(float H, float S, float L, float A, float& rr, float& gg, float& bb, float& aa)

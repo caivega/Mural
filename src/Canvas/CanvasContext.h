@@ -112,13 +112,19 @@ namespace mural
         void clearRect(float x, float y, float w, float h);
 
         void setLineWidth(float width);
+        float getLineWidth();
+        void setStrokeStyle(const std::string& color);
         void setStrokeStyle(float r, float g, float b);
+        std::string getStrokeStyle();
+        void setFillStyle(const std::string& color);
         void setFillStyle(float r, float g, float b);
+        std::string getFillStyle();
         void setGlobalAlpha(float a);
         float getGlobalAlpha();
     };
 
     void stringToColorRGBA(const std::string& color, float& r, float& g, float& b, float& a);
+    std::string colorRGBAToString(float r, float g, float b);
     void colorHSLAToColorRGBA(float h, float s, float l, float a, float& rr, float& gg, float& bb, float& aa);
 }
 
