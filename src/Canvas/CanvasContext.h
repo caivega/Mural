@@ -45,8 +45,6 @@ namespace mural
     } CompositeOperation;
 
     struct CanvasState {
-        MatrixAffine2f transform = MatrixAffine2f::identity();
-
         CompositeOperation globalCompositeOperation = CompositeOperation::kCompositeOperationSourceOver;
         Color fillStyle = Color::black();
         Color strokeStyle = Color::black();
@@ -60,6 +58,23 @@ namespace mural
         Font font = Font::getDefault();
 
         std::vector<Path2d> paths;
+
+        void operator=(const CanvasState& other)
+        {
+            globalCompositeOperation = other.globalCompositeOperation;
+            fillStyle = other.fillStyle;
+            strokeStyle = other.strokeStyle;
+            globalAlpha = other.globalAlpha;
+
+            lineWidth = other.lineWidth;
+            lineCap = other.lineCap;
+            lineJoin = other.lineJoin;
+            miterLimit = other.miterLimit;
+
+            font = other.font;
+
+            paths.push_back(Path2d());
+        }
     };
 
     class CanvasContext
@@ -89,6 +104,10 @@ namespace mural
 
         void stroke();
         void fill();
+
+        void translate(float x, float y);
+        void rotate(float radians);
+        void scale(float x, float y);
 
         void clearRect(float x, float y, float w, float h);
 

@@ -25,7 +25,7 @@ namespace mural
 
     void CanvasContext::save()
     {
-        if (stateIndex == CANVAS_STATE_STACK_SIZE-1) {
+        if (stateIndex == CANVAS_STATE_STACK_SIZE - 1) {
             printf("Warning: CANVAS_STATE_STACK_SIZE (%d) reached", CANVAS_STATE_STACK_SIZE);
             return;
         }
@@ -33,6 +33,8 @@ namespace mural
         stateStack[stateIndex + 1] = stateStack[stateIndex];
         stateIndex++;
         state = &stateStack[stateIndex];
+
+        gl::pushMatrices();
     }
 
     void CanvasContext::restore()
@@ -42,6 +44,8 @@ namespace mural
         // Load state from stack
         stateIndex--;
         state = &stateStack[stateIndex];
+
+        gl::popMatrices();
     }
 
     void CanvasContext::beginPath()
@@ -94,6 +98,21 @@ namespace mural
                 gl::drawSolid(*it);
             }
         }
+    }
+
+    void CanvasContext::translate(float x, float y)
+    {
+        gl::translate(x, y);
+    }
+
+    void CanvasContext::rotate(float radians)
+    {
+        gl::rotate(toDegrees(radians));
+    }
+
+    void CanvasContext::scale(float x, float y)
+    {
+        gl::scale(x, y);
     }
 
     void CanvasContext::clearRect(float x, float y, float w, float h)
