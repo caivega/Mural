@@ -33,11 +33,13 @@ namespace mural
         float aa = 0.0f, bb = 0.0f, cc = 0.0f, dd = 0.0f;
         stringToColorRGBA("#abc", aa, bb, cc, dd);
         printf("color: %f, %f, %f, %f\n", aa, bb, cc, dd);
-        stringToColorRGBA("#abcdef", aa, bb, cc, dd);
+        stringToColorRGBA("#80ff00", aa, bb, cc, dd);
         printf("color: %f, %f, %f, %f\n", aa, bb, cc, dd);
         stringToColorRGBA("rgb(0, 255, 0)", aa, bb, cc, dd);
         printf("color: %f, %f, %f, %f\n", aa, bb, cc, dd);
         stringToColorRGBA("rgba(120, 60, 30, 0.6)", aa, bb, cc, dd);
+        printf("color: %f, %f, %f, %f\n", aa, bb, cc, dd);
+        stringToColorRGBA("hsla(90, 100%, 50%, 1)", aa, bb, cc, dd);
         printf("color: %f, %f, %f, %f\n", aa, bb, cc, dd);
     }
 
@@ -249,5 +251,73 @@ namespace mural
             g = components[1] / 255.0f;
             b = components[2] / 255.0f;
         }
+
+        // hsl(120,100%,50%) or hsla(120,100%,50%,0.5) format
+        else if( (color[0] == 'h' || color[0] == 'H') && (color[1] == 's' || color[1] == 'S') ) {
+            bool skipDigits = false;
+            float hsla[4] = { 0, 0, 0, 1 };
+            int component = 0;
+            for (int i = 4; i < length - 1 && component < 4; i++) {
+                if (component == 3) {
+                    // If we have an alpha component, copy the rest of the wide
+                    // string into a char array and use atof() to parse it.
+                    char alpha[8] = { 0,0,0,0, 0,0,0,0 };
+                    for (int j = 0; i + j < length - 1 && j < 7; j++) {
+                        alpha[j] = color[i + j];
+                    }
+                    hsla[component] = atof(alpha);
+                    component++;
+                }
+                else if (isdigit(color[i]) && !skipDigits) {
+                    hsla[component] = hsla[component] * 10 + (color[i] - '0');
+                }
+                else if(color[i] == '.') {
+                    skipDigits = true;
+                }
+                else if (color[i] == ',' || color[i] == ')') {
+                    skipDigits = false;
+                    component++;
+                }
+            }
+            colorHSLAToColorRGBA(hsla[0] / 360.0f, hsla[1] / 100.0f, hsla[2] / 100.0f, hsla[3], r, g, b, a);
+        }
+    }
+
+    void colorHSLAToColorRGBA(float H, float S, float L, float A, float& rr, float& gg, float& bb, float& aa)
+    {
+        H = fmodf(H, 1); // wrap around
+        S = MAX(0, MIN(S, 1));
+        L = MAX(0, MIN(L, 1));
+        A = MAX(0, MIN(A, 1));
+
+        float r = L; // default to gray
+        float g = L;
+        float b = L;
+        float v = (L <= 0.5) ? (L * (1.0 + S)) : (L + S - L * S);
+
+        if (v > 0) {
+            float m = L + L - v;
+            float sv = (v - m) / v;
+            H *= 6.0;
+            int sextant = (int)H;
+            float fract = H - sextant;
+            float vsf = v * sv * fract;
+            float mid1 = m + vsf;
+            float mid2 = v - vsf;
+
+            switch (sextant) {
+                case 0: r = v; g = mid1; b = m; break;
+                case 1: r = mid2; g = v; b = m; break;
+                case 2: r = m; g = v; b = mid1; break;
+                case 3: r = m; g = mid2; b = v; break;
+                case 4: r = mid1; g = m; b = v; break;
+                case 5: r = v; g = m; b = mid2; break;
+            }
+        }
+
+        rr = r;
+        gg = g;
+        bb = b;
+        aa = A;
     }
 }
