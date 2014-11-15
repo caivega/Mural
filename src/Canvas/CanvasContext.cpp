@@ -76,6 +76,11 @@ namespace mural
         state->paths.back().lineTo(x, y);
     }
 
+    void CanvasContext::arc(float x, float y, float radius, float startRadians, float endRadians, bool antiClockwise)
+    {
+        state->paths.back().arc(x, y, radius, startRadians, endRadians, !antiClockwise);
+    }
+
     void CanvasContext::stroke()
     {
         gl::color(state->strokeStyle);
