@@ -11,6 +11,10 @@
 
 void AsyncImageLoader()
 {
+    // Loader options
+    AssetManager::Options opts;
+    opts.watch(false).asynchronous(true);
+
     // Load the image in a separated thread and returns the ImageSourceRef
     auto asyncLoad = [](DataSourceRef dataSource) {
         ImageSourceRef imageSource = loadImage(dataSource);
@@ -23,7 +27,7 @@ void AsyncImageLoader()
         gl::draw(imageSource, Vec2f(0, 0));
     };
 
-    AssetManager::load<ImageSourceRef>("../Resources/media/title.png", asyncLoad, textureCreation);
+    AssetManager::load<ImageSourceRef>("../Resources/media/title.png", asyncLoad, textureCreation, opts);
 }
 
 #endif
