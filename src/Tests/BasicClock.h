@@ -26,7 +26,6 @@ void BasicClock()
 
     auto ctx = new mural::CanvasContext();
 
-    ctx->setStrokeStyle(Color(1, 1, 1));
     ctx->setLineWidth(2);
 
     auto drawCircle = [&] {

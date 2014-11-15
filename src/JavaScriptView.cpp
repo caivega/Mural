@@ -73,6 +73,8 @@ namespace mural
 
     void JavaScriptView::boot()
     {
+        gl::clear(ColorA::white(), false);
+
         // [Tests]
         BasicClock();
     }
