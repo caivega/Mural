@@ -52,10 +52,12 @@ namespace mural
         Color strokeStyle = Color(0.0f, 0.0f, 0.0f);
         float globalAlpha = 1.0f;
 
-        float lineWidth;
+        float lineWidth = 1.0f;
         LineCap lineCap = LineCap::kLineCapButt;
         LineJoin lineJoin = LineJoin::kLineJoinMiter;
         float miterLimit = 10.0f;
+
+        Font font = Font::getDefault();
 
         std::vector<Path2d> paths;
     };

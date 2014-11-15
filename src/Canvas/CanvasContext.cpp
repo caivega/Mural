@@ -16,13 +16,6 @@ namespace mural
         stateIndex = 0;
         state = &stateStack[stateIndex];
 
-        state->globalAlpha = 1.0f;
-        state->globalCompositeOperation = kCompositeOperationSourceOver;
-        state->transform = MatrixAffine2f::identity();
-        state->lineWidth = 1.0f;
-        state->lineCap = kLineCapButt;
-        state->lineJoin = kLineJoinMiter;
-        state->miterLimit = 10.0f;
         state->paths.push_back(Path2d());
     }
 
@@ -53,6 +46,7 @@ namespace mural
 
     void CanvasContext::beginPath()
     {
+        state->paths.clear();
         state->paths.push_back(Path2d());
     }
 
@@ -61,6 +55,7 @@ namespace mural
         if (!state->paths.empty()) {
             state->paths.back().close();
         }
+        state->paths.clear();
         state->paths.push_back(Path2d());
     }
 
