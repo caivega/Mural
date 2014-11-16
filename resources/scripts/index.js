@@ -7,3 +7,9 @@ var context = new CanvasContext();
 context.strokeStyle = '#0ff';
 context.arc(32, 32, 32, 0, Math.PI * 2, true);
 context.stroke();
+
+var img = new Image();
+img.onload = function() {
+    print('player.png loaded!');
+};
+img.src = 'media/player.png';
