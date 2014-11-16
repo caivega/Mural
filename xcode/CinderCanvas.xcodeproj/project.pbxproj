@@ -64,6 +64,7 @@
 		1484282F1A187644003180D5 /* OperationQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OperationQueue.h; sourceTree = "<group>"; };
 		148428311A187C8A003180D5 /* BindingImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BindingImage.cpp; path = ../src/BindingImage.cpp; sourceTree = "<group>"; };
 		148428321A187C8A003180D5 /* BindingImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BindingImage.h; path = ../src/BindingImage.h; sourceTree = "<group>"; };
+		148428341A18C8D5003180D5 /* Renderable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Renderable.h; path = ../src/Renderable.h; sourceTree = "<group>"; };
 		14B2CD411A11C0A800778064 /* CanvasContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CanvasContext.cpp; path = ../src/Canvas/CanvasContext.cpp; sourceTree = "<group>"; };
 		14B2CD421A11C0A800778064 /* CanvasContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CanvasContext.h; path = ../src/Canvas/CanvasContext.h; sourceTree = "<group>"; };
 		20516ADA7B5C43A5B05F9D44 /* CinderCanvasApp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = CinderCanvasApp.cpp; path = ../src/CinderCanvasApp.cpp; sourceTree = "<group>"; };
@@ -121,6 +122,7 @@
 				1484282A1A186340003180D5 /* Image.h */,
 				148428311A187C8A003180D5 /* BindingImage.cpp */,
 				148428321A187C8A003180D5 /* BindingImage.h */,
+				148428341A18C8D5003180D5 /* Renderable.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";

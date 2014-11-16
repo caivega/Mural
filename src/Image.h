@@ -10,10 +10,11 @@
 #define __CinderCanvas__Image__
 
 #include "Global.h"
+#include "Renderable.h"
 
 namespace mural
 {
-    class Image
+    class Image : public Renderable
     {
         std::string path;
 

@@ -79,7 +79,7 @@ namespace mural
     };
 
     class JavaScriptView;
-    class CanvasContext
+    class CanvasContext : public Renderable
     {
         int width, height;
 
