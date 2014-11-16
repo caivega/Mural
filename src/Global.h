@@ -19,8 +19,9 @@ typedef std::vector<String> StringList;
 // Cinder
 #include "cinder/app/AppNative.h"
 #include "cinder/gl/gl.h"
-#include "cinder/ImageIo.h"
 #include "cinder/gl/Texture.h"
+#include "cinder/ImageIo.h"
+#include "cinder/gl/Fbo.h"
 
 #include "AssetManager/AssetManager.h"
 

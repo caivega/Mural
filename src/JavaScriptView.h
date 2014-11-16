@@ -22,14 +22,16 @@ namespace mural
     class JavaScriptView
     {
         duk_context *jsGlobalContext;
-        // [Test]
-        CanvasContext *ctx;
 
         std::string scriptPath;
     public:
         int width, height;
-
         String lang;
+
+        bool hasScreenCanvas;
+
+        CanvasContext *currRenderingContext;
+        CanvasContext *renderingContext;
 
         JavaScriptView(int width, int height);
         ~JavaScriptView();

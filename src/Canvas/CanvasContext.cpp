@@ -7,6 +7,7 @@
 //
 
 #include "CanvasContext.h"
+#include "AppViewController.h"
 #include <sstream>
 
 namespace mural
@@ -30,6 +31,28 @@ namespace mural
         state->font = Font::getDefault();
 
         state->paths.push_back(Path2d());
+
+        this->scriptView = theAppController.view;
+
+        // Set as current rendering context
+        this->scriptView->currRenderingContext = this;
+        // Set as default rendering context if no one exists
+        if (!this->scriptView->hasScreenCanvas) {
+            this->scriptView->renderingContext = this;
+            this->scriptView->hasScreenCanvas = true;
+
+            // Set size to view size
+            width = scriptView->width;
+            height = scriptView->height;
+        }
+        else {
+            // Set to default size
+            width = 300;
+            height = 150;
+        }
+
+        // Create rendering buffer
+        renderingBuffer = gl::Fbo(width, height);
     }
 
     CanvasContext::~CanvasContext()
@@ -95,96 +118,162 @@ namespace mural
 
     void CanvasContext::stroke()
     {
+        prepare();
+
         gl::color(state->strokeStyle.r, state->strokeStyle.g, state->strokeStyle.b, state->globalAlpha);
         for (auto it = state->paths.begin(); it != state->paths.end(); ++it) {
             if (!it->empty()) {
                 gl::draw(*it);
             }
         }
+
+        present();
     }
 
     void CanvasContext::fill()
     {
+        prepare();
+
         gl::color(state->fillStyle.r, state->fillStyle.g, state->fillStyle.b, state->globalAlpha);
         for (auto it = state->paths.begin(); it != state->paths.end(); ++it) {
             if (!it->empty()) {
                 gl::drawSolid(*it);
             }
         }
+
+        present();
     }
 
     void CanvasContext::drawImage(Image *img, float dx, float dy)
     {
+        prepare();
+
         // Clear color first
         gl::color(1.0f, 1.0f, 1.0f);
         if (img->getComplete()) {
             gl::draw(img->texture, Vec2f(dx, dy));
         }
+
+        present();
     }
 
     void CanvasContext::drawImage(Image *img, float dx, float dy, float dw, float dh)
     {
+        prepare();
+
         // Clear color first
         gl::color(1.0f, 1.0f, 1.0f);
         if (img->getComplete()) {
             gl::draw(img->texture, Rectf(dx, dy, dx + dw, dy + dh));
         }
+
+        present();
     }
 
     void CanvasContext::drawImage(Image *img, float sx, float sy, float sw, float sh, float dx, float dy, float dw, float dh)
     {
+        prepare();
+
         // Clear color first
         gl::color(1.0f, 1.0f, 1.0f);
         if (img->getComplete()) {
             gl::draw(img->texture, Area(sx, sy, sx + sw, sy + sh), Rectf(dx, dy, dx + dw, dy + dh));
         }
+
+        present();
     }
 
     void CanvasContext::translate(float x, float y)
     {
+        prepare();
+
         gl::translate(x, y);
+
+        present();
     }
 
     void CanvasContext::rotate(float radians)
     {
+        prepare();
+
         gl::rotate(toDegrees(radians));
+
+        present();
     }
 
     void CanvasContext::scale(float x, float y)
     {
+        prepare();
+
         gl::scale(x, y);
+
+        present();
     }
 
     void CanvasContext::clearRect(float x, float y, float w, float h)
     {
+        prepare();
+
         gl::color(1.0f, 1.0f, 1.0f, 1.0f);
         gl::drawSolidRect(Rectf(x, y, w, h));
+
+        present();
     }
 
     void CanvasContext::strokeRect(float x, float y, float w, float h)
     {
+        prepare();
+
         gl::drawStrokedRect(Rectf(x, y, x + w, y + h));
+
+        present();
     }
 
     void CanvasContext::fillRect(float x, float y, float w, float h)
     {
+        prepare();
+
         gl::drawSolidRect(Rectf(x, y, x + w, y + h));
+
+        present();
     }
 
     void CanvasContext::strokeText(const std::string &text, float x, float y)
     {
+        prepare();
+
         gl::drawString(text, Vec2f(x, y), state->strokeStyle, state->font);
+
+        present();
     }
 
     void CanvasContext::fillText(const std::string &text, float x, float y)
     {
+        prepare();
+
         gl::drawString(text, Vec2f(x, y), state->fillStyle, state->font);
+
+        present();
+    }
+
+    void CanvasContext::prepare()
+    {
+        renderingBuffer.bindFramebuffer();
+    }
+
+    void CanvasContext::present()
+    {
+        renderingBuffer.unbindFramebuffer();
     }
 
     void CanvasContext::setLineWidth(float width)
     {
+        prepare();
+
         state->lineWidth = width;
         gl::lineWidth(state->lineWidth);
+
+        present();
     }
 
     float CanvasContext::getLineWidth()
@@ -232,6 +321,13 @@ namespace mural
     float CanvasContext::getGlobalAlpha()
     {
         return state->globalAlpha;
+    }
+
+    void CanvasContext::resize(int width, int height)
+    {
+        this->width = width;
+        this->height = height;
+        this->renderingBuffer = gl::Fbo(width, height);
     }
 
     void stringToColorRGBA(const std::string& color, float& r, float& g, float& b, float& a)

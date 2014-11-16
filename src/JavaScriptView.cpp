@@ -33,7 +33,9 @@ namespace mural
 {
     JavaScriptView::JavaScriptView(int width, int height):
         jsGlobalContext(nullptr),
+        renderingContext(nullptr),
         lang("en"),
+        hasScreenCanvas(false),
         width(width),
         height(height)
     {
@@ -55,6 +57,7 @@ namespace mural
         this->defineProperties();
 
         // Setup OpenGL context
+        gl::setViewport(Area(0, 0, width, height));
 
         // Setup event callbacks
 
@@ -103,6 +106,11 @@ namespace mural
         duk_get_prop_string(this->jsGlobalContext, -1, "tickAnimFrame");
         duk_call(this->jsGlobalContext, 0);
         duk_pop_n(this->jsGlobalContext, 3);
+
+        // Draw to screen
+        if (this->renderingContext) {
+            this->renderingContext->renderingBuffer.blitToScreen(Area(0, 0, 640, 480), Area(0, 0, 640, 480));
+        }
     }
 
     void JavaScriptView::defineProperties()

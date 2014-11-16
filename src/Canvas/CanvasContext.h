@@ -78,11 +78,21 @@ namespace mural
         }
     };
 
+    class JavaScriptView;
     class CanvasContext
     {
+        int width, height;
+
         int stateIndex;
         CanvasState stateStack[CANVAS_STATE_STACK_SIZE];
         CanvasState *state;
+
+        gl::Fbo renderingBuffer;
+
+        bool isScreenCanvas;
+
+        JavaScriptView *scriptView;
+        friend JavaScriptView;
     public:
         CanvasContext();
         ~CanvasContext();
@@ -116,6 +126,9 @@ namespace mural
 
         void clearRect(float x, float y, float w, float h);
 
+        void prepare();
+        void present();
+
         void setLineWidth(float width);
         float getLineWidth();
         void setStrokeStyle(const std::string& color);
@@ -126,6 +139,8 @@ namespace mural
         std::string getFillStyle();
         void setGlobalAlpha(float a);
         float getGlobalAlpha();
+
+        void resize(int width, int height);
     };
 
     void stringToColorRGBA(const std::string& color, float& r, float& g, float& b, float& a);
