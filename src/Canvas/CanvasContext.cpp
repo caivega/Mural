@@ -113,6 +113,33 @@ namespace mural
         }
     }
 
+    void CanvasContext::drawImage(Image *img, float dx, float dy)
+    {
+        // Clear color first
+        gl::color(1.0f, 1.0f, 1.0f);
+        if (img->getComplete()) {
+            gl::draw(img->texture, Vec2f(dx, dy));
+        }
+    }
+
+    void CanvasContext::drawImage(Image *img, float dx, float dy, float dw, float dh)
+    {
+        // Clear color first
+        gl::color(1.0f, 1.0f, 1.0f);
+        if (img->getComplete()) {
+            gl::draw(img->texture, Rectf(dx, dy, dx + dw, dy + dh));
+        }
+    }
+
+    void CanvasContext::drawImage(Image *img, float sx, float sy, float sw, float sh, float dx, float dy, float dw, float dh)
+    {
+        // Clear color first
+        gl::color(1.0f, 1.0f, 1.0f);
+        if (img->getComplete()) {
+            gl::draw(img->texture, Area(sx, sy, sx + sw, sy + sh), Rectf(dx, dy, dx + dw, dy + dh));
+        }
+    }
+
     void CanvasContext::translate(float x, float y)
     {
         gl::translate(x, y);

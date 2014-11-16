@@ -10,6 +10,7 @@
 #define __CinderCanvas__CanvasContext__
 
 #include "Global.h"
+#include "Image.h"
 
 using namespace ci;
 
@@ -104,6 +105,10 @@ namespace mural
 
         void stroke();
         void fill();
+
+        void drawImage(Image *img, float dx, float dy);
+        void drawImage(Image *img, float dx, float dy, float dw, float dh);
+        void drawImage(Image *img, float sx, float sy, float sw, float sh, float dx, float dy, float dw, float dh);
 
         void translate(float x, float y);
         void rotate(float radians);
