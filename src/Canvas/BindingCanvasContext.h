@@ -34,6 +34,8 @@ namespace mural
     int w_CanvasContext_prototype_stroke(duk_context *ctx);
     int w_CanvasContext_prototype_fill(duk_context *ctx);
 
+    int w_CanvasContext_prototype_drawImage(duk_context *ctx);
+
     int w_CanvasContext_prototype_translate(duk_context *ctx);
     int w_CanvasContext_prototype_rotate(duk_context *ctx);
     int w_CanvasContext_prototype_scale(duk_context *ctx);

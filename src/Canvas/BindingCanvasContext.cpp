@@ -27,6 +27,7 @@ namespace mural
         { "fillText",   w_CanvasContext_prototype_fillText,     3 },
         { "stroke",     w_CanvasContext_prototype_stroke,       0 },
         { "fill",       w_CanvasContext_prototype_fill,         0 },
+        { "drawImage",  w_CanvasContext_prototype_drawImage,    DUK_VARARGS },
         { "translate",  w_CanvasContext_prototype_translate,    2 },
         { "rotate",     w_CanvasContext_prototype_rotate,       1 },
         { "scale",      w_CanvasContext_prototype_scale,        2 },
@@ -169,6 +170,44 @@ namespace mural
     {
         auto inst = getNativePointer<CanvasContext>(ctx);
         inst->fill();
+
+        return 0;
+    }
+
+    int w_CanvasContext_prototype_drawImage(duk_context *ctx)
+    {
+        auto inst = getNativePointer<CanvasContext>(ctx);
+
+        int args = duk_get_top(ctx);
+        if (args >= 3 && args < 5) {
+            Image *img = getNativePointerOfObjAt<Image>(ctx, 0);
+            float dx = duk_to_number(ctx, 1);
+            float dy = duk_to_number(ctx, 2);
+
+            inst->drawImage(img, dx, dy);
+        }
+        else if (args >= 5 && args < 9) {
+            Image *img = getNativePointerOfObjAt<Image>(ctx, 0);
+            float dx = duk_to_number(ctx, 1);
+            float dy = duk_to_number(ctx, 2);
+            float dw = duk_to_number(ctx, 3);
+            float dh = duk_to_number(ctx, 4);
+
+            inst->drawImage(img, dx, dy, dw, dh);
+        }
+        else if (args >= 9) {
+            Image *img = getNativePointerOfObjAt<Image>(ctx, 0);
+            float sx = duk_to_number(ctx, 1);
+            float sy = duk_to_number(ctx, 2);
+            float sw = duk_to_number(ctx, 3);
+            float sh = duk_to_number(ctx, 4);
+            float dx = duk_to_number(ctx, 5);
+            float dy = duk_to_number(ctx, 6);
+            float dw = duk_to_number(ctx, 7);
+            float dh = duk_to_number(ctx, 8);
+
+            inst->drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh);
+        }
 
         return 0;
     }
