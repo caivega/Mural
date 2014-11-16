@@ -30,20 +30,6 @@ namespace mural
         state->font = Font::getDefault();
 
         state->paths.push_back(Path2d());
-
-        float aa = 0.0f, bb = 0.0f, cc = 0.0f, dd = 0.0f;
-        stringToColorRGBA("#abc", aa, bb, cc, dd);
-        printf("color: %f, %f, %f, %f\n", aa, bb, cc, dd);
-        stringToColorRGBA("#80ff00", aa, bb, cc, dd);
-        printf("color: %f, %f, %f, %f\n", aa, bb, cc, dd);
-        stringToColorRGBA("rgb(0, 255, 0)", aa, bb, cc, dd);
-        printf("color: %f, %f, %f, %f\n", aa, bb, cc, dd);
-        stringToColorRGBA("rgba(120, 60, 30, 0.6)", aa, bb, cc, dd);
-        printf("color: %f, %f, %f, %f\n", aa, bb, cc, dd);
-        stringToColorRGBA("hsla(90, 100%, 50%, 1)", aa, bb, cc, dd);
-        printf("color: %f, %f, %f, %f\n", aa, bb, cc, dd);
-
-        printf("color string: %s", colorRGBAToString(1.0f, 0.0f, 1.0f).c_str());
     }
 
     CanvasContext::~CanvasContext()
