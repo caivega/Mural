@@ -24,6 +24,8 @@ typedef std::vector<String> StringList;
 
 #include "AssetManager/AssetManager.h"
 
+#include "Utils/OperationQueue.h"
+
 // Duktape
 #include "JavaScript/JavaScript.h"
 

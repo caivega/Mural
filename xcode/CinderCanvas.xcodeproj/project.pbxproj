@@ -20,6 +20,7 @@
 		148428201A1778CD003180D5 /* AssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1484281E1A1778CD003180D5 /* AssetManager.cpp */; };
 		148428231A177A47003180D5 /* media in Resources */ = {isa = PBXBuildFile; fileRef = 148428221A177A47003180D5 /* media */; };
 		148428261A178B04003180D5 /* BindingCanvasContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 148428241A178B04003180D5 /* BindingCanvasContext.cpp */; };
+		148428301A187644003180D5 /* OperationQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1484282E1A187644003180D5 /* OperationQueue.cpp */; };
 		14B2CD431A11C0A800778064 /* CanvasContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14B2CD411A11C0A800778064 /* CanvasContext.cpp */; };
 		5323E6B20EAFCA74003A9687 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B10EAFCA74003A9687 /* CoreVideo.framework */; };
 		5323E6B60EAFCA7E003A9687 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B50EAFCA7E003A9687 /* QTKit.framework */; };
@@ -54,6 +55,8 @@
 		148428241A178B04003180D5 /* BindingCanvasContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BindingCanvasContext.cpp; path = ../src/Canvas/BindingCanvasContext.cpp; sourceTree = "<group>"; };
 		148428251A178B04003180D5 /* BindingCanvasContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BindingCanvasContext.h; path = ../src/Canvas/BindingCanvasContext.h; sourceTree = "<group>"; };
 		148428281A184B30003180D5 /* ColorUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorUtil.h; sourceTree = "<group>"; };
+		1484282E1A187644003180D5 /* OperationQueue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OperationQueue.cpp; sourceTree = "<group>"; };
+		1484282F1A187644003180D5 /* OperationQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OperationQueue.h; sourceTree = "<group>"; };
 		14B2CD411A11C0A800778064 /* CanvasContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CanvasContext.cpp; path = ../src/Canvas/CanvasContext.cpp; sourceTree = "<group>"; };
 		14B2CD421A11C0A800778064 /* CanvasContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CanvasContext.h; path = ../src/Canvas/CanvasContext.h; sourceTree = "<group>"; };
 		20516ADA7B5C43A5B05F9D44 /* CinderCanvasApp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = CinderCanvasApp.cpp; path = ../src/CinderCanvasApp.cpp; sourceTree = "<group>"; };
