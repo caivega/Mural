@@ -174,11 +174,15 @@ namespace mural
         gl::lineWidth(state->lineWidth);
     }
 
+    float CanvasContext::getLineWidth()
+    {
+        return state->lineWidth;
+    }
+
     void CanvasContext::setStrokeStyle(const std::string& c)
     {
-        float r, g, b, a;
-        stringToColorRGBA(c, r, g, b, a);
-        state->strokeStyle.set(r, g, b);
+        float a = 1.0f;
+        stringToColorRGBA(c, state->strokeStyle.r, state->strokeStyle.g, state->strokeStyle.b, a);
     }
 
     void CanvasContext::setStrokeStyle(float r, float g, float b)
@@ -193,9 +197,8 @@ namespace mural
 
     void CanvasContext::setFillStyle(const std::string& c)
     {
-        float r, g, b, a;
-        stringToColorRGBA(c, r, g, b, a);
-        state->fillStyle.set(r, g, b);
+        float a = 1.0f;
+        stringToColorRGBA(c, state->fillStyle.r, state->fillStyle.g, state->fillStyle.b, a);
     }
 
     void CanvasContext::setFillStyle(float r, float g, float b)

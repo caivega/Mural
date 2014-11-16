@@ -227,7 +227,7 @@ namespace mural
     int w_CanvasContext_prototype_get_lineWidth(duk_context *ctx)
     {
         auto inst = getNativePointer<CanvasContext>(ctx);
-        duk_push_number(ctx, inst->getLineWidth());
+        duk_push_number(ctx, (double)(inst->getLineWidth()));
 
         return 1;
     }
@@ -287,9 +287,9 @@ namespace mural
 
         MU_BIND_METHODS_AND_NUMBERS(CanvasContext);
 
-        MU_BIND_SET(CanvasContext, lineWidth);
-        MU_BIND_SET(CanvasContext, strokeStyle);
-        MU_BIND_SET(CanvasContext, fillStyle);
+        MU_BIND_SET_GET(CanvasContext, lineWidth);
+        MU_BIND_SET_GET(CanvasContext, strokeStyle);
+        MU_BIND_SET_GET(CanvasContext, fillStyle);
         MU_BIND_SET_GET(CanvasContext, globalAlpha);
 
         MU_FINISH_BINDING(CanvasContext);
