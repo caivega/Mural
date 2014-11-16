@@ -52,10 +52,9 @@ namespace mural
             return;
         }
 
+        // FIXME: Make this work on windows
         this->path += "../Resources/";
         this->path += path;
-
-        printf("resolved path is %s\n", this->path.c_str());
 
         this->beginLoad();
     }
