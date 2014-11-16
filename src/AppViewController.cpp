@@ -16,17 +16,10 @@ namespace mural
     {
         delete view;
     }
-    void AppViewController::initWithScript(const String& path, int width, int height, const String& title)
+    void AppViewController::initWithScript(const String& path, int width, int height)
     {
-        view = new JavaScriptView(width, height, title);
+        view = new JavaScriptView(width, height);
         view->loadScriptAtPath(path);
-    }
-    void AppViewController::initWithScripts(const StringList& paths, int width, int height, const String& title)
-    {
-        view = new JavaScriptView(width, height, title);
-        for (auto it = paths.begin(); it != paths.end(); ++it) {
-            view->loadScriptAtPath(it->c_str());
-        }
     }
     void AppViewController::tickAndDraw()
     {
