@@ -157,6 +157,39 @@ namespace mural
         present();
     }
 
+    void CanvasContext::drawRenderable(mural::Renderable *img, float dx, float dy)
+    {
+        Image *image = dynamic_cast<Image *>(img);
+        if (image) {
+            drawImage(image, dx, dy);
+        }
+        else {
+            drawCanvas(dynamic_cast<CanvasContext *>(img), dx, dy);
+        }
+    }
+
+    void CanvasContext::drawRenderable(mural::Renderable *img, float dx, float dy, float dw, float dh)
+    {
+        Image *image = dynamic_cast<Image *>(img);
+        if (image) {
+            drawImage(image, dx, dy, dw, dh);
+        }
+        else {
+            drawCanvas(dynamic_cast<CanvasContext *>(img), dx, dy, dw, dh);
+        }
+    }
+
+    void CanvasContext::drawRenderable(mural::Renderable *img, float sx, float sy, float sw, float sh, float dx, float dy, float dw, float dh)
+    {
+        Image *image = dynamic_cast<Image *>(img);
+        if (image) {
+            drawImage(image, sx, sy, sw, sh, dx, dy, dw, dh);
+        }
+        else {
+            drawCanvas(dynamic_cast<CanvasContext *>(img), sx, sy, sw, sh, dx, dy, dw, dh);
+        }
+    }
+
     void CanvasContext::drawImage(Image *img, float dx, float dy, float dw, float dh)
     {
         prepare();
@@ -181,6 +214,21 @@ namespace mural
         }
 
         present();
+    }
+
+    void CanvasContext::drawCanvas(CanvasContext *img, float dx, float dy)
+    {
+        img->renderingBuffer.blitTo(this->renderingBuffer, Area(0, 0, img->width, img->height), Area(dx, dy, img->width, img->height));
+    }
+
+    void CanvasContext::drawCanvas(CanvasContext *img, float dx, float dy, float dw, float dh)
+    {
+        img->renderingBuffer.blitTo(this->renderingBuffer, Area(0, 0, img->width, img->height), Area(dx, dy, this->width, this->height));
+    }
+
+    void CanvasContext::drawCanvas(CanvasContext *img, float sx, float sy, float sw, float sh, float dx, float dy, float dw, float dh)
+    {
+        img->renderingBuffer.blitTo(this->renderingBuffer, Area(sx, sy, sw, sh), Area(dx, dy, dw, dh));
     }
 
     void CanvasContext::translate(float x, float y)

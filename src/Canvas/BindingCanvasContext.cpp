@@ -177,26 +177,24 @@ namespace mural
     int w_CanvasContext_prototype_drawImage(duk_context *ctx)
     {
         auto inst = getNativePointer<CanvasContext>(ctx);
+        Renderable *img = getNativePointerOfObjAt<Renderable>(ctx, 0);
 
         int args = duk_get_top(ctx);
         if (args >= 3 && args < 5) {
-            Image *img = getNativePointerOfObjAt<Image>(ctx, 0);
             float dx = duk_to_number(ctx, 1);
             float dy = duk_to_number(ctx, 2);
 
-            inst->drawImage(img, dx, dy);
+            inst->drawRenderable(img, dx, dy);
         }
         else if (args >= 5 && args < 9) {
-            Image *img = getNativePointerOfObjAt<Image>(ctx, 0);
             float dx = duk_to_number(ctx, 1);
             float dy = duk_to_number(ctx, 2);
             float dw = duk_to_number(ctx, 3);
             float dh = duk_to_number(ctx, 4);
 
-            inst->drawImage(img, dx, dy, dw, dh);
+            inst->drawRenderable(img, dx, dy, dw, dh);
         }
         else if (args >= 9) {
-            Image *img = getNativePointerOfObjAt<Image>(ctx, 0);
             float sx = duk_to_number(ctx, 1);
             float sy = duk_to_number(ctx, 2);
             float sw = duk_to_number(ctx, 3);
@@ -206,7 +204,7 @@ namespace mural
             float dw = duk_to_number(ctx, 7);
             float dh = duk_to_number(ctx, 8);
 
-            inst->drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh);
+            inst->drawRenderable(img, sx, sy, sw, sh, dx, dy, dw, dh);
         }
 
         return 0;
