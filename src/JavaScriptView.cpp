@@ -28,11 +28,11 @@
 
 namespace mural
 {
-    JavaScriptView::JavaScriptView(int width, int height, const String& title):
-    jsGlobalContext(nullptr),
-    lang("en"),
-    width(width),
-    height(height)
+    JavaScriptView::JavaScriptView(int width, int height):
+        jsGlobalContext(nullptr),
+        lang("en"),
+        width(width),
+        height(height)
     {
         // Create the global JS context
         this->jsGlobalContext = duk_create_heap_default();
@@ -47,7 +47,7 @@ namespace mural
         jsRefSetup(this->jsGlobalContext);
 
         // Load shim for duktape
-        this->loadScriptAtPath(ci::app::AppBasic::getResourcePath(MURAL_SHIM_JS).c_str());
+        duk_eval_file_noresult(this->jsGlobalContext, app::AppBasic::getResourcePath(MURAL_SHIM_JS).c_str());
 
         this->defineProperties();
 
@@ -59,7 +59,7 @@ namespace mural
         js_register_CanvasContext(this->jsGlobalContext);
 
         // Load boot script
-        this->loadScriptAtPath(ci::app::AppBasic::getResourcePath(MURAL_BOOT_JS).c_str());
+        duk_eval_file_noresult(this->jsGlobalContext, app::AppBasic::getResourcePath(MURAL_BOOT_JS).c_str());
     }
 
     JavaScriptView::~JavaScriptView()
@@ -69,14 +69,17 @@ namespace mural
 
     void JavaScriptView::loadScriptAtPath(const String& path)
     {
-        duk_eval_file(this->jsGlobalContext, path.c_str());
-        duk_pop(this->jsGlobalContext);
+        this->scriptPath = path;
     }
 
     void JavaScriptView::boot()
     {
         gl::enableAlphaBlending();
         gl::clear(ColorA::white(), false);
+
+        if (this->scriptPath.length() > 0) {
+            duk_eval_file_noresult(this->jsGlobalContext, this->scriptPath.c_str());
+        }
 
         // [Tests]
 //        BasicClock();

@@ -24,12 +24,14 @@ namespace mural
         duk_context *jsGlobalContext;
         // [Test]
         CanvasContext *ctx;
+
+        std::string scriptPath;
     public:
         int width, height;
 
         String lang;
 
-        JavaScriptView(int width, int height, const String& title);
+        JavaScriptView(int width, int height);
         ~JavaScriptView();
 
         // Methods
