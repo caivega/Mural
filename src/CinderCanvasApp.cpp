@@ -14,11 +14,11 @@ public:
 
 void CinderCanvasApp::prepareSettings(Settings *settings)
 {
-    theAppController.initWithScript(getResourcePath("scripts/index.js").c_str());
 }
 
 void CinderCanvasApp::setup()
 {
+    theAppController.initWithScript(getResourcePath("scripts/index.js").c_str());
 }
 
 void CinderCanvasApp::mouseDown(app::MouseEvent event)
