@@ -15,10 +15,12 @@ void LoadImage()
 {
     auto img = new mural::Image();
 
-    img->setSrc("media/title.png");
+    img->setSrc("media/coin.png");
     img->loadCallback = [=] {
         printf("img loaded!");
 
+        // Reset color so that the texture draws correctly
+        gl::color(1, 1, 1);
         gl::draw(img->texture);
     };
 }

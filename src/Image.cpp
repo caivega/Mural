@@ -85,7 +85,9 @@ namespace mural
                 this->loading = false;
                 this->loadCompleted = true;
 
-                OperationQueue::defaultQueue().addBlockOperation(this->loadCallback);
+                if (this->loadCallback) {
+                    this->loadCallback();
+                }
             },
             opts
         );
