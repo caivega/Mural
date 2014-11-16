@@ -89,7 +89,7 @@ namespace mural
 //        BasicClock();
 //        AsyncImageLoader();
 //        ColorUtil();
-        LoadImage();
+//        LoadImage();
     }
 
     void JavaScriptView::tickAndDraw()
