@@ -90,6 +90,9 @@ namespace mural
 
     void JavaScriptView::tickAndDraw()
     {
+        // Block operations
+        OperationQueue::defaultQueue().doBlockOperations();
+
         // RAF
         duk_push_global_object(this->jsGlobalContext);
         duk_get_prop_string(this->jsGlobalContext, -1, MURAL_JS_NAMESPACE);
