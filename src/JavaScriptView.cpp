@@ -15,6 +15,7 @@
 #include "Tests/BasicClock.h"
 #include "Tests/AsyncImageLoader.h"
 #include "Tests/ColorUtil.h"
+#include "Tests/LoadImage.h"
 
 #if defined(WIN32)
 #  define OS_NAME "Windows"
@@ -85,7 +86,8 @@ namespace mural
         // [Tests]
 //        BasicClock();
 //        AsyncImageLoader();
-        ColorUtil();
+//        ColorUtil();
+        LoadImage();
     }
 
     void JavaScriptView::tickAndDraw()
