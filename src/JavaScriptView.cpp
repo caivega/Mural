@@ -119,9 +119,7 @@ namespace mural
             // Reset viewport and camera
             gl::setViewport(this->screenRenderingContext->renderingBuffer.getBounds());
             gl::setMatrices(this->screenRenderingContext->renderingCam);
-            // Blit directly to screen
-            // FIXME: better to draw texture instead of blitting?
-            this->screenRenderingContext->renderingBuffer.blitToScreen(ci::app::getWindowBounds(), ci::app::getWindowBounds());
+            gl::draw(screenRenderingContext->getTexture());
         }
     }
 
