@@ -20,7 +20,7 @@ namespace mural
         { "closePath",  w_CanvasContext_prototype_closePath,    0 },
         { "moveTo",     w_CanvasContext_prototype_moveTo,       2 },
         { "lineTo",     w_CanvasContext_prototype_lineTo,       2 },
-        { "arc",        w_CanvasContext_prototype_arc,          6 },
+        { "arc",        w_CanvasContext_prototype_arc,          DUK_VARARGS },
         { "strokeRect", w_CanvasContext_prototype_strokeRect,   4 },
         { "fillRect",   w_CanvasContext_prototype_fillRect,     4 },
         { "strokeText", w_CanvasContext_prototype_strokeText,   3 },
@@ -96,6 +96,11 @@ namespace mural
     int w_CanvasContext_prototype_arc(duk_context *ctx)
     {
         int args = duk_get_top(ctx);
+
+        if (args < 5) {
+            duk_error(ctx, DUK_ERR_API_ERROR, "Failed to execute 'arc' on 'CanvasRenderingContext2D': 5 arguments required, but only %d present.", args);
+            return DUK_RET_API_ERROR;
+        }
 
         double x = duk_require_number(ctx, 0);
         double y = duk_require_number(ctx, 1);
