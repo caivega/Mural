@@ -23,6 +23,8 @@
 		1484282B1A186340003180D5 /* Image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 148428291A186340003180D5 /* Image.cpp */; };
 		148428301A187644003180D5 /* OperationQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1484282E1A187644003180D5 /* OperationQueue.cpp */; };
 		148428331A187C8A003180D5 /* BindingImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 148428311A187C8A003180D5 /* BindingImage.cpp */; };
+		148428371A199AD5003180D5 /* BindingCanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 148428351A199AD5003180D5 /* BindingCanvas.cpp */; };
+		1484283A1A199C6E003180D5 /* BindingCanvasStyle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 148428381A199C6E003180D5 /* BindingCanvasStyle.cpp */; };
 		14B2CD431A11C0A800778064 /* CanvasContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14B2CD411A11C0A800778064 /* CanvasContext.cpp */; };
 		5323E6B20EAFCA74003A9687 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B10EAFCA74003A9687 /* CoreVideo.framework */; };
 		5323E6B60EAFCA7E003A9687 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B50EAFCA7E003A9687 /* QTKit.framework */; };
@@ -65,6 +67,10 @@
 		148428311A187C8A003180D5 /* BindingImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BindingImage.cpp; path = ../src/BindingImage.cpp; sourceTree = "<group>"; };
 		148428321A187C8A003180D5 /* BindingImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BindingImage.h; path = ../src/BindingImage.h; sourceTree = "<group>"; };
 		148428341A18C8D5003180D5 /* Renderable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Renderable.h; path = ../src/Renderable.h; sourceTree = "<group>"; };
+		148428351A199AD5003180D5 /* BindingCanvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BindingCanvas.cpp; path = ../src/Canvas/BindingCanvas.cpp; sourceTree = "<group>"; };
+		148428361A199AD5003180D5 /* BindingCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BindingCanvas.h; path = ../src/Canvas/BindingCanvas.h; sourceTree = "<group>"; };
+		148428381A199C6E003180D5 /* BindingCanvasStyle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BindingCanvasStyle.cpp; path = ../src/Canvas/BindingCanvasStyle.cpp; sourceTree = "<group>"; };
+		148428391A199C6E003180D5 /* BindingCanvasStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BindingCanvasStyle.h; path = ../src/Canvas/BindingCanvasStyle.h; sourceTree = "<group>"; };
 		14B2CD411A11C0A800778064 /* CanvasContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CanvasContext.cpp; path = ../src/Canvas/CanvasContext.cpp; sourceTree = "<group>"; };
 		14B2CD421A11C0A800778064 /* CanvasContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CanvasContext.h; path = ../src/Canvas/CanvasContext.h; sourceTree = "<group>"; };
 		20516ADA7B5C43A5B05F9D44 /* CinderCanvasApp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = CinderCanvasApp.cpp; path = ../src/CinderCanvasApp.cpp; sourceTree = "<group>"; };
@@ -192,6 +198,10 @@
 				14B2CD421A11C0A800778064 /* CanvasContext.h */,
 				148428241A178B04003180D5 /* BindingCanvasContext.cpp */,
 				148428251A178B04003180D5 /* BindingCanvasContext.h */,
+				148428351A199AD5003180D5 /* BindingCanvas.cpp */,
+				148428361A199AD5003180D5 /* BindingCanvas.h */,
+				148428381A199C6E003180D5 /* BindingCanvasStyle.cpp */,
+				148428391A199C6E003180D5 /* BindingCanvasStyle.h */,
 			);
 			name = Canvas;
 			sourceTree = "<group>";
@@ -327,11 +337,13 @@
 				14390A4B1A0EF67600A8008D /* AppViewController.cpp in Sources */,
 				148428301A187644003180D5 /* OperationQueue.cpp in Sources */,
 				14390A611A0F081800A8008D /* JavaScript.cpp in Sources */,
+				148428371A199AD5003180D5 /* BindingCanvas.cpp in Sources */,
 				14B2CD431A11C0A800778064 /* CanvasContext.cpp in Sources */,
 				148428261A178B04003180D5 /* BindingCanvasContext.cpp in Sources */,
 				1484282B1A186340003180D5 /* Image.cpp in Sources */,
 				148428331A187C8A003180D5 /* BindingImage.cpp in Sources */,
 				14390A4E1A0EF6AF00A8008D /* JavaScriptView.cpp in Sources */,
+				1484283A1A199C6E003180D5 /* BindingCanvasStyle.cpp in Sources */,
 				C55B6F466378486C820D8FAA /* CinderCanvasApp.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
