@@ -11,6 +11,9 @@
 
 #include "CanvasContext.h"
 
+#define CANVAS_DEFAULT_WIDTH 300
+#define CANVAS_DEFAULT_HEIGHT 150
+
 namespace mural
 {
     enum CanvasContextMode {
@@ -19,6 +22,7 @@ namespace mural
         kCanvasContextModeWebGL
     };
 
+    class JavaScriptView;
     class BindingCanvas
     {
     public:
@@ -27,6 +31,7 @@ namespace mural
          * JavaScript object reference of context object
          */
         int ctxJsObjectRef;
+        JavaScriptView *scriptView;
 
         CanvasContext *renderingContext;
         CanvasContextMode contextMode;
@@ -52,6 +57,10 @@ namespace mural
         float getStyleHeight() { return style.y2 - style.y1; }
         void setStyleHeight(float height) { style.y2 = style.y1 + height; }
     };
+
+    int w_Canvas_constructor(duk_context *ctx);
+
+    void js_register_Canvas(duk_context *ctx);
 }
 
 #endif /* defined(__CinderCanvas__BindingCanvas__) */
