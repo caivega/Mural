@@ -99,6 +99,20 @@ namespace mural
     duk_put_function_list(ctx, -1, methods_of_##CLASS); \
     duk_put_prop_string(ctx, -2, "prototype");
 
+    /**
+     * Require stack items:
+     *   global, __MURAL__
+     *
+     * Stack after this call:
+     *   global, __MURAL__, constructor, prototype
+     */
+#define MU_BIND_METHODS_AND_NUMBERS_CONSTRUCTOR_HAS_PARAM(CLASS, PARAM) \
+    duk_push_c_function(ctx, w_##CLASS##_constructor, PARAM); \
+    duk_push_object(ctx); \
+    duk_put_number_list(ctx, -1, numbers_of_##CLASS); \
+    duk_put_function_list(ctx, -1, methods_of_##CLASS); \
+    duk_put_prop_string(ctx, -2, "prototype");
+
 #define MU_BIND_SET(CLASS, NAME) \
     duk_eval_string(ctx, "__MURAL__.__defineSetter__"); \
     duk_get_prop_string(ctx, -2, "prototype"); \
