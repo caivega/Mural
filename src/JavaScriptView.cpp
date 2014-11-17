@@ -89,7 +89,7 @@ namespace mural
         }
 
         // [Tests]
-        BasicClock();
+//        BasicClock();
 //        AsyncImageLoader();
 //        ColorUtil();
 //        LoadImage();
