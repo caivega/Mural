@@ -48,7 +48,7 @@ namespace mural
         BindingCanvas();
         ~BindingCanvas();
 
-        float getStyleLeft() { return 10; }
+        float getStyleLeft() { return style.x1; }
         void setStyleLeft(float left) { style.x1 = left; }
         float getStyleTop() { return style.y1; }
         void setStyleTop(float top) { style.y1 = top; }

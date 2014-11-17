@@ -36,7 +36,7 @@ print('Script start');
 window.Canvas = __MURAL__.Canvas;
 print('Canvas ' + (Canvas ? 'exists' : 'not exist'));
 var canvas = new Canvas();
-Object.keys(canvas).forEach(function(key) {
-    print(key + ': ' + canvas[key]);
-});
-print('typeof canvas.style: ' + typeof(canvas.style));
+print('canvas.style.width: ' + canvas.style.width);
+print('canvas.style.height: ' + canvas.style.height);
+print('canvas.style.left: ' + canvas.style.left);
+print('canvas.style.top: ' + canvas.style.top);
