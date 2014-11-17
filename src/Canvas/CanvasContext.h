@@ -88,6 +88,7 @@ namespace mural
         CanvasState *state;
 
         gl::Fbo renderingBuffer;
+        gl::TextureRef texture;
         CameraOrtho renderingCam;
 
         bool isScreenCanvas;
@@ -137,6 +138,8 @@ namespace mural
 
         void prepare();
         void present();
+
+        gl::TextureRef getTexture() override;
 
         void setLineWidth(float width);
         float getLineWidth();

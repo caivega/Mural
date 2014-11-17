@@ -20,15 +20,18 @@ namespace mural
 
         bool loading;
         bool loadCompleted;
-    public:
-        Image();
-        ~Image();
 
+        ci::gl::TextureRef texture;
+    public:
         int jsObjectRef;
         std::function<void()> loadCallback;
 
         ci::Surface data;
-        ci::gl::TextureRef texture;
+
+        Image();
+        ~Image();
+
+        ci::gl::TextureRef getTexture() override;
 
         int getWidth();
         int getHeight();

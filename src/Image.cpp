@@ -20,6 +20,11 @@ namespace mural
         loadCallback(nullptr)
     {}
 
+    gl::TextureRef Image::getTexture()
+    {
+        return texture;
+    }
+
     Image::~Image()
     {
         loadCallback = nullptr;

@@ -184,7 +184,7 @@ namespace mural
         // Clear color first
         gl::color(1.0f, 1.0f, 1.0f);
         if (img->getComplete()) {
-            gl::draw(img->texture, Vec2f(dx, dy));
+            gl::draw(img->getTexture(), Vec2f(dx, dy));
         }
 
         present();
@@ -197,7 +197,7 @@ namespace mural
         // Clear color first
         gl::color(1.0f, 1.0f, 1.0f);
         if (img->getComplete()) {
-            gl::draw(img->texture, Rectf(dx, dy, dx + dw, dy + dh));
+            gl::draw(img->getTexture(), Rectf(dx, dy, dx + dw, dy + dh));
         }
 
         present();
@@ -210,7 +210,7 @@ namespace mural
         // Clear color first
         gl::color(1.0f, 1.0f, 1.0f);
         if (img->getComplete()) {
-            gl::draw(img->texture, Area(sx, sy, sx + sw, sy + sh), Rectf(dx, dy, dx + dw, dy + dh));
+            gl::draw(img->getTexture(), Area(sx, sy, sx + sw, sy + sh), Rectf(dx, dy, dx + dw, dy + dh));
         }
 
         present();
@@ -221,10 +221,7 @@ namespace mural
         prepare();
 
         gl::color(1.0f, 1.0f, 1.0f);
-        gl::Texture t = img->renderingBuffer.getTexture();
-        t.setFlipped();
-
-        gl::draw(t, Vec2f(dx, dy));
+        gl::draw(img->getTexture(), Vec2f(dx, dy));
 
         present();
     }
@@ -234,10 +231,7 @@ namespace mural
         prepare();
 
         gl::color(1.0f, 1.0f, 1.0f);
-        gl::Texture t = img->renderingBuffer.getTexture();
-        t.setFlipped();
-
-        gl::draw(t, Rectf(dx, dy, dx + dw, dy + dh));
+        gl::draw(img->getTexture(), Rectf(dx, dy, dx + dw, dy + dh));
 
         present();
     }
@@ -247,10 +241,7 @@ namespace mural
         prepare();
 
         gl::color(1.0f, 1.0f, 1.0f);
-        gl::Texture t = img->renderingBuffer.getTexture();
-        t.setFlipped();
-
-        gl::draw(t, Area(sx, sy, sx + sw, sy + sh), Rectf(dx, dy, dx + dw, dy + dh));
+        gl::draw(img->getTexture(), Area(sx, sy, sx + sw, sy + sh), Rectf(dx, dy, dx + dw, dy + dh));
 
         present();
     }
@@ -344,6 +335,14 @@ namespace mural
     void CanvasContext::present()
     {
         renderingBuffer.unbindFramebuffer();
+
+        texture = gl::TextureRef::make_shared(renderingBuffer.getTexture());
+        texture->setFlipped(true);
+    }
+
+    gl::TextureRef CanvasContext::getTexture()
+    {
+        return texture;
     }
 
     void CanvasContext::setLineWidth(float width)

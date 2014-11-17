@@ -13,6 +13,7 @@ namespace mural
 {
     struct Renderable
     {
+        virtual ci::gl::TextureRef getTexture() = 0;
         virtual bool isRenderable() { return true; }
     };
 }
