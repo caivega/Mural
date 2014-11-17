@@ -29,3 +29,6 @@ var style = new CanvasStyle();
 print('style.width = ' + style.width);
 style.width = '123px';
 print('style.width = ' + style.width);
+print('style.heihgt = ' + style.height);
+print('style.left = ' + style.left);
+print('style.top = ' + style.top);
