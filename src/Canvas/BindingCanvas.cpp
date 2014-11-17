@@ -174,6 +174,7 @@ namespace mural
             // Setup canvas, context and save context JavaScript object reference
             auto contextInst = getNativePointerOfObjAt<CanvasContext>(ctx, -1); // canvas, context
             inst->renderingContext = contextInst;
+            contextInst->resize(inst->width, inst->height);
             inst->ctxJsObjectRef = jsRef(ctx); // canvas, context
             duk_pop_2(ctx); // ...
 
@@ -206,8 +207,8 @@ namespace mural
         MU_BIND_METHODS_AND_NUMBERS(Canvas);
 
         MU_BIND_GET(Canvas, nodeName);
-        MU_BIND_GET(Canvas, width);
-        MU_BIND_GET(Canvas, height);
+        MU_BIND_SET_GET(Canvas, width);
+        MU_BIND_SET_GET(Canvas, height);
 
         MU_FINISH_BINDING(Canvas);
     }
