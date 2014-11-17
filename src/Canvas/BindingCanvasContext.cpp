@@ -179,12 +179,13 @@ namespace mural
         auto inst = getNativePointer<CanvasContext>(ctx);
         Renderable *img = getNativePointerOfObjAt<Renderable>(ctx, 0);
 
+        // Donot throw error if argument is not 3, 5, 9 like REAL canvas does
         int args = duk_get_top(ctx);
         if (args >= 3 && args < 5) {
             float dx = duk_to_number(ctx, 1);
             float dy = duk_to_number(ctx, 2);
 
-            inst->drawRenderable(img, dx, dy);
+            inst->drawImage(img, dx, dy);
         }
         else if (args >= 5 && args < 9) {
             float dx = duk_to_number(ctx, 1);
@@ -192,7 +193,7 @@ namespace mural
             float dw = duk_to_number(ctx, 3);
             float dh = duk_to_number(ctx, 4);
 
-            inst->drawRenderable(img, dx, dy, dw, dh);
+            inst->drawImage(img, dx, dy, dw, dh);
         }
         else if (args >= 9) {
             float sx = duk_to_number(ctx, 1);
@@ -204,7 +205,7 @@ namespace mural
             float dw = duk_to_number(ctx, 7);
             float dh = duk_to_number(ctx, 8);
 
-            inst->drawRenderable(img, sx, sy, sw, sh, dx, dy, dw, dh);
+            inst->drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh);
         }
 
         return 0;

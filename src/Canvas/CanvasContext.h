@@ -118,17 +118,9 @@ namespace mural
         void stroke();
         void fill();
 
-        void drawRenderable(Renderable *img, float dx, float dy);
-        void drawRenderable(Renderable *img, float dx, float dy, float dw, float dh);
-        void drawRenderable(Renderable *img, float sx, float sy, float sw, float sh, float dx, float dy, float dw, float dh);
-
-        void drawImage(Image *img, float dx, float dy);
-        void drawImage(Image *img, float dx, float dy, float dw, float dh);
-        void drawImage(Image *img, float sx, float sy, float sw, float sh, float dx, float dy, float dw, float dh);
-
-        void drawCanvas(CanvasContext *img, float dx, float dy);
-        void drawCanvas(CanvasContext *img, float dx, float dy, float dw, float dh);
-        void drawCanvas(CanvasContext *img, float sx, float sy, float sw, float sh, float dx, float dy, float dw, float dh);
+        void drawImage(Renderable *img, float dx, float dy);
+        void drawImage(Renderable *img, float dx, float dy, float dw, float dh);
+        void drawImage(Renderable *img, float sx, float sy, float sw, float sh, float dx, float dy, float dw, float dh);
 
         void translate(float x, float y);
         void rotate(float radians);

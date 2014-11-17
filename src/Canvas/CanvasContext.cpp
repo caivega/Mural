@@ -144,104 +144,41 @@ namespace mural
         present();
     }
 
-    void CanvasContext::drawRenderable(mural::Renderable *img, float dx, float dy)
-    {
-        Image *image = dynamic_cast<Image *>(img);
-        if (image) {
-            drawImage(image, dx, dy);
-        }
-        else {
-            drawCanvas(dynamic_cast<CanvasContext *>(img), dx, dy);
-        }
-    }
-
-    void CanvasContext::drawRenderable(mural::Renderable *img, float dx, float dy, float dw, float dh)
-    {
-        Image *image = dynamic_cast<Image *>(img);
-        if (image) {
-            drawImage(image, dx, dy, dw, dh);
-        }
-        else {
-            drawCanvas(dynamic_cast<CanvasContext *>(img), dx, dy, dw, dh);
-        }
-    }
-
-    void CanvasContext::drawRenderable(mural::Renderable *img, float sx, float sy, float sw, float sh, float dx, float dy, float dw, float dh)
-    {
-        Image *image = dynamic_cast<Image *>(img);
-        if (image) {
-            drawImage(image, sx, sy, sw, sh, dx, dy, dw, dh);
-        }
-        else {
-            drawCanvas(dynamic_cast<CanvasContext *>(img), sx, sy, sw, sh, dx, dy, dw, dh);
-        }
-    }
-
-    void CanvasContext::drawImage(Image *img, float dx, float dy)
+    void CanvasContext::drawImage(Renderable *img, float dx, float dy)
     {
         prepare();
 
         // Clear color first
         gl::color(1.0f, 1.0f, 1.0f);
-        if (img->getComplete()) {
+        if (img->getTexture()) {
             gl::draw(img->getTexture(), Vec2f(dx, dy));
         }
 
         present();
     }
 
-    void CanvasContext::drawImage(Image *img, float dx, float dy, float dw, float dh)
+    void CanvasContext::drawImage(Renderable *img, float dx, float dy, float dw, float dh)
     {
         prepare();
 
         // Clear color first
         gl::color(1.0f, 1.0f, 1.0f);
-        if (img->getComplete()) {
+        if (img->getTexture()) {
             gl::draw(img->getTexture(), Rectf(dx, dy, dx + dw, dy + dh));
         }
 
         present();
     }
 
-    void CanvasContext::drawImage(Image *img, float sx, float sy, float sw, float sh, float dx, float dy, float dw, float dh)
+    void CanvasContext::drawImage(Renderable *img, float sx, float sy, float sw, float sh, float dx, float dy, float dw, float dh)
     {
         prepare();
 
         // Clear color first
         gl::color(1.0f, 1.0f, 1.0f);
-        if (img->getComplete()) {
+        if (img->getTexture()) {
             gl::draw(img->getTexture(), Area(sx, sy, sx + sw, sy + sh), Rectf(dx, dy, dx + dw, dy + dh));
         }
-
-        present();
-    }
-
-    void CanvasContext::drawCanvas(CanvasContext *img, float dx, float dy)
-    {
-        prepare();
-
-        gl::color(1.0f, 1.0f, 1.0f);
-        gl::draw(img->getTexture(), Vec2f(dx, dy));
-
-        present();
-    }
-
-    void CanvasContext::drawCanvas(CanvasContext *img, float dx, float dy, float dw, float dh)
-    {
-        prepare();
-
-        gl::color(1.0f, 1.0f, 1.0f);
-        gl::draw(img->getTexture(), Rectf(dx, dy, dx + dw, dy + dh));
-
-        present();
-    }
-
-    void CanvasContext::drawCanvas(CanvasContext *img, float sx, float sy, float sw, float sh, float dx, float dy, float dw, float dh)
-    {
-        prepare();
-
-        gl::color(1.0f, 1.0f, 1.0f);
-        gl::draw(img->getTexture(), Area(sx, sy, sx + sw, sy + sh), Rectf(dx, dy, dx + dw, dy + dh));
 
         present();
     }

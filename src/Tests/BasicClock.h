@@ -88,7 +88,7 @@ void BasicClock()
     c2->arc(150, 150, 150, 0, PI * 2, true);
     c2->fill();
 
-    ctx->drawRenderable(c2, 0, 0);
+    ctx->drawImage(c2, 0, 0);
 }
 
 #endif
