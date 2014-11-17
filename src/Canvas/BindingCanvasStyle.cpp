@@ -11,15 +11,6 @@
 
 namespace mural
 {
-#define MU_BIND_SET_GET_STYLE(CLASS, NAME) \
-    duk_eval_string(ctx, "__MURAL__.__defineAccessor__"); \
-    duk_get_prop_string(ctx, -2, "prototype"); \
-    duk_push_string(ctx, #NAME); \
-    duk_push_c_function(ctx, w_##CLASS##_prototype_set_##NAME, 1); \
-    duk_push_c_function(ctx, w_##CLASS##_prototype_get_##NAME, 0); \
-    duk_call(ctx, 4); \
-    duk_pop(ctx);
-
     int w_CanvasStyle_constructor(duk_context *ctx)
     {
         auto inst = new BindingCanvasStyle();
