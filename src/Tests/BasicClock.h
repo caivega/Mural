@@ -78,6 +78,17 @@ void BasicClock()
     };
 
     drawClock();
+
+    ctx->setFillStyle("#f0f");
+    ctx->fillRect(250, 100, 100, 100);
+
+    auto c2 = new mural::CanvasContext();
+    c2->resize(300, 300);
+    c2->setFillStyle("#0ff");
+    c2->arc(150, 150, 150, 0, PI * 2, true);
+    c2->fill();
+
+    ctx->drawRenderable(c2, 0, 0);
 }
 
 #endif
