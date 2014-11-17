@@ -37,7 +37,9 @@ namespace mural
 
     int w_CanvasContext_constructor(duk_context *ctx)
     {
-        auto *inst = new CanvasContext();
+        bool isScreenContext = duk_get_boolean(ctx, 0);
+
+        auto *inst = new CanvasContext(isScreenContext);
         setNativePointer(ctx, inst);
 
         return 1;
@@ -323,7 +325,7 @@ namespace mural
     {
         MU_START_BINDING(CanvasContext);
 
-        MU_BIND_METHODS_AND_NUMBERS(CanvasContext);
+        MU_BIND_METHODS_AND_NUMBERS_CONSTRUCTOR_HAS_PARAM(CanvasContext, 1);
 
         MU_BIND_SET_GET(CanvasContext, lineWidth);
         MU_BIND_SET_GET(CanvasContext, strokeStyle);
