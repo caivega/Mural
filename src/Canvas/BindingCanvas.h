@@ -60,6 +60,13 @@ namespace mural
 
     int w_Canvas_constructor(duk_context *ctx);
 
+    int w_Canvas_prototype_get_width(duk_context *ctx);
+    int w_Canvas_prototype_set_width(duk_context *ctx);
+    int w_Canvas_prototype_get_height(duk_context *ctx);
+    int w_Canvas_prototype_set_height(duk_context *ctx);
+
+    int w_Canvas_prototype_getContext(duk_context *ctx);
+
     void js_register_Canvas(duk_context *ctx);
 }
 
