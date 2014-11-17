@@ -16,6 +16,10 @@
 
 namespace mural
 {
+    void jsRefSetup(duk_context *ctx);
+    int jsRef(duk_context *ctx);
+    void jsPushRef(duk_context *ctx, int ref);
+    void jsUnref(duk_context *ctx, int ref);
 
     template <class T>
     T *getNativePointer(duk_context *ctx)
@@ -31,7 +35,6 @@ namespace mural
     template <class T>
     T *getNativePointerOfObjAt(duk_context *ctx, duk_idx_t idx)
     {
-        duk_push_this(ctx); /* ... obj(at idx) ... */
         duk_get_prop_string(ctx, idx, DATA_POINTER_NAME); /* ... obj(at idx) ... pointer */
         T *t = static_cast<T*>(duk_get_pointer(ctx, -1));
         duk_pop(ctx);
@@ -47,11 +50,6 @@ namespace mural
         duk_put_prop_string(ctx, -2, DATA_POINTER_NAME); /* this */
         duk_pop(ctx);
     }
-
-    void jsRefSetup(duk_context *ctx);
-    int jsRef(duk_context *ctx);
-    void jsPushRef(duk_context *ctx, int ref);
-    void jsUnref(duk_context *ctx, int ref);
 
     /**
      * Macros for binding classes
@@ -125,7 +123,6 @@ namespace mural
     duk_push_c_function(ctx, w_##CLASS##_prototype_get_##NAME, 0); \
     duk_call(ctx, 4); \
     duk_pop(ctx);
-
 }
 
 #endif /* defined(__CinderCanvas__JavaScript__) */
