@@ -210,6 +210,7 @@ window.top = window.parent = window;
 
     // The native Image, Audio, HttpRequest and LocalStorage class mimic the real elements
     window.Image = __MURAL__.Image;
+    window.CanvasRenderingContext2D = __MURAL__.CanvasContext;
     // window.Audio = __MURAL__.Audio;
     // window.Video = __MURAL__.Video;
     // window.XMLHttpRequest = __MURAL__.HttpRequest;
@@ -323,8 +324,10 @@ window.top = window.parent = window;
             return new HTMLElement(name);
         },
 
-        getElementById: function(id){
+        getElementById: function(id) {
+            print('get canvas from document');
             if (id === 'canvas') {
+                print(typeof window.canvas);
                 return window.canvas;
             }
             return null;

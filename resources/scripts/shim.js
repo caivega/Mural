@@ -80,3 +80,6 @@ __MURAL__.eventMixin = (function() {
         return this;
     };
 })();
+
+// Array to save CanvasContext instances from GC
+__MURAL__.contextPool = [];
