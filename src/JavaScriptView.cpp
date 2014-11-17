@@ -10,6 +10,7 @@
 
 // Modules
 #include "BindingImage.h"
+#include "Canvas/BindingCanvasStyle.h"
 #include "Canvas/BindingCanvasContext.h"
 
 // Tests
@@ -63,6 +64,7 @@ namespace mural
 
         // Register built-in
         js_register_Image(this->jsGlobalContext);
+        js_register_CanvasStyle(this->jsGlobalContext);
         js_register_CanvasContext(this->jsGlobalContext);
 
         // Load boot script
