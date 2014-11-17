@@ -14,7 +14,6 @@ namespace mural
     int w_CanvasStyle_constructor(duk_context *ctx)
     {
         auto inst = new BindingCanvasStyle();
-        inst->binding = new BindingCanvas();
 
         setNativePointer(ctx, inst);
 
