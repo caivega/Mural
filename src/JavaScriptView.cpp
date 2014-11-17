@@ -35,12 +35,17 @@ namespace mural
 {
     JavaScriptView::JavaScriptView(int width, int height):
         jsGlobalContext(nullptr),
-        renderingContext(nullptr),
+        width(width), height(height),
         lang("en"),
-        hasScreenCanvas(false),
-        width(width),
-        height(height)
+        currRenderingContext(nullptr),
+        screenRenderingContext(nullptr),
+        hasScreenCanvas(false)
     {
+        // Setup OpenGL context
+        gl::setViewport(Area(0, 0, width, height));
+
+        // Setup event callbacks
+
         // Create the global JS context
         this->jsGlobalContext = duk_create_heap_default();
 
@@ -56,21 +61,11 @@ namespace mural
         // Load shim for duktape
         duk_eval_file_noresult(this->jsGlobalContext, app::AppBasic::getResourcePath(MURAL_SHIM_JS).c_str());
 
-        this->defineProperties();
-
-        // Setup OpenGL context
-        gl::setViewport(Area(0, 0, width, height));
-
-        // Setup event callbacks
-
         // Register built-in
         js_register_Image(this->jsGlobalContext);
         js_register_CanvasStyle(this->jsGlobalContext);
         js_register_Canvas(this->jsGlobalContext);
         js_register_CanvasContext(this->jsGlobalContext);
-
-        // Load boot script
-        duk_eval_file_noresult(this->jsGlobalContext, app::AppBasic::getResourcePath(MURAL_BOOT_JS).c_str());
     }
 
     JavaScriptView::~JavaScriptView()
@@ -85,9 +80,17 @@ namespace mural
 
     void JavaScriptView::boot()
     {
+        glDisable(GL_DEPTH_TEST);
         gl::enableAlphaBlending();
         gl::clear(ColorA::white(), false);
 
+        // Set app properties to __MURAL__
+        this->defineProperties();
+
+        // Load boot script
+        duk_eval_file_noresult(this->jsGlobalContext, app::AppBasic::getResourcePath(MURAL_BOOT_JS).c_str());
+
+        // Load app script
         if (this->scriptPath.length() > 0) {
             duk_eval_file_noresult(this->jsGlobalContext, this->scriptPath.c_str());
         }
@@ -112,13 +115,13 @@ namespace mural
         duk_pop_n(this->jsGlobalContext, 3);
 
         // Draw to screen
-        if (this->renderingContext) {
+        if (this->screenRenderingContext) {
             // Reset viewport and camera
-            gl::setViewport(this->renderingContext->renderingBuffer.getBounds());
-            gl::setMatrices(this->renderingContext->renderingCam);
+            gl::setViewport(this->screenRenderingContext->renderingBuffer.getBounds());
+            gl::setMatrices(this->screenRenderingContext->renderingCam);
             // Blit directly to screen
             // FIXME: better to draw texture instead of blitting?
-            this->renderingContext->renderingBuffer.blitToScreen(Area(0, 0, 640, 480), Area(0, 0, 640, 480));
+            this->screenRenderingContext->renderingBuffer.blitToScreen(ci::app::getWindowBounds(), ci::app::getWindowBounds());
         }
     }
 

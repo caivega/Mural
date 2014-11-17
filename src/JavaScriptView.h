@@ -31,7 +31,7 @@ namespace mural
         bool hasScreenCanvas;
 
         CanvasContext *currRenderingContext;
-        CanvasContext *renderingContext;
+        CanvasContext *screenRenderingContext;
 
         JavaScriptView(int width, int height);
         ~JavaScriptView();
