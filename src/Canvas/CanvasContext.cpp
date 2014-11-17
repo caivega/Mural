@@ -348,11 +348,11 @@ namespace mural
         }
 
         this->renderingBuffer = gl::Fbo(this->width, this->height);
-        this->renderingCam.setOrtho(0, this->width, this->height, 0, 0, 1);
+        this->renderingCam.setOrtho(0, this->width, this->height, 0, -1, 1);
 
-        renderingBuffer.bindFramebuffer();
+        prepare();
         gl::clear(ColorA(1.0f, 1.0f, 1.0f, 0.0f));
-        renderingBuffer.unbindFramebuffer();
+        present();
     }
 
     void stringToColorRGBA(const std::string& color, float& r, float& g, float& b, float& a)
