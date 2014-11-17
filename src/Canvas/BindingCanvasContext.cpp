@@ -77,8 +77,8 @@ namespace mural
 
     int w_CanvasContext_prototype_moveTo(duk_context *ctx)
     {
-        double x = duk_to_number(ctx, 0);
-        double y = duk_to_number(ctx, 1);
+        double x = duk_require_number(ctx, 0);
+        double y = duk_require_number(ctx, 1);
         auto inst = getNativePointer<CanvasContext>(ctx);
         inst->moveTo(x, y);
 
@@ -86,8 +86,8 @@ namespace mural
     }
     int w_CanvasContext_prototype_lineTo(duk_context *ctx)
     {
-        double x = duk_to_number(ctx, 0);
-        double y = duk_to_number(ctx, 1);
+        double x = duk_require_number(ctx, 0);
+        double y = duk_require_number(ctx, 1);
         auto inst = getNativePointer<CanvasContext>(ctx);
         inst->lineTo(x, y);
 
@@ -97,14 +97,14 @@ namespace mural
     {
         int args = duk_get_top(ctx);
 
-        double x = duk_to_number(ctx, 0);
-        double y = duk_to_number(ctx, 1);
-        double radius = duk_to_number(ctx, 2);
-        double startRadians = duk_to_number(ctx, 3);
-        double endRadians = duk_to_number(ctx, 4);
+        double x = duk_require_number(ctx, 0);
+        double y = duk_require_number(ctx, 1);
+        double radius = duk_require_number(ctx, 2);
+        double startRadians = duk_require_number(ctx, 3);
+        double endRadians = duk_require_number(ctx, 4);
         bool antiClockwise = true;
         if (args > 5) {
-            antiClockwise = duk_to_boolean(ctx, 5);
+            antiClockwise = duk_require_boolean(ctx, 5);
         }
 
         auto inst = getNativePointer<CanvasContext>(ctx);
@@ -115,10 +115,10 @@ namespace mural
 
     int w_CanvasContext_prototype_strokeRect(duk_context *ctx)
     {
-        double x = duk_to_number(ctx, 0);
-        double y = duk_to_number(ctx, 1);
-        double w = duk_to_number(ctx, 2);
-        double h = duk_to_number(ctx, 3);
+        double x = duk_require_number(ctx, 0);
+        double y = duk_require_number(ctx, 1);
+        double w = duk_require_number(ctx, 2);
+        double h = duk_require_number(ctx, 3);
 
         auto inst = getNativePointer<CanvasContext>(ctx);
         inst->strokeRect(x, y, w, h);
@@ -127,10 +127,10 @@ namespace mural
     }
     int w_CanvasContext_prototype_fillRect(duk_context *ctx)
     {
-        double x = duk_to_number(ctx, 0);
-        double y = duk_to_number(ctx, 1);
-        double w = duk_to_number(ctx, 2);
-        double h = duk_to_number(ctx, 3);
+        double x = duk_require_number(ctx, 0);
+        double y = duk_require_number(ctx, 1);
+        double w = duk_require_number(ctx, 2);
+        double h = duk_require_number(ctx, 3);
 
         auto inst = getNativePointer<CanvasContext>(ctx);
         inst->fillRect(x, y, w, h);
@@ -141,8 +141,8 @@ namespace mural
     int w_CanvasContext_prototype_strokeText(duk_context *ctx)
     {
         std::string text = duk_to_string(ctx, 0);
-        double x = duk_to_number(ctx, 1);
-        double y = duk_to_number(ctx, 2);
+        double x = duk_require_number(ctx, 1);
+        double y = duk_require_number(ctx, 2);
 
         auto inst = getNativePointer<CanvasContext>(ctx);
         inst->strokeText(text, x, y);
@@ -152,8 +152,8 @@ namespace mural
     int w_CanvasContext_prototype_fillText(duk_context *ctx)
     {
         std::string text = duk_to_string(ctx, 0);
-        double x = duk_to_number(ctx, 1);
-        double y = duk_to_number(ctx, 2);
+        double x = duk_require_number(ctx, 1);
+        double y = duk_require_number(ctx, 2);
 
         auto inst = getNativePointer<CanvasContext>(ctx);
         inst->fillText(text, x, y);
@@ -184,28 +184,28 @@ namespace mural
         // Donot throw error if argument is not 3, 5, 9 like REAL canvas does
         int args = duk_get_top(ctx);
         if (args >= 3 && args < 5) {
-            float dx = duk_to_number(ctx, 1);
-            float dy = duk_to_number(ctx, 2);
+            float dx = duk_require_number(ctx, 1);
+            float dy = duk_require_number(ctx, 2);
 
             inst->drawImage(img, dx, dy);
         }
         else if (args >= 5 && args < 9) {
-            float dx = duk_to_number(ctx, 1);
-            float dy = duk_to_number(ctx, 2);
-            float dw = duk_to_number(ctx, 3);
-            float dh = duk_to_number(ctx, 4);
+            float dx = duk_require_number(ctx, 1);
+            float dy = duk_require_number(ctx, 2);
+            float dw = duk_require_number(ctx, 3);
+            float dh = duk_require_number(ctx, 4);
 
             inst->drawImage(img, dx, dy, dw, dh);
         }
         else if (args >= 9) {
-            float sx = duk_to_number(ctx, 1);
-            float sy = duk_to_number(ctx, 2);
-            float sw = duk_to_number(ctx, 3);
-            float sh = duk_to_number(ctx, 4);
-            float dx = duk_to_number(ctx, 5);
-            float dy = duk_to_number(ctx, 6);
-            float dw = duk_to_number(ctx, 7);
-            float dh = duk_to_number(ctx, 8);
+            float sx = duk_require_number(ctx, 1);
+            float sy = duk_require_number(ctx, 2);
+            float sw = duk_require_number(ctx, 3);
+            float sh = duk_require_number(ctx, 4);
+            float dx = duk_require_number(ctx, 5);
+            float dy = duk_require_number(ctx, 6);
+            float dw = duk_require_number(ctx, 7);
+            float dh = duk_require_number(ctx, 8);
 
             inst->drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh);
         }
@@ -215,8 +215,8 @@ namespace mural
 
     int w_CanvasContext_prototype_translate(duk_context *ctx)
     {
-        double x = duk_to_number(ctx, 0);
-        double y = duk_to_number(ctx, 1);
+        double x = duk_require_number(ctx, 0);
+        double y = duk_require_number(ctx, 1);
 
         auto inst = getNativePointer<CanvasContext>(ctx);
         inst->translate(x, y);
@@ -225,7 +225,7 @@ namespace mural
     }
     int w_CanvasContext_prototype_rotate(duk_context *ctx)
     {
-        double radians = duk_to_number(ctx, 0);
+        double radians = duk_require_number(ctx, 0);
 
         auto inst = getNativePointer<CanvasContext>(ctx);
         inst->rotate(radians);
@@ -234,8 +234,8 @@ namespace mural
     }
     int w_CanvasContext_prototype_scale(duk_context *ctx)
     {
-        double x = duk_to_number(ctx, 0);
-        double y = duk_to_number(ctx, 1);
+        double x = duk_require_number(ctx, 0);
+        double y = duk_require_number(ctx, 1);
 
         auto inst = getNativePointer<CanvasContext>(ctx);
         inst->scale(x, y);
@@ -245,10 +245,10 @@ namespace mural
 
     int w_CanvasContext_prototype_clearRect(duk_context *ctx)
     {
-        double x = duk_to_number(ctx, 0);
-        double y = duk_to_number(ctx, 1);
-        double w = duk_to_number(ctx, 2);
-        double h = duk_to_number(ctx, 3);
+        double x = duk_require_number(ctx, 0);
+        double y = duk_require_number(ctx, 1);
+        double w = duk_require_number(ctx, 2);
+        double h = duk_require_number(ctx, 3);
 
         auto inst = getNativePointer<CanvasContext>(ctx);
         inst->clearRect(x, y, w, h);
@@ -258,7 +258,7 @@ namespace mural
 
     int w_CanvasContext_prototype_set_lineWidth(duk_context *ctx)
     {
-        double width = duk_to_number(ctx, 0);
+        double width = duk_require_number(ctx, 0);
         auto inst = getNativePointer<CanvasContext>(ctx);
         inst->setLineWidth(width);
 
@@ -273,7 +273,7 @@ namespace mural
     }
     int w_CanvasContext_prototype_set_strokeStyle(duk_context *ctx)
     {
-        const char *c = duk_to_string(ctx, 0);
+        const char *c = duk_require_string(ctx, 0);
         auto inst = getNativePointer<CanvasContext>(ctx);
         float r, g, b, a;
         stringToColorRGBA(c, r, g, b, a);
@@ -290,7 +290,7 @@ namespace mural
     }
     int w_CanvasContext_prototype_set_fillStyle(duk_context *ctx)
     {
-        const char *c = duk_to_string(ctx, 0);
+        const char *c = duk_require_string(ctx, 0);
         auto inst = getNativePointer<CanvasContext>(ctx);
         float r, g, b, a;
         stringToColorRGBA(c, r, g, b, a);
@@ -307,7 +307,7 @@ namespace mural
     }
     int w_CanvasContext_prototype_set_globalAlpha(duk_context *ctx)
     {
-        double alpha = duk_to_number(ctx, 0);
+        double alpha = duk_require_number(ctx, 0);
         auto inst = getNativePointer<CanvasContext>(ctx);
         inst->setGlobalAlpha(alpha);
 
@@ -321,7 +321,7 @@ namespace mural
         return 1;
     }
 
-    void js_register_CanvasContext(duk_context *ctx)
+    duk_ret_t js_register_CanvasContext(duk_context *ctx)
     {
         MU_START_BINDING(CanvasContext);
 
@@ -333,5 +333,7 @@ namespace mural
         MU_BIND_SET_GET(CanvasContext, globalAlpha);
 
         MU_FINISH_BINDING(CanvasContext);
+
+        return 0;
     }
 }

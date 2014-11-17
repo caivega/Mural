@@ -73,7 +73,7 @@ namespace mural
         { NULL, NULL, 0 }
     };
 
-    void js_register_Image(duk_context *ctx)
+    duk_ret_t js_register_Image(duk_context *ctx)
     {
         MU_START_BINDING(Image);
 
@@ -84,11 +84,13 @@ namespace mural
         MU_BIND_GET(Image, height);
         MU_BIND_GET(Image, complete);
         MU_BIND_SET_GET(Image, src);
-        
+
         MU_FINISH_BINDING(Image);
-        
+
         // Inject eventMixin
-        duk_eval_string(ctx, "__MURAL__.eventMixin.call(__MURAL__.Image.prototype);");
+        duk_peval_string(ctx, "__MURAL__.eventMixin.call(__MURAL__.Image.prototype);");
         duk_pop(ctx);
+        
+        return 0;
     }
 }

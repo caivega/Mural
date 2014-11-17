@@ -59,13 +59,17 @@ namespace mural
         jsRefSetup(this->jsGlobalContext);
 
         // Load shim for duktape
-        duk_eval_file_noresult(this->jsGlobalContext, app::AppBasic::getResourcePath(MURAL_SHIM_JS).c_str());
+        duk_peval_file_noresult(this->jsGlobalContext, app::AppBasic::getResourcePath(MURAL_SHIM_JS).c_str());
 
         // Register built-in
-        js_register_Image(this->jsGlobalContext);
-        js_register_CanvasStyle(this->jsGlobalContext);
-        js_register_Canvas(this->jsGlobalContext);
-        js_register_CanvasContext(this->jsGlobalContext);
+//        js_register_Image(this->jsGlobalContext);
+//        js_register_CanvasStyle(this->jsGlobalContext);
+//        js_register_Canvas(this->jsGlobalContext);
+//        js_register_CanvasContext(this->jsGlobalContext);
+        registerModule(js_register_Image, "Image");
+        registerModule(js_register_CanvasStyle, "CanvasStyle");
+        registerModule(js_register_Canvas, "Canvas");
+        registerModule(js_register_CanvasContext, "CanvasContext");
     }
 
     JavaScriptView::~JavaScriptView()
@@ -88,11 +92,17 @@ namespace mural
         this->defineProperties();
 
         // Load boot script
-        duk_eval_file_noresult(this->jsGlobalContext, app::AppBasic::getResourcePath(MURAL_BOOT_JS).c_str());
+        if (duk_peval_file(this->jsGlobalContext, app::AppBasic::getResourcePath(MURAL_BOOT_JS).c_str()) != 0) {
+            printf("%s\n", duk_safe_to_string(this->jsGlobalContext, -1));
+        }
+        duk_pop(this->jsGlobalContext);
 
         // Load app script
         if (this->scriptPath.length() > 0) {
-            duk_eval_file_noresult(this->jsGlobalContext, this->scriptPath.c_str());
+            if (duk_peval_file(this->jsGlobalContext, this->scriptPath.c_str()) != 0) {
+                printf("%s\n", duk_safe_to_string(this->jsGlobalContext, -1));
+            }
+            duk_pop(this->jsGlobalContext);
         }
 
         // [Tests]
@@ -154,5 +164,12 @@ namespace mural
 
         // Leave global scope
         duk_pop_2(this->jsGlobalContext);
+    }
+
+    void JavaScriptView::registerModule(duk_c_function registerFunc, const char *moduleName)
+    {
+        if (duk_safe_call(this->jsGlobalContext, registerFunc, 0, 1) != 0) {
+            printf("[Module: %s] %s\n", moduleName, duk_safe_to_string(this->jsGlobalContext, -1));
+        }
     }
 }

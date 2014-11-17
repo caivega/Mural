@@ -21,7 +21,7 @@ namespace mural
     int w_Image_prototype_get_src(duk_context *ctx);
     int w_Image_prototype_set_src(duk_context *ctx);
 
-    void js_register_Image(duk_context *ctx);
+    duk_ret_t js_register_Image(duk_context *ctx);
 }
 
 #endif /* defined(__CinderCanvas__BindingImage__) */

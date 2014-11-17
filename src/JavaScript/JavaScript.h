@@ -26,7 +26,7 @@ namespace mural
     {
         duk_push_this(ctx); /* this */
         duk_get_prop_string(ctx, -1, DATA_POINTER_NAME); /* this, pointer */
-        T *t = static_cast<T*>(duk_get_pointer(ctx, -1));
+        T *t = static_cast<T*>(duk_require_pointer(ctx, -1));
         duk_pop_n(ctx, 2);
 
         return t;
@@ -36,7 +36,7 @@ namespace mural
     T *getNativePointerOfObjAt(duk_context *ctx, duk_idx_t idx)
     {
         duk_get_prop_string(ctx, idx, DATA_POINTER_NAME); /* ... obj(at idx) ... pointer */
-        T *t = static_cast<T*>(duk_get_pointer(ctx, -1));
+        T *t = static_cast<T*>(duk_require_pointer(ctx, -1));
         duk_pop(ctx);
 
         return t;

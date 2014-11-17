@@ -29,7 +29,7 @@ namespace mural
 
     int w_CanvasStyle_prototype_set_width(duk_context *ctx)
     {
-        std::string valueStr = duk_get_string(ctx, 0);
+        std::string valueStr = duk_require_string(ctx, 0);
 
         auto inst = getNativePointer<BindingCanvasStyle>(ctx);
         // style value format is "%fpx"
@@ -51,7 +51,7 @@ namespace mural
 
     int w_CanvasStyle_prototype_set_height(duk_context *ctx)
     {
-        std::string valueStr = duk_get_string(ctx, 0);
+        std::string valueStr = duk_require_string(ctx, 0);
 
         auto inst = getNativePointer<BindingCanvasStyle>(ctx);
         // style value format is "%fpx"
@@ -73,7 +73,7 @@ namespace mural
 
     int w_CanvasStyle_prototype_set_left(duk_context *ctx)
     {
-        std::string valueStr = duk_get_string(ctx, 0);
+        std::string valueStr = duk_require_string(ctx, 0);
 
         auto inst = getNativePointer<BindingCanvasStyle>(ctx);
         // style value format is "%fpx"
@@ -95,7 +95,7 @@ namespace mural
 
     int w_CanvasStyle_prototype_set_top(duk_context *ctx)
     {
-        std::string valueStr = duk_get_string(ctx, 0);
+        std::string valueStr = duk_require_string(ctx, 0);
 
         auto inst = getNativePointer<BindingCanvasStyle>(ctx);
         // style value format is "%fpx"
@@ -115,7 +115,7 @@ namespace mural
         return 1;
     }
 
-    void js_register_CanvasStyle(duk_context *ctx)
+    duk_ret_t js_register_CanvasStyle(duk_context *ctx)
     {
         MU_START_BINDING(CanvasStyle);
 
@@ -127,5 +127,7 @@ namespace mural
         MU_BIND_SET_GET(CanvasStyle, top);
 
         MU_FINISH_BINDING(CanvasStyle);
+
+        return 0;
     }
 }

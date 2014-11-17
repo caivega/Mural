@@ -67,7 +67,7 @@ namespace mural
 
     int w_Canvas_prototype_getContext(duk_context *ctx);
 
-    void js_register_Canvas(duk_context *ctx);
+    duk_ret_t js_register_Canvas(duk_context *ctx);
 }
 
 #endif /* defined(__CinderCanvas__BindingCanvas__) */

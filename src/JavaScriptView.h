@@ -44,6 +44,7 @@ namespace mural
         // Event callbacks
     private:
         void defineProperties();
+        void registerModule(duk_c_function registerFunc, const char *moduleName);
     };
 }
 

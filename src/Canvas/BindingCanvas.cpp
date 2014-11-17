@@ -58,7 +58,7 @@ namespace mural
         setNativePointer(ctx, inst);
 
         duk_push_this(ctx); // canvas
-        duk_eval_string(ctx, "new __MURAL__.CanvasStyle()"); // canvas, style
+        duk_peval_string(ctx, "new __MURAL__.CanvasStyle()"); // canvas, style
 
         // Create a style object and bind to self
         auto styleInst = getNativePointerOfObjAt<BindingCanvasStyle>(ctx, -1); // canvas, style
@@ -87,7 +87,7 @@ namespace mural
     }
     int w_Canvas_prototype_set_width(duk_context *ctx)
     {
-        int value = duk_get_int(ctx, 0);
+        int value = duk_require_int(ctx, 0);
         auto inst = getNativePointer<BindingCanvas>(ctx);
         if (inst->renderingContext) {
             inst->renderingContext->resize(value, -1);
@@ -108,7 +108,7 @@ namespace mural
     }
     int w_Canvas_prototype_set_height(duk_context *ctx)
     {
-        int value = duk_get_int(ctx, 0);
+        int value = duk_require_int(ctx, 0);
         auto inst = getNativePointer<BindingCanvas>(ctx);
         if (inst->renderingContext) {
             inst->renderingContext->resize(-1, value);
@@ -129,7 +129,7 @@ namespace mural
         }
 
         CanvasContextMode mode = CanvasContextMode::kCanvasContextModeInvalid;
-        std::string type = duk_get_string(ctx, 0);
+        std::string type = duk_require_string(ctx, 0);
         if (type == "2d") {
             mode = CanvasContextMode::kCanvasContextMode2D;
         }
@@ -164,12 +164,12 @@ namespace mural
             if (inst->isScreenCanvas) {
                 duk_push_this(ctx); // canvas
                 // Create a texture CanvasContext instance
-                duk_eval_string(ctx, "new __MURAL__.CanvasContext(true)"); // canvas, context
+                duk_peval_string(ctx, "new __MURAL__.CanvasContext(true)"); // canvas, context
             }
             else {
                 duk_push_this(ctx); // canvas
                 // Create a screen CanvasContext instance
-                duk_eval_string(ctx, "new __MURAL__.CanvasContext(false)"); // canvas, context
+                duk_peval_string(ctx, "new __MURAL__.CanvasContext(false)"); // canvas, context
             }
             // Setup canvas, context and save context JavaScript object reference
             auto contextInst = getNativePointerOfObjAt<CanvasContext>(ctx, -1); // canvas, context
@@ -179,7 +179,7 @@ namespace mural
             duk_pop_2(ctx); // ...
 
             // Save to context pool so that it won't be delete by GC
-            duk_eval_string(ctx, "__MURAL__.contextPool"); // contextPool
+            duk_peval_string(ctx, "__MURAL__.contextPool"); // contextPool
             duk_push_string(ctx, "push"); // contextPool, "push"
             jsPushRef(ctx, inst->ctxJsObjectRef); // contextPool, "push", context
             duk_call_prop(ctx, -3, 1); // contextPool, returnValue
@@ -200,7 +200,7 @@ namespace mural
         return 1;
     }
 
-    void js_register_Canvas(duk_context *ctx)
+    duk_ret_t js_register_Canvas(duk_context *ctx)
     {
         MU_START_BINDING(Canvas);
 
@@ -211,5 +211,7 @@ namespace mural
         MU_BIND_SET_GET(Canvas, height);
 
         MU_FINISH_BINDING(Canvas);
+
+        return 0;
     }
 }
