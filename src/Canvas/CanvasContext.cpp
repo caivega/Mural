@@ -12,7 +12,7 @@
 
 namespace mural
 {
-    CanvasContext::CanvasContext()
+    CanvasContext::CanvasContext(bool isScreenContext)
     {
         memset(stateStack, 0, sizeof(stateStack));
         stateIndex = 0;
@@ -37,9 +37,8 @@ namespace mural
         // Set as current rendering context
         this->scriptView->currRenderingContext = this;
         // Set as default rendering context if no one exists
-        if (!this->scriptView->hasScreenCanvas) {
-            this->scriptView->renderingContext = this;
-            this->scriptView->hasScreenCanvas = true;
+        if (isScreenContext) {
+            this->scriptView->screenRenderingContext = this;
 
             // Set size to view size
             width = scriptView->width;
@@ -341,11 +340,15 @@ namespace mural
 
     void CanvasContext::resize(int width, int height)
     {
-        this->width = width;
-        this->height = height;
+        if (width > 0) {
+            this->width = width;
+        }
+        if (height > 0) {
+            this->height = height;
+        }
 
-        this->renderingBuffer = gl::Fbo(width, height);
-        this->renderingCam.setOrtho(0, width, height, 0, 0, 1);
+        this->renderingBuffer = gl::Fbo(this->width, this->height);
+        this->renderingCam.setOrtho(0, this->width, this->height, 0, 0, 1);
 
         renderingBuffer.bindFramebuffer();
         gl::clear(ColorA(1.0f, 1.0f, 1.0f, 0.0f));

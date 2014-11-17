@@ -96,7 +96,7 @@ namespace mural
         JavaScriptView *scriptView;
         friend JavaScriptView;
     public:
-        CanvasContext();
+        CanvasContext(bool isScreenContext = false);
         ~CanvasContext();
 
         void save();
@@ -144,7 +144,9 @@ namespace mural
         void setGlobalAlpha(float a);
         float getGlobalAlpha();
 
-        void resize(int width, int height);
+        void resize(int width = -1, int height = -1);
+        int getWidth() { return width; }
+        int getHeight() { return height; }
     };
 
     void stringToColorRGBA(const std::string& color, float& r, float& g, float& b, float& a);
