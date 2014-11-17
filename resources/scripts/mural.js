@@ -325,9 +325,7 @@ window.top = window.parent = window;
         },
 
         getElementById: function(id) {
-            print('get canvas from document');
             if (id === 'canvas') {
-                print(typeof window.canvas);
                 return window.canvas;
             }
             return null;
