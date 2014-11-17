@@ -23,3 +23,9 @@ context2.arc(100, 100, 100, 0, Math.PI * 2, true);
 context2.fill();
 
 context.drawImage(context2, 0, 0);
+
+window.CanvasStyle = __MURAL__.CanvasStyle;
+var style = new CanvasStyle();
+print('style.width = ' + style.width);
+style.width = '123px';
+print('style.width = ' + style.width);
