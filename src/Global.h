@@ -22,6 +22,7 @@ typedef std::vector<String> StringList;
 #include "cinder/gl/Texture.h"
 #include "cinder/ImageIo.h"
 #include "cinder/gl/Fbo.h"
+#include "cinder/Camera.h"
 
 #include "AssetManager/AssetManager.h"
 

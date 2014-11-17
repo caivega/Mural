@@ -88,6 +88,7 @@ namespace mural
         CanvasState *state;
 
         gl::Fbo renderingBuffer;
+        CameraOrtho renderingCam;
 
         bool isScreenCanvas;
 

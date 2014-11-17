@@ -109,6 +109,11 @@ namespace mural
 
         // Draw to screen
         if (this->renderingContext) {
+            // Reset viewport and camera
+            gl::setViewport(this->renderingContext->renderingBuffer.getBounds());
+            gl::setMatrices(this->renderingContext->renderingCam);
+            // Blit directly to screen
+            // FIXME: better to draw texture instead of blitting?
             this->renderingContext->renderingBuffer.blitToScreen(Area(0, 0, 640, 480), Area(0, 0, 640, 480));
         }
     }

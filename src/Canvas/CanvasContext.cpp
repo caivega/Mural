@@ -52,7 +52,7 @@ namespace mural
         }
 
         // Create rendering buffer
-        renderingBuffer = gl::Fbo(width, height);
+        resize(width, height);
     }
 
     CanvasContext::~CanvasContext()
@@ -144,19 +144,6 @@ namespace mural
         present();
     }
 
-    void CanvasContext::drawImage(Image *img, float dx, float dy)
-    {
-        prepare();
-
-        // Clear color first
-        gl::color(1.0f, 1.0f, 1.0f);
-        if (img->getComplete()) {
-            gl::draw(img->texture, Vec2f(dx, dy));
-        }
-
-        present();
-    }
-
     void CanvasContext::drawRenderable(mural::Renderable *img, float dx, float dy)
     {
         Image *image = dynamic_cast<Image *>(img);
@@ -190,6 +177,19 @@ namespace mural
         }
     }
 
+    void CanvasContext::drawImage(Image *img, float dx, float dy)
+    {
+        prepare();
+
+        // Clear color first
+        gl::color(1.0f, 1.0f, 1.0f);
+        if (img->getComplete()) {
+            gl::draw(img->texture, Vec2f(dx, dy));
+        }
+
+        present();
+    }
+
     void CanvasContext::drawImage(Image *img, float dx, float dy, float dw, float dh)
     {
         prepare();
@@ -218,17 +218,41 @@ namespace mural
 
     void CanvasContext::drawCanvas(CanvasContext *img, float dx, float dy)
     {
-        img->renderingBuffer.blitTo(this->renderingBuffer, Area(0, 0, img->width, img->height), Area(dx, dy, img->width, img->height));
+        prepare();
+
+        gl::color(1.0f, 1.0f, 1.0f);
+        gl::Texture t = img->renderingBuffer.getTexture();
+        t.setFlipped();
+
+        gl::draw(t, Vec2f(dx, dy));
+
+        present();
     }
 
     void CanvasContext::drawCanvas(CanvasContext *img, float dx, float dy, float dw, float dh)
     {
-        img->renderingBuffer.blitTo(this->renderingBuffer, Area(0, 0, img->width, img->height), Area(dx, dy, this->width, this->height));
+        prepare();
+
+        gl::color(1.0f, 1.0f, 1.0f);
+        gl::Texture t = img->renderingBuffer.getTexture();
+        t.setFlipped();
+
+        gl::draw(t, Rectf(dx, dy, dx + dw, dy + dh));
+
+        present();
     }
 
     void CanvasContext::drawCanvas(CanvasContext *img, float sx, float sy, float sw, float sh, float dx, float dy, float dw, float dh)
     {
-        img->renderingBuffer.blitTo(this->renderingBuffer, Area(sx, sy, sw, sh), Area(dx, dy, dw, dh));
+        prepare();
+
+        gl::color(1.0f, 1.0f, 1.0f);
+        gl::Texture t = img->renderingBuffer.getTexture();
+        t.setFlipped();
+
+        gl::draw(t, Area(sx, sy, sx + sw, sy + sh), Rectf(dx, dy, dx + dw, dy + dh));
+
+        present();
     }
 
     void CanvasContext::translate(float x, float y)
@@ -262,6 +286,9 @@ namespace mural
     {
         prepare();
 
+        // Clear paths
+        state->paths.clear();
+
         gl::color(1.0f, 1.0f, 1.0f, 1.0f);
         gl::drawSolidRect(Rectf(x, y, w, h));
 
@@ -272,6 +299,7 @@ namespace mural
     {
         prepare();
 
+        gl::color(state->strokeStyle);
         gl::drawStrokedRect(Rectf(x, y, x + w, y + h));
 
         present();
@@ -281,6 +309,7 @@ namespace mural
     {
         prepare();
 
+        gl::color(state->fillStyle);
         gl::drawSolidRect(Rectf(x, y, x + w, y + h));
 
         present();
@@ -307,6 +336,9 @@ namespace mural
     void CanvasContext::prepare()
     {
         renderingBuffer.bindFramebuffer();
+
+        gl::setViewport(renderingBuffer.getBounds());
+        gl::setMatrices(renderingCam);
     }
 
     void CanvasContext::present()
@@ -375,7 +407,13 @@ namespace mural
     {
         this->width = width;
         this->height = height;
+
         this->renderingBuffer = gl::Fbo(width, height);
+        this->renderingCam.setOrtho(0, width, height, 0, 0, 1);
+
+        renderingBuffer.bindFramebuffer();
+        gl::clear(ColorA(1.0f, 1.0f, 1.0f, 0.0f));
+        renderingBuffer.unbindFramebuffer();
     }
 
     void stringToColorRGBA(const std::string& color, float& r, float& g, float& b, float& a)
