@@ -21,7 +21,7 @@ namespace mural
             const char *evtCode = inst->getComplete() ? "new window.Event('load')" : "new window.Event('error')";
             jsPushRef(ctx, inst->jsObjectRef);
             duk_push_string(ctx, "dispatchEvent");
-            duk_eval_string(ctx, evtCode);
+            duk_peval_string(ctx, evtCode);
             duk_call_prop(ctx, -3, 1);
             duk_pop(ctx);
         };

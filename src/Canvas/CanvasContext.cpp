@@ -103,6 +103,9 @@ namespace mural
 
     void CanvasContext::lineTo(float x, float y)
     {
+        if (paths.empty()) {
+            return;
+        }
         paths.back().lineTo(x, y);
     }
 
