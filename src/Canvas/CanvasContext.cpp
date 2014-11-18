@@ -134,6 +134,7 @@ namespace mural
         gl::color(state->strokeStyle.r, state->strokeStyle.g, state->strokeStyle.b, state->globalAlpha);
         for (auto it = paths.begin(); it != paths.end(); ++it) {
             if (!it->empty()) {
+                it->transform(state->transform);
                 gl::draw(*it);
             }
         }
@@ -149,6 +150,7 @@ namespace mural
         gl::color(state->fillStyle.r, state->fillStyle.g, state->fillStyle.b, state->globalAlpha);
         for (auto it = paths.begin(); it != paths.end(); ++it) {
             if (!it->empty()) {
+                it->transform(state->transform);
                 gl::drawSolid(*it);
             }
         }
@@ -159,6 +161,8 @@ namespace mural
     void CanvasContext::drawImage(Renderable *img, float dx, float dy)
     {
         prepare();
+
+        gl::multModelView(Matrix44f(state->transform));
 
         // Clear color first
         gl::SaveColorState saveColor;
@@ -174,6 +178,8 @@ namespace mural
     {
         prepare();
 
+        gl::multModelView(Matrix44f(state->transform));
+
         // Clear color first
         gl::SaveColorState saveColor;
         gl::color(1.0f, 1.0f, 1.0f);
@@ -187,6 +193,8 @@ namespace mural
     void CanvasContext::drawImage(Renderable *img, float sx, float sy, float sw, float sh, float dx, float dy, float dw, float dh)
     {
         prepare();
+
+        gl::multModelView(Matrix44f(state->transform));
 
         // Clear color first
         gl::SaveColorState saveColor;
