@@ -14,6 +14,7 @@ public:
 
 void CinderCanvasApp::prepareSettings(Settings *settings)
 {
+    settings->setTitle("Mural");
 }
 
 void CinderCanvasApp::setup()
