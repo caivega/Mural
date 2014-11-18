@@ -201,7 +201,7 @@ namespace mural
             duk_error(ctx, DUK_ERR_API_ERROR, "Failed to execute 'drawImage' on 'CanvasRenderingContext2D': 3 arguments required, but only %d present.", args);
             return DUK_RET_API_ERROR;
         }
-        else if (args != 3 || args != 5 || args != 9) {
+        else if (args == 4 || args == 6 || args == 7 || args == 8 || args > 9) {
             duk_error(ctx, DUK_ERR_API_ERROR, "Failed to execute 'drawImage' on 'CanvasRenderingContext2D': Valid arities are: [3, 5, 9], but %d arguments provided.", args);
             return DUK_RET_API_ERROR;
         }
