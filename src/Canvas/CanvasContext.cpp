@@ -94,7 +94,6 @@ namespace mural
         if (!state->paths.empty()) {
             state->paths.back().close();
         }
-        state->paths.clear();
         state->paths.push_back(Path2d());
     }
 
