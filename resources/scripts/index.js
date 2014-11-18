@@ -1,28 +1,80 @@
 window.canvas = document.createElement('canvas');
 
 
-print('Script start');
+var canvas = document.getElementById('canvas'),
+    context = canvas.getContext('2d');
 
-var canvas = document.getElementById('canvas');
-var context = canvas.getContext('2d');
+var DRAW_SIZE = Math.min(canvas.width, canvas.height),
+    FONT_HEIGHT = 15,
+    MARGIN = 35,
+    HAND_TRUNCATION = DRAW_SIZE / 25,
+    HOUR_HAND_TRUNCATION = DRAW_SIZE / 10,
+    NUMERAL_SPACING = 20,
+    RADIUS = DRAW_SIZE / 2 - MARGIN,
+    HAND_RADIUS = RADIUS + NUMERAL_SPACING;
 
-context.fillStyle = '#0ff';
-context.arc(32, 32, 32, 0, Math.PI * 2, true);
-context.fill();
+context.lineWidth = 2;
 
-var img = new Image();
-img.onload = function() {
-    print('player.png loaded!');
+// Functions.....................................................
 
-    context.drawImage(img, 300, 0, 105, 60);
-    context.drawImage(img, 0, 0, 75, 100, 100, 100, 75, 100);
-};
-img.src = 'media/player.png';
+function drawCircle() {
+   context.beginPath();
+   context.arc(DRAW_SIZE / 2, DRAW_SIZE / 2,
+               RADIUS, 0, Math.PI * 2, true);
+   context.stroke();
+}
 
-var canvas2 = document.createElement('canvas');
-canvas2.width = canvas2.height = 400;
-var context2 = canvas2.getContext('2d');
-context2.fillStyle = '#f0f';
-context2.fillRect(20, 20, 40, 40);
+function drawNumerals() {
+   var numerals = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+       angle = 0,
+       numeralWidth = 0;
 
-context.drawImage(context2, 0, 0);
+   numerals.forEach(function(numeral) {
+      angle = Math.PI / 6 * (numeral - 3);
+      // numeralWidth = context.measureText(numeral).width;
+      numeralWidth = 20;
+      context.fillText(numeral,
+         DRAW_SIZE / 2  + Math.cos(angle) * (HAND_RADIUS) - numeralWidth / 2,
+         DRAW_SIZE / 2 + Math.sin(angle) * (HAND_RADIUS) + FONT_HEIGHT / 3);
+   });
+}
+
+function drawCenter() {
+   context.beginPath();
+   context.arc(DRAW_SIZE / 2, DRAW_SIZE / 2, 5, 0, Math.PI * 2, true);
+   context.fill();
+}
+
+function drawHand(loc, isHour) {
+   var angle = (Math.PI * 2) * (loc / 60) - Math.PI / 2,
+       handRadius = isHour ? RADIUS - HAND_TRUNCATION - HOUR_HAND_TRUNCATION
+                           : RADIUS - HAND_TRUNCATION;
+
+   context.moveTo(DRAW_SIZE / 2, DRAW_SIZE / 2);
+   context.lineTo(DRAW_SIZE / 2  + Math.cos(angle) * handRadius,
+                  DRAW_SIZE / 2 + Math.sin(angle) * handRadius);
+   context.stroke();
+}
+
+function drawHands() {
+   var date = new Date,
+       hour = date.getHours();
+   hour = hour > 12 ? hour - 12 : hour;
+   drawHand(hour * 5 + (date.getMinutes() / 60) * 5, true, 0.5);
+   drawHand(date.getMinutes(), false, 0.5);
+   drawHand(date.getSeconds(), false, 0.2);
+}
+
+function drawClock() {
+   context.clearRect(0, 0, DRAW_SIZE, DRAW_SIZE);
+
+   drawCircle();
+   drawCenter();
+   drawHands();
+   drawNumerals();
+}
+
+// Initialization................................................
+
+// context.font = FONT_HEIGHT + 'px Arial';
+var loop = setInterval(drawClock, 1000);
