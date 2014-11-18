@@ -119,6 +119,7 @@ namespace mural
     {
         prepare();
 
+        gl::SaveColorState saveColor;
         gl::color(state->strokeStyle.r, state->strokeStyle.g, state->strokeStyle.b, state->globalAlpha);
         for (auto it = state->paths.begin(); it != state->paths.end(); ++it) {
             if (!it->empty()) {
@@ -133,6 +134,7 @@ namespace mural
     {
         prepare();
 
+        gl::SaveColorState saveColor;
         gl::color(state->fillStyle.r, state->fillStyle.g, state->fillStyle.b, state->globalAlpha);
         for (auto it = state->paths.begin(); it != state->paths.end(); ++it) {
             if (!it->empty()) {
@@ -148,6 +150,7 @@ namespace mural
         prepare();
 
         // Clear color first
+        gl::SaveColorState saveColor;
         gl::color(1.0f, 1.0f, 1.0f);
         if (img->getTexture()) {
             gl::draw(img->getTexture(), Vec2f(dx, dy));
@@ -161,6 +164,7 @@ namespace mural
         prepare();
 
         // Clear color first
+        gl::SaveColorState saveColor;
         gl::color(1.0f, 1.0f, 1.0f);
         if (img->getTexture()) {
             gl::draw(img->getTexture(), Rectf(dx, dy, dx + dw, dy + dh));
@@ -174,6 +178,7 @@ namespace mural
         prepare();
 
         // Clear color first
+        gl::SaveColorState saveColor;
         gl::color(1.0f, 1.0f, 1.0f);
         if (img->getTexture()) {
             gl::draw(img->getTexture(), Area(sx, sy, sx + sw, sy + sh), Rectf(dx, dy, dx + dw, dy + dh));
@@ -211,13 +216,14 @@ namespace mural
 
     void CanvasContext::clearRect(float x, float y, float w, float h)
     {
-        prepare();
-
         // Clear paths
         state->paths.clear();
 
-        gl::color(1.0f, 1.0f, 1.0f, 1.0f);
-        gl::drawSolidRect(Rectf(x, y, w, h));
+        prepare();
+
+        gl::SaveColorState saveColor;
+        gl::color(ColorA::white());
+        gl::drawSolidRect(Rectf(x, y, x + w, y + h));
 
         present();
     }
@@ -226,6 +232,7 @@ namespace mural
     {
         prepare();
 
+        gl::SaveColorState saveColor;
         gl::color(state->strokeStyle);
         gl::drawStrokedRect(Rectf(x, y, x + w, y + h));
 
@@ -236,6 +243,7 @@ namespace mural
     {
         prepare();
 
+        gl::SaveColorState saveColor;
         gl::color(state->fillStyle);
         gl::drawSolidRect(Rectf(x, y, x + w, y + h));
 
@@ -246,6 +254,8 @@ namespace mural
     {
         prepare();
 
+        gl::SaveColorState saveColor;
+        gl::color(state->strokeStyle);
         gl::drawString(text, Vec2f(x, y), state->strokeStyle, state->font);
 
         present();
@@ -255,6 +265,8 @@ namespace mural
     {
         prepare();
 
+        gl::SaveColorState saveColor;
+        gl::color(state->fillStyle);
         gl::drawString(text, Vec2f(x, y), state->fillStyle, state->font);
 
         present();
@@ -262,6 +274,7 @@ namespace mural
 
     void CanvasContext::prepare()
     {
+//        gl::SaveFramebufferBinding saveFbo;
         renderingBuffer.bindFramebuffer();
 
         gl::setViewport(renderingBuffer.getBounds());
