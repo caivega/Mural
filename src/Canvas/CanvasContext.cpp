@@ -30,7 +30,8 @@ namespace mural
 
         state->font = Font::getDefault();
 
-        state->paths.push_back(Path2d());
+        state->transform = MatrixAffine2f::identity();
+        paths.push_back(Path2d());
 
         this->scriptView = theAppController.view;
 
@@ -68,8 +69,6 @@ namespace mural
         stateStack[stateIndex + 1] = stateStack[stateIndex];
         stateIndex++;
         state = &stateStack[stateIndex];
-
-        gl::pushMatrices();
     }
 
     void CanvasContext::restore()
@@ -79,34 +78,32 @@ namespace mural
         // Load state from stack
         stateIndex--;
         state = &stateStack[stateIndex];
-
-        gl::popMatrices();
     }
 
     void CanvasContext::beginPath()
     {
-        state->paths.clear();
-        state->paths.push_back(Path2d());
+        paths.clear();
+        paths.push_back(Path2d());
     }
 
     void CanvasContext::closePath()
     {
-        if (!state->paths.empty()) {
-            state->paths.back().close();
+        if (!paths.empty()) {
+            paths.back().close();
         }
-        state->paths.push_back(Path2d());
+        paths.push_back(Path2d());
     }
 
     void CanvasContext::moveTo(float x, float y)
     {
         Path2d p;
         p.moveTo(x, y);
-        state->paths.push_back(p);
+        paths.push_back(p);
     }
 
     void CanvasContext::lineTo(float x, float y)
     {
-        state->paths.back().lineTo(x, y);
+        paths.back().lineTo(x, y);
     }
 
     void CanvasContext::rect(float x, float y, float w, float h)
@@ -118,12 +115,12 @@ namespace mural
         p.lineTo(x + w, y);
         p.close();
 
-        state->paths.push_back(p);
+        paths.push_back(p);
     }
 
     void CanvasContext::arc(float x, float y, float radius, float startRadians, float endRadians, bool antiClockwise)
     {
-        state->paths.back().arc(x, y, radius, startRadians, endRadians, !antiClockwise);
+        paths.back().arc(x, y, radius, startRadians, endRadians, !antiClockwise);
     }
 
     void CanvasContext::stroke()
@@ -132,7 +129,7 @@ namespace mural
 
         gl::SaveColorState saveColor;
         gl::color(state->strokeStyle.r, state->strokeStyle.g, state->strokeStyle.b, state->globalAlpha);
-        for (auto it = state->paths.begin(); it != state->paths.end(); ++it) {
+        for (auto it = paths.begin(); it != paths.end(); ++it) {
             if (!it->empty()) {
                 gl::draw(*it);
             }
@@ -147,7 +144,7 @@ namespace mural
 
         gl::SaveColorState saveColor;
         gl::color(state->fillStyle.r, state->fillStyle.g, state->fillStyle.b, state->globalAlpha);
-        for (auto it = state->paths.begin(); it != state->paths.end(); ++it) {
+        for (auto it = paths.begin(); it != paths.end(); ++it) {
             if (!it->empty()) {
                 gl::drawSolid(*it);
             }
@@ -200,35 +197,23 @@ namespace mural
 
     void CanvasContext::translate(float x, float y)
     {
-        prepare();
-
-        gl::translate(x, y);
-
-        present();
+        state->transform.translate(Vec2f(x, y));
     }
 
     void CanvasContext::rotate(float radians)
     {
-        prepare();
-
-        gl::rotate(toDegrees(radians));
-
-        present();
+        state->transform.rotate(radians);
     }
 
     void CanvasContext::scale(float x, float y)
     {
-        prepare();
-
-        gl::scale(x, y);
-
-        present();
+        state->transform.scale(Vec2f(x, y));
     }
 
     void CanvasContext::clearRect(float x, float y, float w, float h)
     {
         // Clear paths
-        state->paths.clear();
+        paths.clear();
 
         prepare();
 

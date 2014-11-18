@@ -58,7 +58,7 @@ namespace mural
 
         Font font = Font::getDefault();
 
-        std::vector<Path2d> paths;
+        MatrixAffine2f transform = MatrixAffine2f::identity();
 
         void operator=(const CanvasState& other)
         {
@@ -74,7 +74,7 @@ namespace mural
 
             font = other.font;
 
-            paths.push_back(Path2d());
+            transform = other.transform;
         }
     };
 
@@ -86,6 +86,8 @@ namespace mural
         int stateIndex;
         CanvasState stateStack[CANVAS_STATE_STACK_SIZE];
         CanvasState *state;
+
+        std::vector<Path2d> paths;
 
         gl::Fbo renderingBuffer;
         gl::TextureRef texture;
