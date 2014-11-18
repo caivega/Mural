@@ -105,6 +105,9 @@ namespace mural
             duk_pop(this->jsGlobalContext);
         }
 
+        // Clear rect
+        gl::clear(ColorA::white(), false);
+
         // [Tests]
 //        BasicClock();
 //        AsyncImageLoader();
@@ -126,7 +129,7 @@ namespace mural
             // Reset viewport and camera
             gl::setViewport(this->screenRenderingContext->renderingBuffer.getBounds());
             gl::setMatrices(this->screenRenderingContext->renderingCam);
-            gl::clear(ColorA::black(), false);
+            gl::clear(ColorA::white(), false);
             gl::draw(screenRenderingContext->getTexture());
         }
     }
