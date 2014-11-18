@@ -111,12 +111,14 @@ namespace mural
 
     void CanvasContext::rect(float x, float y, float w, float h)
     {
-        beginPath();
-        moveTo(x, y);
-        lineTo(x, y + h);
-        lineTo(x + w, y + h);
-        lineTo(x + w, y);
-        closePath();
+        Path2d p;
+        p.moveTo(x, y);
+        p.lineTo(x, y + h);
+        p.lineTo(x + w, y + h);
+        p.lineTo(x + w, y);
+        p.close();
+
+        state->paths.push_back(p);
     }
 
     void CanvasContext::arc(float x, float y, float radius, float startRadians, float endRadians, bool antiClockwise)
