@@ -239,6 +239,8 @@ namespace mural
     {
         prepare();
 
+        gl::multModelView(Matrix44f(state->transform));
+
         gl::SaveColorState saveColor;
         gl::color(state->strokeStyle);
         gl::drawStrokedRect(Rectf(x, y, x + w, y + h));
@@ -249,6 +251,8 @@ namespace mural
     void CanvasContext::fillRect(float x, float y, float w, float h)
     {
         prepare();
+
+        gl::multModelView(Matrix44f(state->transform));
 
         gl::SaveColorState saveColor;
         gl::color(state->fillStyle);
