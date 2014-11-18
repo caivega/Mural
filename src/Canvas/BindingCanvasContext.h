@@ -23,6 +23,7 @@ namespace mural
 
     int w_CanvasContext_prototype_moveTo(duk_context *ctx);
     int w_CanvasContext_prototype_lineTo(duk_context *ctx);
+    int w_CanvasContext_prototype_rect(duk_context *ctx);
     int w_CanvasContext_prototype_arc(duk_context *ctx);
 
     int w_CanvasContext_prototype_strokeRect(duk_context *ctx);

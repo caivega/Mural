@@ -20,6 +20,7 @@ namespace mural
         { "closePath",  w_CanvasContext_prototype_closePath,    0 },
         { "moveTo",     w_CanvasContext_prototype_moveTo,       2 },
         { "lineTo",     w_CanvasContext_prototype_lineTo,       2 },
+        { "rect",       w_CanvasContext_prototype_rect,         4 },
         { "arc",        w_CanvasContext_prototype_arc,          DUK_VARARGS },
         { "strokeRect", w_CanvasContext_prototype_strokeRect,   4 },
         { "fillRect",   w_CanvasContext_prototype_fillRect,     4 },
@@ -90,6 +91,17 @@ namespace mural
         double y = duk_require_number(ctx, 1);
         auto inst = getNativePointer<CanvasContext>(ctx);
         inst->lineTo(x, y);
+
+        return 0;
+    }
+    int w_CanvasContext_prototype_rect(duk_context * ctx)
+    {
+        double x = duk_require_number(ctx, 0);
+        double y = duk_require_number(ctx, 1);
+        double w = duk_require_number(ctx, 2);
+        double h = duk_require_number(ctx, 3);
+        auto inst = getNativePointer<CanvasContext>(ctx);
+        inst->rect(x, y, w, h);
 
         return 0;
     }
@@ -183,18 +195,26 @@ namespace mural
 
     int w_CanvasContext_prototype_drawImage(duk_context *ctx)
     {
+        int args = duk_get_top(ctx);
+
+        if (args < 3) {
+            duk_error(ctx, DUK_ERR_API_ERROR, "Failed to execute 'drawImage' on 'CanvasRenderingContext2D': 3 arguments required, but only %d present.", args);
+            return DUK_RET_API_ERROR;
+        }
+        else if (args != 3 || args != 5 || args != 9) {
+            duk_error(ctx, DUK_ERR_API_ERROR, "Failed to execute 'drawImage' on 'CanvasRenderingContext2D': Valid arities are: [3, 5, 9], but %d arguments provided.", args);
+            return DUK_RET_API_ERROR;
+        }
+
         auto inst = getNativePointer<CanvasContext>(ctx);
         Renderable *img = getNativePointerOfObjAt<Renderable>(ctx, 0);
-
-        // Donot throw error if argument is not 3, 5, 9 like REAL canvas does
-        int args = duk_get_top(ctx);
-        if (args >= 3 && args < 5) {
+        if (args == 3) {
             float dx = duk_require_number(ctx, 1);
             float dy = duk_require_number(ctx, 2);
 
             inst->drawImage(img, dx, dy);
         }
-        else if (args >= 5 && args < 9) {
+        else if (args == 5) {
             float dx = duk_require_number(ctx, 1);
             float dy = duk_require_number(ctx, 2);
             float dw = duk_require_number(ctx, 3);
@@ -202,7 +222,7 @@ namespace mural
 
             inst->drawImage(img, dx, dy, dw, dh);
         }
-        else if (args >= 9) {
+        else if (args == 9) {
             float sx = duk_require_number(ctx, 1);
             float sy = duk_require_number(ctx, 2);
             float sw = duk_require_number(ctx, 3);
