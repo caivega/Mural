@@ -31,7 +31,7 @@ namespace mural
         { "translate",  w_CanvasContext_prototype_translate,    2 },
         { "rotate",     w_CanvasContext_prototype_rotate,       1 },
         { "scale",      w_CanvasContext_prototype_scale,        2 },
-        { "clearRect",  w_CanvasContext_prototype_clearRect,    0 },
+        { "clearRect",  w_CanvasContext_prototype_clearRect,    4 },
         { NULL, NULL, 0 }
     };
 
