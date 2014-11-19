@@ -13,7 +13,6 @@ using namespace ci;
 namespace mural
 {
     Image::Image():
-        path(""),
         loading(false),
         loadCompleted(false),
         jsObjectRef(0),
@@ -57,9 +56,7 @@ namespace mural
             return;
         }
 
-        // FIXME: Make this work on windows
-        this->path += "../Resources/";
-        this->path += path;
+        this->path = path;
 
         this->beginLoad();
     }
@@ -77,7 +74,7 @@ namespace mural
         opts.watch(false).asynchronous(true);
 
         AssetManager::load<ImageSourceRef>(
-            path,
+            this->path,
             [](DataSourceRef dataSourceRef) {
                 ImageSourceRef imageSource = loadImage(dataSourceRef);
                 return imageSource;
