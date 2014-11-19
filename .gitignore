@@ -16,3 +16,8 @@ profile
 *.moved-aside
 DerivedData
 .idea/
+*.opensdf
+*.sdf
+*.suo
+vc2013/Debug
+*.obj
