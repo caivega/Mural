@@ -14,11 +14,9 @@
 		00B784B60FF439BC000DE1D7 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B20FF439BC000DE1D7 /* CoreAudio.framework */; };
 		14390A4B1A0EF67600A8008D /* AppViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14390A491A0EF67600A8008D /* AppViewController.cpp */; };
 		14390A4E1A0EF6AF00A8008D /* JavaScriptView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14390A4C1A0EF6AF00A8008D /* JavaScriptView.cpp */; };
-		14390A571A0F004000A8008D /* scripts in Resources */ = {isa = PBXBuildFile; fileRef = 14390A561A0F004000A8008D /* scripts */; };
 		14390A601A0F081800A8008D /* duktape.c in Sources */ = {isa = PBXBuildFile; fileRef = 14390A5C1A0F081800A8008D /* duktape.c */; };
 		14390A611A0F081800A8008D /* JavaScript.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14390A5E1A0F081800A8008D /* JavaScript.cpp */; };
 		148428201A1778CD003180D5 /* AssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1484281E1A1778CD003180D5 /* AssetManager.cpp */; };
-		148428231A177A47003180D5 /* media in Resources */ = {isa = PBXBuildFile; fileRef = 148428221A177A47003180D5 /* media */; };
 		148428261A178B04003180D5 /* BindingCanvasContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 148428241A178B04003180D5 /* BindingCanvasContext.cpp */; };
 		1484282B1A186340003180D5 /* Image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 148428291A186340003180D5 /* Image.cpp */; };
 		148428301A187644003180D5 /* OperationQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1484282E1A187644003180D5 /* OperationQueue.cpp */; };
@@ -26,6 +24,7 @@
 		148428371A199AD5003180D5 /* BindingCanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 148428351A199AD5003180D5 /* BindingCanvas.cpp */; };
 		1484283A1A199C6E003180D5 /* BindingCanvasStyle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 148428381A199C6E003180D5 /* BindingCanvasStyle.cpp */; };
 		14B2CD431A11C0A800778064 /* CanvasContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14B2CD411A11C0A800778064 /* CanvasContext.cpp */; };
+		14B703771A1C52A600A2C9C8 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 14B703761A1C52A600A2C9C8 /* assets */; };
 		5323E6B20EAFCA74003A9687 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B10EAFCA74003A9687 /* CoreVideo.framework */; };
 		5323E6B60EAFCA7E003A9687 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B50EAFCA7E003A9687 /* QTKit.framework */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -47,7 +46,6 @@
 		14390A4C1A0EF6AF00A8008D /* JavaScriptView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = JavaScriptView.cpp; path = ../src/JavaScriptView.cpp; sourceTree = "<group>"; };
 		14390A4D1A0EF6AF00A8008D /* JavaScriptView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JavaScriptView.h; path = ../src/JavaScriptView.h; sourceTree = "<group>"; };
 		14390A551A0EF74A00A8008D /* Global.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Global.h; path = ../src/Global.h; sourceTree = "<group>"; };
-		14390A561A0F004000A8008D /* scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = scripts; path = ../resources/scripts; sourceTree = "<group>"; };
 		14390A5C1A0F081800A8008D /* duktape.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duktape.c; sourceTree = "<group>"; };
 		14390A5D1A0F081800A8008D /* duktape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duktape.h; sourceTree = "<group>"; };
 		14390A5E1A0F081800A8008D /* JavaScript.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JavaScript.cpp; sourceTree = "<group>"; };
@@ -55,7 +53,6 @@
 		1484281E1A1778CD003180D5 /* AssetManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AssetManager.cpp; sourceTree = "<group>"; };
 		1484281F1A1778CD003180D5 /* AssetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetManager.h; sourceTree = "<group>"; };
 		148428211A177906003180D5 /* AsyncImageLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AsyncImageLoader.h; sourceTree = "<group>"; };
-		148428221A177A47003180D5 /* media */ = {isa = PBXFileReference; lastKnownFileType = folder; name = media; path = ../resources/media; sourceTree = "<group>"; };
 		148428241A178B04003180D5 /* BindingCanvasContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BindingCanvasContext.cpp; path = ../src/Canvas/BindingCanvasContext.cpp; sourceTree = "<group>"; };
 		148428251A178B04003180D5 /* BindingCanvasContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BindingCanvasContext.h; path = ../src/Canvas/BindingCanvasContext.h; sourceTree = "<group>"; };
 		148428281A184B30003180D5 /* ColorUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorUtil.h; sourceTree = "<group>"; };
@@ -73,6 +70,7 @@
 		148428391A199C6E003180D5 /* BindingCanvasStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BindingCanvasStyle.h; path = ../src/Canvas/BindingCanvasStyle.h; sourceTree = "<group>"; };
 		14B2CD411A11C0A800778064 /* CanvasContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CanvasContext.cpp; path = ../src/Canvas/CanvasContext.cpp; sourceTree = "<group>"; };
 		14B2CD421A11C0A800778064 /* CanvasContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CanvasContext.h; path = ../src/Canvas/CanvasContext.h; sourceTree = "<group>"; };
+		14B703761A1C52A600A2C9C8 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../assets; sourceTree = "<group>"; };
 		20516ADA7B5C43A5B05F9D44 /* CinderCanvasApp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = CinderCanvasApp.cpp; path = ../src/CinderCanvasApp.cpp; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
@@ -230,6 +228,7 @@
 				01B97315FEAEA392516A2CEA /* Blocks */,
 				29B97315FDCFA39411CA2CEA /* Headers */,
 				080E96DDFE201D6D7F000001 /* Source */,
+				14B703761A1C52A600A2C9C8 /* assets */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
@@ -249,8 +248,6 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				148428221A177A47003180D5 /* media */,
-				14390A561A0F004000A8008D /* scripts */,
 				D3DF879870F349C2A32E127F /* CinderApp.icns */,
 				0E7778188AC649DC99906A3C /* Info.plist */,
 			);
@@ -319,9 +316,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				148428231A177A47003180D5 /* media in Resources */,
 				AF3C680FFEC842D2BDA578DC /* CinderApp.icns in Resources */,
-				14390A571A0F004000A8008D /* scripts in Resources */,
+				14B703771A1C52A600A2C9C8 /* assets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

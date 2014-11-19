@@ -17,4 +17,7 @@ img.onload = function() {
 
     context.drawImage(img, 0, 0);
 };
+img.onerror = function() {
+    print('failed to load img');
+};
 img.src = 'media/heart-full.png';
