@@ -34,10 +34,10 @@ void AssetManager::load( const fs::path &relativePath, function<void(DataSourceR
         }
         else
             loader = LoaderRef( new Loader( relativePath, callback, options ) );
-        
+
         if( options.isWatching() )
             instance()->mWatchingLoaders.push_back( loader );
-        
+
         loader->notify();
     }
     else throw app::AssetLoadExc( relativePath );
@@ -46,7 +46,7 @@ void AssetManager::load( const fs::path &relativePath, function<void(DataSourceR
 
 void AssetManager::load( const ci::fs::path &p0, const ci::fs::path &p1, std::function<void(ci::DataSourceRef,ci::DataSourceRef)> callback, const Options &options )
 {
-    load( { p0, p1 }, callback, options );    
+    load( { p0, p1 }, callback, options );
 }
 void AssetManager::load( const ci::fs::path &p0, const ci::fs::path &p1, const ci::fs::path &p2, std::function<void(ci::DataSourceRef,ci::DataSourceRef,ci::DataSourceRef)> callback, const Options &options )
 {

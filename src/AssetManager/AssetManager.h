@@ -1,18 +1,18 @@
 /*
- 
+
  AssetManager API
- 
+
  Copyright (c) 2013, Simon Geilfus
  All rights reserved.
- 
+
  Redistribution and use in source and binary forms, with or without modification, are permitted provided that
  the following conditions are met:
- 
+
  * Redistributions of source code must retain the above copyright notice, this list of conditions and
  the following disclaimer.
  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and
  the following disclaimer in the documentation and/or other materials provided with the distribution.
- 
+
  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED
  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
  PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
@@ -35,54 +35,54 @@
 
 class AssetManager {
 public:
-    
+
     //! Options passed when creating an asset Loader.
     struct Options {
         Options() : mWatch( true ), mAsynchronous( false ) {}
-        
+
         //! Sets whether the asset should be watched for hot reloading.
         Options& watch( bool watch = true )         { mWatch = watch; return *this; }
         //! Sets whether the asset should be asynchronously loaded.
         Options& asynchronous( bool async = true )  { mAsynchronous = async; return *this; }
-        
+
         //! Returns whether the asset will be watched for hot reloading.
         bool    isWatching()        const { return mWatch; }
         //! Returns whether the asset will be asynchronously loaded.
         bool    isAsynchronous()    const { return mAsynchronous; }
-        
+
     private:
         bool mAsynchronous;
         bool mWatch;
     };
-    
+
     //! Loads an asset and if needed watch for hot reload.
     static void     load( const ci::fs::path &relativePath, std::function<void(ci::DataSourceRef)> callback, const Options &options = Options() );
-    
+
     //! Load several assets and if needed watch for hot reload.
     static void                                 load( const ci::fs::path &p0, const ci::fs::path &p1, std::function<void(ci::DataSourceRef,ci::DataSourceRef)> callback, const Options &options = Options() );
     static void                                 load( const ci::fs::path &p0, const ci::fs::path &p1, const ci::fs::path &p2, std::function<void(ci::DataSourceRef,ci::DataSourceRef,ci::DataSourceRef)> callback, const Options &options = Options() );
     static void                                 load( const ci::fs::path &p0, const ci::fs::path &p1, const ci::fs::path &p2, const ci::fs::path &p3, std::function<void(ci::DataSourceRef,ci::DataSourceRef,ci::DataSourceRef,ci::DataSourceRef)> callback, const Options &options = Options() );
     template<typename... Arguments> static void load( const std::vector<ci::fs::path> &relativePaths, std::function<void(Arguments...)> callback, const Options &options = Options() );
-    
-    
+
+
     //! Asynchronously loads an asset and if needed watch for hot reload.
     template<typename T> static void    load( const ci::fs::path &relativePath, std::function<T(ci::DataSourceRef)> asyncCallback, std::function<void(T)> mainThreadCallback, const Options &options = Options()  );
-    
+
     //! Asynchronously load several asset and if needed watch for hot reload.
     template<typename T> static void                        load( const ci::fs::path &p0, const ci::fs::path &p1, std::function<T(ci::DataSourceRef,ci::DataSourceRef)> asyncCallback, std::function<void(T)> mainThreadCallback, const Options &options = Options()  );
     template<typename T> static void                        load( const ci::fs::path &p0, const ci::fs::path &p1, const ci::fs::path &p2, std::function<T(ci::DataSourceRef,ci::DataSourceRef,ci::DataSourceRef)> asyncCallback, std::function<void(T)> mainThreadCallback, const Options &options = Options()  );
     template<typename T> static void                        load( const ci::fs::path &p0, const ci::fs::path &p1, const ci::fs::path &p2, const ci::fs::path &p3, std::function<T(ci::DataSourceRef,ci::DataSourceRef,ci::DataSourceRef,ci::DataSourceRef)> asyncCallback, std::function<void(T)> mainThreadCallback, const Options &options = Options()  );
     template<typename T, typename... Arguments> static void load( const std::vector<ci::fs::path> &relativePaths, std::function<T(Arguments...)> asyncCallback, std::function<void(T)> mainThreadCallback, const Options &options = Options()  );
-    
+
 protected:
-    
+
     //! Loader
     class Loader {
     public:
         Loader(){}
         Loader( ci::fs::path relativePath, std::function<void(ci::DataSourceRef)> callback, const Options &options = Options() )
         : mRelativePath( relativePath ), mCallback( callback ), mLastTimeWritten( ci::fs::last_write_time( ci::app::getAssetPath( relativePath ) ) ), mOptions( options ), mLoaded( false ) {}
-        
+
         //! Returns whether the asset needs to be reloaded or not.
         virtual bool watch();
         //! Loads the asset and Notify the Callback function with the new DataSourceRef.
@@ -91,18 +91,18 @@ protected:
         virtual void update(){}
         //! Returns whether the asset has been or not.
         virtual bool loaded() const { return mLoaded; }
-        
+
     protected:
         friend class AssetManager;
-        
+
         bool                                    mLoaded;
         Options                                 mOptions;
-        
+
         ci::fs::path                            mRelativePath;
         std::time_t                             mLastTimeWritten;
         std::function<void(ci::DataSourceRef)>  mCallback;
     };
-    
+
     //! AsyncLoader
     template<typename T>
     class AsyncLoader : public Loader {
@@ -115,7 +115,7 @@ protected:
             mOptions            = options;
             mOptions.asynchronous();
         }
-        
+
         //! Loads the asset in a separated thread and Notify the Callback function with the new DataSourceRef.
         virtual void notify()
         {
@@ -127,7 +127,7 @@ protected:
                 mLoaded                 = true;
             } ).detach();
         }
-        
+
         virtual void update()
         {
             if( loaded() ){
@@ -135,15 +135,15 @@ protected:
                     mMainThreadCallback( mAsyncData );
             }
         }
-        
+
     protected:
         T                                    mAsyncData;
         std::function<void(T)>               mMainThreadCallback;
         std::function<T(ci::DataSourceRef)>  mCallback;
     };
-    
+
     //! VariadicLoader Helper. Allows to dynamically call a variadic function with N parameters.
-    template <uint N, typename T>
+    template <unsigned int N, typename T>
     struct VariadicHelper
     {
         //! VariadicLoader Helper start point (<N-1,...>)
@@ -153,7 +153,7 @@ protected:
             return VariadicHelper<N-1,T>::load( relativePaths, callback, ci::app::loadAsset( relativePaths[N-1] ), args... );
         }
     };
-    
+
     //! VariadicLoader
     template<typename... Arguments>
     class VariadicLoader : public Loader {
@@ -166,8 +166,8 @@ protected:
             }
             mOptions = options;
         }
-        
-        
+
+
         //! Returns whether the asset needs to be reloaded or not.
         virtual bool watch(){
             bool needsReload = false;
@@ -180,20 +180,20 @@ protected:
             }
             return needsReload;
         }
-        
+
         //! Loads the asset and Notify the Callback function with the new DataSourceRef.
         virtual void notify(){
             VariadicHelper<sizeof...(Arguments),void>::load( mRelativePaths, mCallback );
         }
-        
+
     protected:
         std::vector<ci::fs::path>           mRelativePaths;
         std::vector<std::time_t>            mLastTimesWritten;
         std::function<void(Arguments...)>   mCallback;
     };
-    
-    
-    
+
+
+
     //! VariadicLoader
     template<typename T, typename... Arguments>
     class AsyncVariadicLoader : public Loader {
@@ -207,8 +207,8 @@ protected:
             mOptions = options;
             mOptions.asynchronous();
         }
-        
-        
+
+
         //! Returns whether the asset needs to be reloaded or not.
         virtual bool watch(){
             bool needsReload = false;
@@ -221,7 +221,7 @@ protected:
             }
             return needsReload;
         }
-        
+
         //! Loads the asset and Notify the Callback function with the new DataSourceRef.
         virtual void notify(){
             mLoaded = false;
@@ -231,9 +231,9 @@ protected:
                 mLoaded = true;
             } ).detach();
         }
-        
-        
-        
+
+
+
         virtual void update()
         {
             if( loaded() ){
@@ -241,7 +241,7 @@ protected:
                     mMainThreadCallback( mAsyncData );
             }
         }
-        
+
     protected:
         T                                   mAsyncData;
         std::vector<ci::fs::path>           mRelativePaths;
@@ -249,15 +249,15 @@ protected:
         std::function<T(Arguments...)>      mCallback;
         std::function<void(T)>              mMainThreadCallback;
     };
-    
+
     typedef std::shared_ptr<Loader> LoaderRef;
-    
+
     AssetManager(){}
-    
+
     static AssetManager* instance();
-    
+
     void update();
-    
+
     std::deque< LoaderRef > mWatchingLoaders;
     std::deque< LoaderRef > mAsyncLoaders;
     static AssetManager*    mInstance;
@@ -285,7 +285,7 @@ void AssetManager::load( const std::vector<ci::fs::path> &relativePaths, std::fu
     bool filesExist = true;
     for( auto path : relativePaths ){
         filesExist = filesExist && ci::fs::exists( ci::app::getAssetPath( path ) );
-        
+
         if( !filesExist )
             throw ci::app::AssetLoadExc( path );
     }
@@ -297,10 +297,10 @@ void AssetManager::load( const std::vector<ci::fs::path> &relativePaths, std::fu
         }
         else
             loader = LoaderRef( new VariadicLoader<Arguments...>( relativePaths, callback, options ) );
-        
+
         if( options.isWatching() )
             instance()->mWatchingLoaders.push_back( loader );
-        
+
         loader->notify();
     }
 }
@@ -312,7 +312,7 @@ void AssetManager::load( const std::vector<ci::fs::path> &relativePaths, std::fu
     bool filesExist = true;
     for( auto path : relativePaths ){
         filesExist = filesExist && ci::fs::exists( ci::app::getAssetPath( path ) );
-        
+
         if( !filesExist )
             throw ci::app::AssetLoadExc( path );
     }
@@ -360,7 +360,7 @@ class AssetManager::AsyncLoader<void> : public Loader {
 public:
     AsyncLoader( ci::fs::path relativePath, std::function<void(ci::DataSourceRef)> asyncCallback, const Options &options = Options() )
     : Loader( relativePath, asyncCallback, options ) {}
-    
+
     //! Loads the asset in a separated thread and Notify the Callback function with the new DataSourceRef.
     virtual void notify()
     {
@@ -387,7 +387,7 @@ public:
         mOptions = options;
         mOptions.asynchronous();
     }
-    
+
     //! Loads the asset in a separated thread and Notify the Callback function with the new DataSourceRef.
     virtual void notify(){
         mLoaded = false;
@@ -397,7 +397,7 @@ public:
             mLoaded = true;
         } ).detach();
     }
-    
+
 protected:
     std::vector<ci::fs::path>           mRelativePaths;
     std::vector<std::time_t>            mLastTimesWritten;
