@@ -296,7 +296,7 @@ namespace mural
     {
         renderingBuffer.unbindFramebuffer();
 
-        texture = gl::TextureRef::make_shared(renderingBuffer.getTexture());
+        texture = std::make_shared<gl::Texture>(renderingBuffer.getTexture());
         texture->setFlipped(true);
     }
 
@@ -483,6 +483,14 @@ namespace mural
 
         return result += stream.str();
     }
+
+/* Macros for min/max. */
+#ifndef MIN
+#define MIN(a, b) (((a)<(b))?(a):(b))
+#endif /* MIN */
+#ifndef MAX
+#define MAX(a, b) (((a)>(b))?(a):(b))
+#endif /* MAX */
 
     void colorHSLAToColorRGBA(float H, float S, float L, float A, float& rr, float& gg, float& bb, float& aa)
     {
