@@ -11,14 +11,13 @@
 
 #include "Global.h"
 
-#include "CanvasContext.h"
-
 #define MURAL_VERSION "0.1"
 #define MURAL_SHIM_JS "scripts/shim.js"
 #define MURAL_BOOT_JS "scripts/mural.js"
 
 namespace mural
 {
+    class CanvasContext;
     class JavaScriptView
     {
         duk_context *jsGlobalContext;
