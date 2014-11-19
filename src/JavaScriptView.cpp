@@ -59,7 +59,7 @@ namespace mural
         jsRefSetup(this->jsGlobalContext);
 
         // Load shim for duktape
-        duk_peval_file_noresult(this->jsGlobalContext, app::getAssetPath(MURAL_SHIM_JS).c_str());
+        duk_peval_file_noresult(this->jsGlobalContext, app::getAssetPath(MURAL_SHIM_JS).generic_string().c_str());
 
         // Register built-in
         registerModule(js_register_Image, "Image");
@@ -88,14 +88,14 @@ namespace mural
         this->defineProperties();
 
         // Load boot script
-        if (duk_peval_file(this->jsGlobalContext, app::getAssetPath(MURAL_BOOT_JS).c_str()) != 0) {
+        if (duk_peval_file(this->jsGlobalContext, app::getAssetPath(MURAL_BOOT_JS).generic_string().c_str()) != 0) {
             printf("%s\n", duk_safe_to_string(this->jsGlobalContext, -1));
         }
         duk_pop(this->jsGlobalContext);
 
         // Load app script
         if (this->scriptPath.length() > 0) {
-            if (duk_peval_file(this->jsGlobalContext, app::getAssetPath(this->scriptPath).c_str()) != 0) {
+            if (duk_peval_file(this->jsGlobalContext, app::getAssetPath(this->scriptPath).generic_string().c_str()) != 0) {
                 printf("%s\n", duk_safe_to_string(this->jsGlobalContext, -1));
             }
             duk_pop(this->jsGlobalContext);
