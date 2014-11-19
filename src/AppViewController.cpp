@@ -23,12 +23,14 @@ namespace mural
     }
     void AppViewController::tickAndDraw()
     {
-        if (booted) {
-            view->tickAndDraw();
-        }
-        else {
-            view->boot();
-            booted = true;
+        if (view) {
+            if (booted) {
+                view->tickAndDraw();
+            }
+            else {
+                view->boot();
+                booted = true;
+            }
         }
     }
 }
