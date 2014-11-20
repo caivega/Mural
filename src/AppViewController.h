@@ -17,8 +17,8 @@ namespace mural
 
     class AppViewController
     {
-        bool booted;
     public:
+        bool booted;
         JavaScriptView *view;
 
     public:
