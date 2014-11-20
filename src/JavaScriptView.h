@@ -23,6 +23,14 @@ namespace mural
         duk_context *jsGlobalContext;
 
         std::string scriptPath;
+
+        // input properties
+        bool altDown;
+        bool ctrlDown;
+        bool metaDown;
+        bool shiftDown;
+
+        ci::Vec2i lastPosOnMouseMove;
     public:
         int width, height;
         String lang;
@@ -41,6 +49,9 @@ namespace mural
         void tickAndDraw();
 
         // Event callbacks
+        void mouseEvent(const char *type, ci::app::MouseEvent event);
+        void keyEvent(const char *type, ci::app::KeyEvent event);
+
     private:
         void defineProperties();
         void registerModule(duk_c_function registerFunc, const char *moduleName);
