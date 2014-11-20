@@ -73,6 +73,7 @@ __MURAL__.eventMixin = (function() {
 
     return function() {
         this.events = {};
+        this.createEvent = createEvent;
         this.addEventListener = addEventListener;
         this.removeEventListener = removeEventListener;
         this.dispatchEvent = dispatchEvent;
