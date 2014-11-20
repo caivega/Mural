@@ -64,6 +64,8 @@ void CinderCanvasApp::keyUp(app::KeyEvent event)
 
 void CinderCanvasApp::draw()
 {
+    theAppController.averageFPS = getAverageFps();
+
     if (theAppController.view) {
         theAppController.tickAndDraw();
     }

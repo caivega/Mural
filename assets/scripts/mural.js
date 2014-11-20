@@ -381,4 +381,7 @@ window.top = window.parent = window;
     };
     __MURAL__.eventMixin.call(window.document);
 
+    // Utils
+    window.getAverageFPS = __MURAL__.getAverageFPS;
+
 })(this);

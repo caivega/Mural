@@ -13,6 +13,7 @@
 #include "Canvas/BindingCanvasStyle.h"
 #include "Canvas/BindingCanvas.h"
 #include "Canvas/BindingCanvasContext.h"
+#include "Utils/UtilFunctions.h"
 
 // Tests
 #include "Tests/BasicClock.h"
@@ -71,6 +72,7 @@ namespace mural
         registerModule(js_register_CanvasStyle, "CanvasStyle");
         registerModule(js_register_Canvas, "Canvas");
         registerModule(js_register_CanvasContext, "CanvasContext");
+        registerModule(js_register_Utils, "Utils");
     }
 
     JavaScriptView::~JavaScriptView()

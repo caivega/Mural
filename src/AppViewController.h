@@ -21,6 +21,8 @@ namespace mural
         bool booted;
         JavaScriptView *view;
 
+        float averageFPS;
+
     public:
         void initWithScript(const String& path, int width = 640, int height = 480);
 
@@ -33,7 +35,7 @@ namespace mural
         }
 
     private:
-        AppViewController(): booted(false) {}
+        AppViewController(): booted(false), view(nullptr), averageFPS(0.0f) {}
         AppViewController(AppViewController const&) {}
         void operator=(AppViewController const&) {}
 
