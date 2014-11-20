@@ -21,3 +21,10 @@ img.onerror = function() {
     print('failed to load img');
 };
 img.src = 'media/heart-full.png';
+
+document.addEventListener('mousedown', function(evt) {
+    print('mouse which: ' + evt.which);
+});
+document.onmousedown = function(evt) {
+    print('mouse: (' + evt.clientX + ', ' + evt.clientY + ')');
+};
