@@ -217,7 +217,7 @@ window.top = window.parent = window;
     // window.localStorage = new __MURAL__.LocalStorage();
     // window.WebSocket = __MURAL__.WebSocket;
 
-    window.Event = __MURAL__.Event;
+    window.Event = window.MouseEvent = window.KeyboardEvent = __MURAL__.Event;
 
     window.location = { href: 'index' };
 
@@ -301,8 +301,6 @@ window.top = window.parent = window;
         head: new HTMLElement('head'),
         body: new HTMLElement('body'),
 
-        events: {},
-
         createElement: function(name) {
             if (name === 'canvas') {
                 var canvas = new __MURAL__.Canvas();
@@ -354,52 +352,6 @@ window.top = window.parent = window;
             return elements;
         },
 
-        createEvent: function(type) {
-            return new window.Event(type);
-        },
-
-        addEventListener: function(type, callback, useCapture) {
-            if (type == 'DOMContentLoaded') {
-                window.setTimeout(callback, 1);
-                return;
-            }
-            if (!this.events[type]) {
-                this.events[type] = [];
-
-                // call the event initializer, if this is the first time we
-                // bind to this event.
-                if (typeof(this._eventInitializers[type]) === 'function') {
-                    this._eventInitializers[type]();
-                }
-            }
-            this.events[type].push(callback);
-        },
-
-        removeEventListener: function(type, callback) {
-            var listeners = this.events[type];
-            if (!listeners) {
-                return;
-            }
-
-            for (var i = listeners.length; i--;) {
-                if (listeners[i] === callback) {
-                    listeners.splice(i, 1);
-                }
-            }
-        },
-
-        _eventInitializers: {},
-        dispatchEvent: function(event) {
-            var listeners = this.events[event.type];
-            if (!listeners) {
-                return;
-            }
-
-            for (var i = 0; i < listeners.length; i++) {
-                listeners[i](event);
-            }
-        },
-
         dispatchMouseEvent: function(type, which, buttons, altKey, ctrlKey, metaKey, shiftKey, x, y, movementX, movementY) {
             var evt = document.createEvent(type);
 
@@ -417,7 +369,16 @@ window.top = window.parent = window;
             evt.movementY = movementY;
 
             document.dispatchEvent(evt);
+        },
+
+        dispatchKeyEvent: function(type, code, key, metaKey) {
+            var evt = document.createEvent(type);
+            evt.code = code;
+            evt.key = key;
+            evt.metaKey = metaKey;
+            document.dispatchEvent(evt);
         }
     };
+    __MURAL__.eventMixin.call(window.document);
 
 })(this);
