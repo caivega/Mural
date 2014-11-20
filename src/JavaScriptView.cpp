@@ -35,6 +35,11 @@ namespace mural
 {
     JavaScriptView::JavaScriptView(int width, int height):
         jsGlobalContext(nullptr),
+        altDown(false),
+        ctrlDown(false),
+        metaDown(false),
+        shiftDown(false),
+        lastPosOnMouseMove(Vec2i(0, 0)),
         width(width), height(height),
         lang("en"),
         currRenderingContext(nullptr),
@@ -128,6 +133,59 @@ namespace mural
             gl::clear(ColorA::white(), false);
             gl::draw(screenRenderingContext->getTexture());
         }
+    }
+
+    void JavaScriptView::mouseEvent(const char *type, ci::app::MouseEvent event)
+    {
+        // Calculate event properties
+        int which = event.isLeft() ? 1 : (event.isMiddle() ? 2 : (event.isRight() ? 3 : 0));
+        int buttons = 0;
+        buttons |= (event.isLeftDown() ? 1 : 0);
+        buttons |= (event.isRightDown() ? 2 : 0);
+        buttons |= (event.isMiddleDown() ? 4 : 0);
+
+        int x = event.getX(), y = event.getY();
+
+        int movementX = x - lastPosOnMouseMove.x;
+        int movementY = y - lastPosOnMouseMove.y;
+        lastPosOnMouseMove.set(x, y);
+
+        // Dispatch a MouseEvent
+        duk_push_global_object(jsGlobalContext);
+        duk_get_prop_string(jsGlobalContext, -1, "document"); // window, document
+        duk_push_string(jsGlobalContext, "dispatchMouseEvent"); // window, document, dispatchMouseEvent
+
+        duk_push_string(jsGlobalContext, type);
+        duk_push_int(jsGlobalContext, which);
+        duk_push_int(jsGlobalContext, buttons);
+        duk_push_boolean(jsGlobalContext, altDown);
+        duk_push_boolean(jsGlobalContext, ctrlDown);
+        duk_push_boolean(jsGlobalContext, metaDown);
+        duk_push_boolean(jsGlobalContext, shiftDown);
+        duk_push_int(jsGlobalContext, x);
+        duk_push_int(jsGlobalContext, y);
+        duk_push_int(jsGlobalContext, movementX);
+        duk_push_int(jsGlobalContext, movementY);
+
+        duk_pcall_prop(jsGlobalContext, -13, 11);
+
+        duk_pop_3(jsGlobalContext);
+    }
+    void JavaScriptView::keyEvent(const char *type, ci::app::KeyEvent event)
+    {
+        this->altDown = event.isAltDown();
+        this->ctrlDown = event.isControlDown();
+        this->metaDown = event.isMetaDown();
+        this->shiftDown = event.isShiftDown();
+
+        duk_push_global_object(jsGlobalContext);
+        duk_get_prop_string(jsGlobalContext, -1, "document"); // window, document
+        duk_push_string(jsGlobalContext, "dispatchKeyEvent"); // window, document, dispatchKeyEvent
+
+        duk_push_string(jsGlobalContext, type); // ... type
+        duk_push_string(jsGlobalContext, ""); // ... code
+        duk_push_string(jsGlobalContext, ""); // ... key
+        duk_push_boolean(jsGlobalContext, false); // ... meta
     }
 
     void JavaScriptView::defineProperties()

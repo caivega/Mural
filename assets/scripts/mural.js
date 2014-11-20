@@ -398,6 +398,25 @@ window.top = window.parent = window;
             for (var i = 0; i < listeners.length; i++) {
                 listeners[i](event);
             }
+        },
+
+        dispatchMouseEvent: function(type, which, buttons, altKey, ctrlKey, metaKey, shiftKey, x, y, movementX, movementY) {
+            var evt = document.createEvent(type);
+
+            evt.altKey = altKey;
+            evt.ctrlKey = ctrlKey;
+            evt.metaKey = metaKey;
+            evt.shiftKey = shiftKey;
+
+            evt.which = which;
+            evt.button = (which - 1 > 0) ? (which - 1) : 0;
+            evt.buttons = buttons;
+            evt.clientX = evt.screenX = x;
+            evt.clientY = evt.screenY = y;
+            evt.movementX = movementX;
+            evt.movementY = movementY;
+
+            document.dispatchEvent(evt);
         }
     };
 
