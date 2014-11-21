@@ -299,13 +299,13 @@ namespace mural
     void CanvasContext::present()
     {
         renderingBuffer.unbindFramebuffer();
-
-        texture = std::make_shared<gl::Texture>(renderingBuffer.getTexture());
-        texture->setFlipped(true);
     }
 
     gl::TextureRef CanvasContext::getTexture()
     {
+        texture = std::make_shared<gl::Texture>(renderingBuffer.getTexture());
+        texture->setFlipped(true);
+
         return texture;
     }
 
