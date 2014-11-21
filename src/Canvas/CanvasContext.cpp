@@ -69,6 +69,8 @@ namespace mural
         stateStack[stateIndex + 1] = stateStack[stateIndex];
         stateIndex++;
         state = &stateStack[stateIndex];
+
+        glPushMatrix();
     }
 
     void CanvasContext::restore()
@@ -78,6 +80,8 @@ namespace mural
         // Load state from stack
         stateIndex--;
         state = &stateStack[stateIndex];
+
+        glPopMatrix();
     }
 
     void CanvasContext::beginPath()
@@ -134,7 +138,6 @@ namespace mural
         gl::color(state->strokeStyle.r, state->strokeStyle.g, state->strokeStyle.b, state->globalAlpha);
         for (auto it = paths.begin(); it != paths.end(); ++it) {
             if (!it->empty()) {
-                it->transform(state->transform);
                 gl::draw(*it);
             }
         }
@@ -150,7 +153,6 @@ namespace mural
         gl::color(state->fillStyle.r, state->fillStyle.g, state->fillStyle.b, state->globalAlpha);
         for (auto it = paths.begin(); it != paths.end(); ++it) {
             if (!it->empty()) {
-                it->transform(state->transform);
                 gl::drawSolid(*it);
             }
         }
@@ -161,8 +163,6 @@ namespace mural
     void CanvasContext::drawImage(Renderable *img, float dx, float dy)
     {
         prepare();
-
-        gl::multModelView(Matrix44f(state->transform));
 
         // Clear color first
         gl::SaveColorState saveColor;
@@ -178,8 +178,6 @@ namespace mural
     {
         prepare();
 
-        gl::multModelView(Matrix44f(state->transform));
-
         // Clear color first
         gl::SaveColorState saveColor;
         gl::color(1.0f, 1.0f, 1.0f);
@@ -194,8 +192,6 @@ namespace mural
     {
         prepare();
 
-        gl::multModelView(Matrix44f(state->transform));
-
         // Clear color first
         gl::SaveColorState saveColor;
         gl::color(1.0f, 1.0f, 1.0f);
@@ -208,17 +204,22 @@ namespace mural
 
     void CanvasContext::translate(float x, float y)
     {
-        state->transform.translate(Vec2f(x, y));
+        Vec2f t = Vec2f(x, y);
+        state->transform.translate(t);
+        gl::translate(t);
     }
 
     void CanvasContext::rotate(float radians)
     {
         state->transform.rotate(radians);
+        gl::rotate(toDegrees(radians));
     }
 
     void CanvasContext::scale(float x, float y)
     {
-        state->transform.scale(Vec2f(x, y));
+        Vec2f s(x, y);
+        state->transform.scale(s);
+        gl::scale(s);
     }
 
     void CanvasContext::clearRect(float x, float y, float w, float h)
