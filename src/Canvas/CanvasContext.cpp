@@ -288,8 +288,12 @@ namespace mural
 //        gl::SaveFramebufferBinding saveFbo;
         renderingBuffer.bindFramebuffer();
 
-        gl::setViewport(renderingBuffer.getBounds());
-        gl::setMatrices(renderingCam);
+        // ONLY set matrix when not already
+        if (scriptView->currRenderingContext != this) {
+            scriptView->currRenderingContext = this;
+            gl::setViewport(renderingBuffer.getBounds());
+            gl::setMatrices(renderingCam);
+        }
     }
 
     void CanvasContext::present()
