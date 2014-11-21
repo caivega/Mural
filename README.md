@@ -54,6 +54,11 @@ Not implemented yet, but already under development.
 4. Open project file and have fun
 *Development using Cinder v0.8.6, the dev version not tested yet*
 
+## Hacking
+It's better to compile in release mode and directly modify `index.js` in `assets/scripts` to see the result.
+If you want to help develop, please run in debug mode and see what's happening.
+Note that the release version will simple ignore issue (even fatal errors) but will log everything including script syntax in debug mode.
+
 ## Supported Platforms
 Currently only support Windows and OSX._([Cinder](Cinder) only support Windows, OSX and iOS)_
 For other platforms plz try:
