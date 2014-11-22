@@ -93,8 +93,6 @@ namespace mural
         gl::TextureRef texture;
         CameraOrtho renderingCam;
 
-        bool isScreenCanvas;
-
         JavaScriptView *scriptView;
         friend JavaScriptView;
     public:

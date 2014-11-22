@@ -161,13 +161,12 @@ namespace mural
 
         // 2D screen or texture
         if (mode == CanvasContextMode::kCanvasContextMode2D) {
+            duk_push_this(ctx); // canvas
             if (inst->isScreenCanvas) {
-                duk_push_this(ctx); // canvas
                 // Create a texture CanvasContext instance
                 duk_peval_string(ctx, "new __MURAL__.CanvasContext(true)"); // canvas, context
             }
             else {
-                duk_push_this(ctx); // canvas
                 // Create a screen CanvasContext instance
                 duk_peval_string(ctx, "new __MURAL__.CanvasContext(false)"); // canvas, context
             }
