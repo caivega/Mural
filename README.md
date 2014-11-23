@@ -47,6 +47,9 @@ Not implemented yet, but already under development.
 - [ ] createRadialGradient
 - [ ] createPattern
 
+## Progress of developing
+I always prefer [Trello][trello] for project management, the tasks list can be found here [Mural at Trello][mural-trello]
+
 ## Build and Run
 1. Download Cinder from [http://libcinder.org/download/](http://libcinder.org/download/) and unzip it
 2. Create a `apps` folder at the root
@@ -102,3 +105,5 @@ THE SOFTWARE.
 [Ejecta-X]: http://wizcorp.github.io/Ejecta-X/
 [Cocoonjs]: https://www.ludei.com/cocoonjs/
 [Node-webkit]: https://github.com/rogerwang/node-webkit
+[trello]: https://trello.com
+[mural-trello]: https://trello.com/b/9cpESvdR/mural
