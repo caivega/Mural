@@ -25,6 +25,7 @@ Not implemented yet, but already under development.
 - [x] drawImage (supports both Image and CanvasRenderingContext2D)
 - [x] translate, rotate, scale
 - [x] clearRect
+- [x] bezierCurveTo
 - [ ] font
 - [ ] globalCompositeOperation
 - [ ] imageSmoothEnabled
@@ -38,7 +39,6 @@ Not implemented yet, but already under development.
 - [ ] texAlign
 - [ ] textBaseline
 - [ ] arcTo
-- [ ] bezierCurveTo
 - [ ] quadraticCurveTo
 - [ ] measureText
 - [ ] setTrasform
