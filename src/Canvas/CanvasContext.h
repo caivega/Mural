@@ -107,6 +107,7 @@ namespace mural
 
         void moveTo(float x, float y);
         void lineTo(float x, float y);
+        void bezierCurveTo(float x1, float y1, float x2, float y2, float x3, float y3);
         void rect(float x, float y, float w, float h);
         void arc(float x, float y, float radius, float startRadians, float endRadians, bool antiClockwise = true);
 
