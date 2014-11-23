@@ -20,6 +20,7 @@ namespace mural
         { "closePath",  w_CanvasContext_prototype_closePath,    0 },
         { "moveTo",     w_CanvasContext_prototype_moveTo,       2 },
         { "lineTo",     w_CanvasContext_prototype_lineTo,       2 },
+        { "bezierCurveTo",     w_CanvasContext_prototype_bezierCurveTo,       6 },
         { "rect",       w_CanvasContext_prototype_rect,         4 },
         { "arc",        w_CanvasContext_prototype_arc,          DUK_VARARGS },
         { "strokeRect", w_CanvasContext_prototype_strokeRect,   4 },
@@ -91,6 +92,19 @@ namespace mural
         double y = duk_require_number(ctx, 1);
         auto inst = getNativePointer<CanvasContext>(ctx);
         inst->lineTo(x, y);
+
+        return 0;
+    }
+    int w_CanvasContext_prototype_bezierCurveTo(duk_context *ctx)
+    {
+        double x1 = duk_require_number(ctx, 0);
+        double y1 = duk_require_number(ctx, 1);
+        double x2 = duk_require_number(ctx, 2);
+        double y2 = duk_require_number(ctx, 3);
+        double x3 = duk_require_number(ctx, 4);
+        double y3 = duk_require_number(ctx, 5);
+        auto inst = getNativePointer<CanvasContext>(ctx);
+        inst->bezierCurveTo(x1, y1, x2, y2, x3, y3);
 
         return 0;
     }
