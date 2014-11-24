@@ -26,6 +26,7 @@ Not implemented yet, but already under development.
 - [x] translate, rotate, scale
 - [x] clearRect
 - [x] bezierCurveTo
+- [x] arcTo
 - [ ] font
 - [ ] globalCompositeOperation
 - [ ] imageSmoothEnabled
@@ -38,7 +39,6 @@ Not implemented yet, but already under development.
 - [ ] shadowOffsetY
 - [ ] texAlign
 - [ ] textBaseline
-- [ ] arcTo
 - [ ] quadraticCurveTo
 - [ ] measureText
 - [ ] setTrasform
