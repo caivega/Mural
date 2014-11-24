@@ -14,10 +14,11 @@
 
 namespace mural
 {
-
     class AppViewController
     {
+        ci::app::App *appInst;
     public:
+
         bool booted;
         JavaScriptView *view;
 
@@ -32,6 +33,10 @@ namespace mural
         {
             static AppViewController instance;
             return instance;
+        }
+        void setupWithAppInstance(ci::app::App *inst)
+        {
+            this->appInst = inst;
         }
 
     private:
