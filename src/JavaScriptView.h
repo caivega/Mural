@@ -24,6 +24,9 @@ namespace mural
 
         std::string scriptPath;
 
+        int width, height;
+        String lang;
+
         // input properties
         bool altDown;
         bool ctrlDown;
@@ -32,9 +35,6 @@ namespace mural
 
         ci::Vec2i lastPosOnMouseMove;
     public:
-        int width, height;
-        String lang;
-
         bool hasScreenCanvas;
 
         CanvasContext *currRenderingContext;
@@ -42,6 +42,11 @@ namespace mural
 
         JavaScriptView(int width, int height);
         ~JavaScriptView();
+
+        int getWidth() const;
+        void setWidth(int width);
+        int getHeight() const;
+        void setHeight(int height);
 
         // Methods
         void loadScriptAtPath(const String& path);

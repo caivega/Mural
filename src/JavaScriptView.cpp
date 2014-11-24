@@ -80,6 +80,31 @@ namespace mural
         duk_destroy_heap(this->jsGlobalContext);
     }
 
+    int JavaScriptView::getWidth() const
+    {
+        return this->width;
+    }
+    void JavaScriptView::setWidth(int width)
+    {
+        if (width <= 0) {
+            return;
+        }
+        this->width = width;
+        theAppController.setWidth(width);
+    }
+    int JavaScriptView::getHeight() const
+    {
+        return this->height;
+    }
+    void JavaScriptView::setHeight(int height)
+    {
+        if (height <= 0) {
+            return;
+        }
+        this->height = height;
+        theAppController.setHeight(height);
+    }
+
     void JavaScriptView::loadScriptAtPath(const String& path)
     {
         this->scriptPath = path;
