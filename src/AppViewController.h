@@ -29,6 +29,13 @@ namespace mural
 
         void tickAndDraw();
 
+        int getWidth() const;
+        void setWidth(int w);
+        int getHeight() const;
+        void setHeight(int h);
+        std::string getTitle() const;
+        void setTitle(const std::string& title);
+
         static AppViewController& getInstance()
         {
             static AppViewController instance;
