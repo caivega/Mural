@@ -42,8 +42,8 @@ namespace mural
             this->scriptView->screenRenderingContext = this;
 
             // Set size to view size
-            width = scriptView->width;
-            height = scriptView->height;
+            width = scriptView->getWidth();
+            height = scriptView->getHeight();
         }
         else {
             // Set to default size
