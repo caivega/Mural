@@ -23,6 +23,7 @@ public:
 void CinderCanvasApp::prepareSettings(Settings *settings)
 {
     settings->setTitle("Mural");
+    settings->setResizable(false);
 }
 
 void CinderCanvasApp::setup()
