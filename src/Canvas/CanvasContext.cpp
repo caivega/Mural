@@ -121,6 +121,14 @@ namespace mural
         paths.back().curveTo(x1, y1, x2, y2, x3, y3);
     }
 
+    void CanvasContext::arcTo(float x1, float y1, float x2, float y2, float radius)
+    {
+        if (paths.empty()) {
+            return;
+        }
+        paths.back().arcTo(x2, y2, x1, y1, radius);
+    }
+
     void CanvasContext::rect(float x, float y, float w, float h)
     {
         Path2d p;

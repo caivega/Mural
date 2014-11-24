@@ -24,6 +24,7 @@ namespace mural
     int w_CanvasContext_prototype_moveTo(duk_context *ctx);
     int w_CanvasContext_prototype_lineTo(duk_context *ctx);
     int w_CanvasContext_prototype_bezierCurveTo(duk_context *ctx);
+    int w_CanvasContext_prototype_arcTo(duk_context *ctx);
     int w_CanvasContext_prototype_rect(duk_context *ctx);
     int w_CanvasContext_prototype_arc(duk_context *ctx);
 
