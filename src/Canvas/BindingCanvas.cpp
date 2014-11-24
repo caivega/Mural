@@ -32,8 +32,8 @@ namespace mural
             this->isScreenCanvas = true;
             scriptView->hasScreenCanvas = true;
 
-            width = scriptView->width;
-            height = scriptView->height;
+            width = scriptView->getWidth();
+            height = scriptView->getHeight();
 
             printf("Canvas is screen canvas\n");
         }
@@ -43,6 +43,23 @@ namespace mural
     }
 
     BindingCanvas::~BindingCanvas() {}
+
+    int BindingCanvas::getStyleWidth()
+    {
+        return scriptView->getWidth();
+    }
+    void BindingCanvas::setStyleWidth(int width)
+    {
+        scriptView->setWidth(width);
+    }
+    int BindingCanvas::getStyleHeight()
+    {
+        return scriptView->getHeight();
+    }
+    void BindingCanvas::setStyleHeight(int height)
+    {
+        scriptView->setHeight(height);
+    }
 
     const duk_number_list_entry numbers_of_Canvas[] = {
         { NULL, 0.0 }
