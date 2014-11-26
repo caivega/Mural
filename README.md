@@ -27,9 +27,10 @@ Not implemented yet, but already under development.
 - [x] clearRect
 - [x] bezierCurveTo
 - [x] arcTo
+- [x] quadraticCurveTo
 - [ ] font
 - [ ] globalCompositeOperation
-- [ ] imageSmoothEnabled
+- [ ] imageSmoothingEnabled
 - [ ] lineCap
 - [ ] lineJoin
 - [ ] miterLimit
@@ -39,7 +40,6 @@ Not implemented yet, but already under development.
 - [ ] shadowOffsetY
 - [ ] texAlign
 - [ ] textBaseline
-- [ ] quadraticCurveTo
 - [ ] measureText
 - [ ] setTrasform
 - [ ] transform
