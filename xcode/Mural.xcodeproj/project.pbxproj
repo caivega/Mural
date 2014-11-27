@@ -12,6 +12,7 @@
 		00B784B40FF439BC000DE1D7 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B00FF439BC000DE1D7 /* AudioToolbox.framework */; };
 		00B784B50FF439BC000DE1D7 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B10FF439BC000DE1D7 /* AudioUnit.framework */; };
 		00B784B60FF439BC000DE1D7 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B20FF439BC000DE1D7 /* CoreAudio.framework */; };
+		141F1C291A26AC6F00B34F42 /* Color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 141F1C281A26AC6F00B34F42 /* Color.cpp */; };
 		14390A4B1A0EF67600A8008D /* AppViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14390A491A0EF67600A8008D /* AppViewController.cpp */; };
 		14390A4E1A0EF6AF00A8008D /* JavaScriptView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14390A4C1A0EF6AF00A8008D /* JavaScriptView.cpp */; };
 		14390A601A0F081800A8008D /* duktape.c in Sources */ = {isa = PBXBuildFile; fileRef = 14390A5C1A0F081800A8008D /* duktape.c */; };
@@ -41,6 +42,8 @@
 		0E7778188AC649DC99906A3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		140C92B51A16E62600A65D4F /* BasicClock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BasicClock.h; sourceTree = "<group>"; };
+		141F1C271A26A8B300B34F42 /* Color.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Color.h; sourceTree = "<group>"; };
+		141F1C281A26AC6F00B34F42 /* Color.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Color.cpp; sourceTree = "<group>"; };
 		14390A491A0EF67600A8008D /* AppViewController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AppViewController.cpp; path = ../src/AppViewController.cpp; sourceTree = "<group>"; };
 		14390A4A1A0EF67600A8008D /* AppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppViewController.h; path = ../src/AppViewController.h; sourceTree = "<group>"; };
 		14390A4C1A0EF6AF00A8008D /* JavaScriptView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = JavaScriptView.cpp; path = ../src/JavaScriptView.cpp; sourceTree = "<group>"; };
@@ -211,6 +214,8 @@
 				1484282E1A187644003180D5 /* OperationQueue.cpp */,
 				1484282F1A187644003180D5 /* OperationQueue.h */,
 				14FC6ED51A1E0D3A004B21FF /* UtilFunctions.h */,
+				141F1C271A26A8B300B34F42 /* Color.h */,
+				141F1C281A26AC6F00B34F42 /* Color.cpp */,
 			);
 			name = Utils;
 			path = ../src/Utils;
@@ -337,6 +342,7 @@
 				14390A611A0F081800A8008D /* JavaScript.cpp in Sources */,
 				148428371A199AD5003180D5 /* BindingCanvas.cpp in Sources */,
 				14B2CD431A11C0A800778064 /* CanvasContext.cpp in Sources */,
+				141F1C291A26AC6F00B34F42 /* Color.cpp in Sources */,
 				148428261A178B04003180D5 /* BindingCanvasContext.cpp in Sources */,
 				1484282B1A186340003180D5 /* Image.cpp in Sources */,
 				148428331A187C8A003180D5 /* BindingImage.cpp in Sources */,
