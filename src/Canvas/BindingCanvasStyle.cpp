@@ -8,6 +8,7 @@
 
 #include "BindingCanvasStyle.h"
 #include "BindingCanvas.h"
+#include "../Utils/Color.h"
 
 namespace mural
 {
