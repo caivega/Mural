@@ -3,6 +3,10 @@ window.canvas = document.createElement('canvas');
 var canvas = document.getElementById('canvas'),
     context = canvas.getContext('2d');
 
+print('canvas.style.backgroundColor: ' + canvas.style.backgroundColor);
+canvas.style.backgroundColor = '#808';
+print('canvas.style.backgroundColor: ' + canvas.style.backgroundColor);
+
 var ARROW_MARGIN = 30,
     POINT_RADIUS = 7,
     points = [
