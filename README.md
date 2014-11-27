@@ -11,6 +11,15 @@ I'm very proud of the result, even it's not completed, lots of features not supp
 See `assets/scripts/mural.js`
 ### LocalStorage
 Not implemented yet, but already under development.
+### Canvas Style
+Basic window settings are supported by using `canvas.style`:
+```
+// Change window width/height
+canvas.style.width = '320px';
+canvas.style.height = '180px';
+// Change default window background color
+canvas.style.backgroundColor = '#808';
+```
 ### CanvasRenderingContext2D
 - [x] strokeStyle, fillStyle (only color support for now)
 - [x] globalAlpha
