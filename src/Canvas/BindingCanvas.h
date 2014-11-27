@@ -37,6 +37,8 @@ namespace mural
         CanvasContextMode contextMode;
         short width, height;
 
+        ColorA backgroundColor;
+
         Rectf style;
 
         bool isScreenCanvas;

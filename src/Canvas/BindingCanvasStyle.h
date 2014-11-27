@@ -31,6 +31,8 @@ namespace mural
     int w_CanvasStyle_prototype_get_left(duk_context *ctx);
     int w_CanvasStyle_prototype_set_top(duk_context *ctx);
     int w_CanvasStyle_prototype_get_top(duk_context *ctx);
+    int w_CanvasStyle_prototype_set_backgroundColor(duk_context *ctx);
+    int w_CanvasStyle_prototype_get_backgroundColor(duk_context *ctx);
 
     duk_ret_t js_register_CanvasStyle(duk_context *ctx);
 }

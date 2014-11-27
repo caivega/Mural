@@ -115,6 +115,35 @@ namespace mural
         return 1;
     }
 
+    int w_CanvasStyle_prototype_set_backgroundColor(duk_context *ctx)
+    {
+        std::string valueStr = duk_require_string(ctx, 0);
+
+        auto inst = getNativePointer<BindingCanvasStyle>(ctx);
+        // style value format is "%fpx"
+        float r = 0.0f, g = 0.0f, b = 0.0f, a = 0.0f;
+        stringToColorRGBA(valueStr, r, g, b, a);
+        inst->binding->backgroundColor.set(r, g, b, a);
+
+        return 0;
+    }
+    int w_CanvasStyle_prototype_get_backgroundColor(duk_context *ctx)
+    {
+        auto inst = getNativePointer<BindingCanvasStyle>(ctx);
+
+        std::string result = "rgb(";
+        result += std::to_string((int)(inst->binding->backgroundColor.r * 255));
+        result += ", ";
+        result += std::to_string((int)(inst->binding->backgroundColor.g * 255));
+        result += ", ";
+        result += std::to_string((int)(inst->binding->backgroundColor.b * 255));
+        result += ")";
+
+        duk_push_string(ctx, result.c_str());
+
+        return 1;
+    }
+
     duk_ret_t js_register_CanvasStyle(duk_context *ctx)
     {
         MU_START_BINDING(CanvasStyle);
@@ -125,6 +154,7 @@ namespace mural
         MU_BIND_SET_GET(CanvasStyle, height);
         MU_BIND_SET_GET(CanvasStyle, left);
         MU_BIND_SET_GET(CanvasStyle, top);
+        MU_BIND_SET_GET(CanvasStyle, backgroundColor);
 
         MU_FINISH_BINDING(CanvasStyle);
 

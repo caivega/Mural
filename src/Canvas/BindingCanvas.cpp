@@ -20,6 +20,7 @@ namespace mural
         contextMode(kCanvasContextModeInvalid),
         width(CANVAS_DEFAULT_WIDTH),
         height(CANVAS_DEFAULT_HEIGHT),
+        backgroundColor(ColorA::white()),
         isScreenCanvas(false),
         useRetinaResolution(false),
         msaaEnabled(false),
