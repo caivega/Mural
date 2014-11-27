@@ -7,12 +7,14 @@
 //
 
 #include "CanvasContext.h"
+#include "BindingCanvas.h"
 #include "AppViewController.h"
 #include "../Utils/Color.h"
 
 namespace mural
 {
-    CanvasContext::CanvasContext(bool isScreenContext)
+    CanvasContext::CanvasContext(bool isScreenContext):
+        canvas(nullptr)
     {
         memset(stateStack, 0, sizeof(stateStack));
         stateIndex = 0;

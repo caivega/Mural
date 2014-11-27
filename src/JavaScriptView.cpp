@@ -157,7 +157,8 @@ namespace mural
             // Reset viewport and camera
             gl::setViewport(this->screenRenderingContext->renderingBuffer.getBounds());
             gl::setMatrices(this->screenRenderingContext->renderingCam);
-            gl::clear(ColorA::white(), false);
+//            gl::clear(ColorA::white(), false);
+            gl::clear(this->screenRenderingContext->canvas->backgroundColor, false);
             gl::draw(screenRenderingContext->getTexture());
         }
     }

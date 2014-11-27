@@ -191,6 +191,7 @@ namespace mural
             // Setup canvas, context and save context JavaScript object reference
             auto contextInst = getNativePointerOfObjAt<CanvasContext>(ctx, -1); // canvas, context
             inst->renderingContext = contextInst;
+            contextInst->canvas = inst;
             contextInst->resize(inst->width, inst->height);
             inst->ctxJsObjectRef = jsRef(ctx); // canvas, context
             duk_pop_2(ctx); // ...

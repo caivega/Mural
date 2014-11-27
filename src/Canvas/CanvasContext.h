@@ -79,6 +79,7 @@ namespace mural
     };
 
     class JavaScriptView;
+    class BindingCanvas;
     class CanvasContext : public Renderable
     {
         int width, height;
@@ -96,6 +97,8 @@ namespace mural
         JavaScriptView *scriptView;
         friend JavaScriptView;
     public:
+        BindingCanvas *canvas;
+
         CanvasContext(bool isScreenContext = false);
         ~CanvasContext();
 
