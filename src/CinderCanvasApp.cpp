@@ -24,8 +24,6 @@ void CinderCanvasApp::prepareSettings(Settings *settings)
 {
     settings->setTitle("Mural");
 //    settings->setResizable(false);
-
-    theAppController.setupWithAppInstance(this);
 }
 
 void CinderCanvasApp::setup()

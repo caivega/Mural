@@ -35,22 +35,22 @@ namespace mural
     }
     int AppViewController::getWidth() const
     {
-        return appInst->getWindowWidth();
+        return ci::app::getWindowWidth();
     }
     void AppViewController::setWidth(int w)
     {
-        appInst->setWindowSize(w, appInst->getWindowHeight());
+        ci::app::setWindowSize(w, ci::app::getWindowHeight());
     }
     int AppViewController::getHeight() const
     {
-        return appInst->getWindowHeight();
+        return ci::app::getWindowHeight();
     }
     void AppViewController::setHeight(int h)
     {
-        appInst->setWindowSize(appInst->getWindowWidth(), h);
+        ci::app::setWindowSize(ci::app::getWindowWidth(), h);
     }
     std::string AppViewController::getTitle() const
     {
-        return appInst->getWindow()->getTitle();
+        return ci::app::getWindow()->getTitle();
     }
 }
