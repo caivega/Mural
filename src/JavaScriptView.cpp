@@ -47,9 +47,6 @@ namespace mural
         screenRenderingContext(nullptr),
         hasScreenCanvas(false)
     {
-        // Setup OpenGL context
-        gl::setViewport(Area(0, 0, width, height));
-
         // Setup event callbacks
 
         // Create the global JS context
@@ -137,10 +134,6 @@ namespace mural
 
     void JavaScriptView::boot()
     {
-        glDisable(GL_DEPTH_TEST);
-        gl::enableAlphaBlending();
-        gl::clear(ColorA::white(), false);
-
         // Set app properties to __MURAL__
         this->defineProperties();
 
@@ -158,7 +151,10 @@ namespace mural
             duk_pop(this->jsGlobalContext);
         }
 
-        // Clear rect
+        // Setup OpenGL for drawing
+        gl::setViewport(Area(0, 0, width, height));
+        glDisable(GL_DEPTH_TEST);
+        gl::enableAlphaBlending();
         gl::clear(ColorA::white(), false);
 
         // [Tests]
@@ -182,7 +178,6 @@ namespace mural
             // Reset viewport and camera
             gl::setViewport(this->screenRenderingContext->renderingBuffer.getBounds());
             gl::setMatrices(this->screenRenderingContext->renderingCam);
-//            gl::clear(ColorA::white(), false);
             gl::clear(this->screenRenderingContext->canvas->backgroundColor, false);
             gl::draw(screenRenderingContext->getTexture());
         }
