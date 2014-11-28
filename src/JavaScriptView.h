@@ -48,6 +48,11 @@ namespace mural
         int getHeight() const;
         void setHeight(int height);
 
+        int getWindowWidth() const;
+        void setWindowWidth(int width);
+        int getWindowHeight() const;
+        void setWindowHeight(int height);
+
         // Methods
         void loadScriptAtPath(const String& path);
         void boot();

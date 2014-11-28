@@ -90,7 +90,8 @@ namespace mural
             return;
         }
         this->width = width;
-        theAppController.setWidth(width);
+//        theAppController.setWidth(width);
+        printf("set canvas width\n");
     }
     int JavaScriptView::getHeight() const
     {
@@ -102,6 +103,30 @@ namespace mural
             return;
         }
         this->height = height;
+//        theAppController.setHeight(height);
+        printf("set canvas height\n");
+    }
+
+    int JavaScriptView::getWindowWidth() const
+    {
+        return theAppController.getWidth();
+    }
+    void JavaScriptView::setWindowWidth(int width)
+    {
+        if (width <= 0) {
+            return;
+        }
+        theAppController.setWidth(width);
+    }
+    int JavaScriptView::getWindowHeight() const
+    {
+        return theAppController.getHeight();
+    }
+    void JavaScriptView::setWindowHeight(int height)
+    {
+        if (height <= 0) {
+            return;
+        }
         theAppController.setHeight(height);
     }
 
