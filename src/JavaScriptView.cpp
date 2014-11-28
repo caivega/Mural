@@ -176,10 +176,14 @@ namespace mural
         // Draw to screen
         if (this->screenRenderingContext) {
             // Reset viewport and camera
-            gl::setViewport(this->screenRenderingContext->renderingBuffer.getBounds());
-            gl::setMatrices(this->screenRenderingContext->renderingCam);
+            float w = (float)ci::app::getWindowWidth();
+            float h = (float)ci::app::getWindowHeight();
+            cam.setOrtho(0.0f, w, h, 0.0f, -1.0f, 1.0f);
+
+            gl::setViewport(ci::app::getWindowBounds());
+            gl::setMatrices(cam);
             gl::clear(this->screenRenderingContext->canvas->backgroundColor, false);
-            gl::draw(screenRenderingContext->getTexture());
+            gl::draw(screenRenderingContext->getTexture(), ci::app::getWindowBounds());
         }
     }
 

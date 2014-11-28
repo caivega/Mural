@@ -27,6 +27,8 @@ namespace mural
         int width, height;
         String lang;
 
+        ci::CameraOrtho cam;
+
         // input properties
         bool altDown;
         bool ctrlDown;
