@@ -47,19 +47,31 @@ namespace mural
 
     int BindingCanvas::getStyleWidth()
     {
-        return scriptView->getWidth();
+        return (int)style.getWidth();
     }
     void BindingCanvas::setStyleWidth(int width)
     {
-        scriptView->setWidth(width);
+        style.x2 = style.x1 + width;
+
+        if (this->isScreenCanvas) {
+            scriptView->setWindowWidth((int)style.getWidth());
+        }
+
+        printf("Change window width: %d\n", (int)style.getWidth());
     }
     int BindingCanvas::getStyleHeight()
     {
-        return scriptView->getHeight();
+        return (int)style.getHeight();
     }
     void BindingCanvas::setStyleHeight(int height)
     {
-        scriptView->setHeight(height);
+        style.y2 = style.y1 + height;
+
+        if (this->isScreenCanvas) {
+            scriptView->setWindowHeight((int)style.getHeight());
+        }
+
+        printf("Change window height: %d\n", (int)style.getHeight());
     }
 
     const duk_number_list_entry numbers_of_Canvas[] = {
