@@ -371,10 +371,10 @@ window.top = window.parent = window;
             document.dispatchEvent(evt);
         },
 
-        dispatchKeyEvent: function(type, code, key, metaKey) {
+        dispatchKeyEvent: function(type, keyCode, code, metaKey) {
             var evt = document.createEvent(type);
+            evt.keyCode = keyCode;
             evt.code = code;
-            evt.key = key;
             evt.metaKey = metaKey;
             document.dispatchEvent(evt);
         }
