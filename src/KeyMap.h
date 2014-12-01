@@ -12,8 +12,30 @@
 #include <map>
 #include <string>
 
-static std::map<int, int> CiToKeyCodeMap;
-static std::map<int, std::string> CiToCodeMap;
+static std::map<int, int> CiToKeyCodeMap = {
+    { 44, 188 }, // Comma
+    { 46, 190 }, // Period
+    { 59, 186 }, // Semicolon
+    { 39, 222 }, // Quote
+    { 91, 219 }, // BracketLeft
+    { 93, 221 }, // BracketRight
+    { 96, 192 }, // Backquote
+    { 92, 220 }, // Backslash
+    { 45, 189 }, // Minuse
+    { 61, 187 }, // Equal
+};
+static std::map<int, std::string> CiToCodeMap = {
+    { 44, "Comma" },
+    { 46, "Period" },
+    { 59, "Semicolon" },
+    { 39, "Quote" },
+    { 91, "BracketLeft" },
+    { 93, "BracketRight" },
+    { 96, "Backquote" },
+    { 92, "Backslash" },
+    { 45, "Minuse" },
+    { 61, "Equal" },
+};
 
 void initKeyCodeMap()
 {
