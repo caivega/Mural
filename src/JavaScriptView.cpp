@@ -15,6 +15,8 @@
 #include "Canvas/BindingCanvasContext.h"
 #include "Utils/UtilFunctions.h"
 
+#include "KeyMap.h"
+
 // Tests
 #include "Tests/BasicClock.h"
 #include "Tests/AsyncImageLoader.h"
@@ -34,29 +36,6 @@
 
 namespace mural
 {
-    struct KeyInfo {
-        int ciCode;
-        int domKeyCode;
-        const char *domCode;
-    };
-
-    const KeyInfo INFO[] = {
-        { 48, 48, "Digit0" },
-        { 49, 49, "Digit1" },
-        { 50, 50, "Digit2" },
-        { 51, 51, "Digit3" },
-        { 52, 52, "Digit4" },
-        { 53, 53, "Digit5" },
-        { 54, 54, "Digit6" },
-        { 55, 55, "Digit7" },
-        { 56, 56, "Digit8" },
-        { 57, 57, "Digit9" },
-        { NULL, NULL, NULL }
-    };
-    const int SUPPORTED_KEY_AMOUNT = 10;
-
-    static std::map<int, KeyInfo> theKeyMap;
-
     JavaScriptView::JavaScriptView(int width, int height):
         jsGlobalContext(nullptr),
         altDown(false),
@@ -71,9 +50,7 @@ namespace mural
         hasScreenCanvas(false)
     {
         // Setup event callbacks
-        for (auto i = 0; i < SUPPORTED_KEY_AMOUNT; ++i) {
-            theKeyMap[INFO[i].ciCode] = INFO[i];
-        }
+        initKeyCodeMap();
 
         // Create the global JS context
         this->jsGlobalContext = duk_create_heap_default();
@@ -256,15 +233,13 @@ namespace mural
         this->metaDown = event.isMetaDown();
         this->shiftDown = event.isShiftDown();
 
-        KeyInfo info = theKeyMap[event.getCode()];
-
         duk_push_global_object(jsGlobalContext);
         duk_get_prop_string(jsGlobalContext, -1, "document"); // window, document
         duk_push_string(jsGlobalContext, "dispatchKeyEvent"); // window, document, dispatchKeyEvent
 
         duk_push_string(jsGlobalContext, type); // ... type
-        duk_push_int(jsGlobalContext, info.domKeyCode); // ... keyCode
-        duk_push_string(jsGlobalContext, info.domCode); // ... code
+        duk_push_int(jsGlobalContext, CiToKeyCodeMap[event.getCode()]); // ... keyCode
+        duk_push_string(jsGlobalContext, CiToCodeMap[event.getCode()].c_str()); // ... code
         duk_push_boolean(jsGlobalContext, false); // ... meta
 
         duk_pcall_prop(jsGlobalContext, -6, 4);
