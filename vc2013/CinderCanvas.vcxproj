@@ -119,6 +119,7 @@
     <ClCompile Include="..\src\JavaScriptView.cpp" />
     <ClCompile Include="..\src\JavaScript\duktape.c" />
     <ClCompile Include="..\src\JavaScript\JavaScript.cpp" />
+    <ClCompile Include="..\src\Utils\Color.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Resources.h" />
@@ -134,11 +135,14 @@
     <ClInclude Include="..\src\JavaScriptView.h" />
     <ClInclude Include="..\src\JavaScript\duktape.h" />
     <ClInclude Include="..\src\JavaScript\JavaScript.h" />
+    <ClInclude Include="..\src\KeyMap.h" />
     <ClInclude Include="..\src\Renderable.h" />
     <ClInclude Include="..\src\Tests\AsyncImageLoader.h" />
     <ClInclude Include="..\src\Tests\BasicClock.h" />
     <ClInclude Include="..\src\Tests\ColorUtil.h" />
     <ClInclude Include="..\src\Tests\LoadImage.h" />
+    <ClInclude Include="..\src\Utils\Color.h" />
+    <ClInclude Include="..\src\Utils\UtilFunctions.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
