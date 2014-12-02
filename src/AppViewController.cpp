@@ -28,8 +28,8 @@ namespace mural
                 view->tickAndDraw();
             }
             else {
-                view->boot();
                 booted = true;
+                view->boot();
             }
         }
     }

@@ -48,7 +48,6 @@ namespace mural
 
         ~AppViewController();
     };
-
 }
 
 #define theAppController mural::AppViewController::getInstance()
