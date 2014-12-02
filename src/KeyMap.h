@@ -50,6 +50,12 @@ void initKeyCodeMap()
         CiToKeyCodeMap[i] = i - 32;
         CiToCodeMap[i] = "Key"; CiToCodeMap[i] += (i + ('A' - 'a'));
     }
+
+    // F1-F24
+    for (int i = 282; i < 297; ++i) {
+        CiToKeyCodeMap[i] = i - 170;
+        CiToCodeMap[i] = "F"; CiToCodeMap[i] += std::to_string(i - 281);
+    }
 }
 
 #endif
