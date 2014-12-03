@@ -7,6 +7,7 @@
 //
 
 #include "JavaScriptView.h"
+#include "JavaScript/JavaScript.h"
 
 // Modules
 #include "BindingImage.h"
@@ -146,6 +147,17 @@ namespace mural
         }
         duk_pop(this->jsGlobalContext);
 
+        // Save JavaScript callback indexes for later use.
+        // Calling functions directly is much faster than eval or access from global object
+        duk_push_global_object(this->jsGlobalContext);
+        duk_get_prop_string(this->jsGlobalContext, -1, MURAL_JS_NAMESPACE); // global, __MURAL__
+
+        duk_get_prop_string(this->jsGlobalContext, -1, "tickAnimFrame");
+        this->jsTickFunction = jsRef(this->jsGlobalContext);
+        duk_pop(this->jsGlobalContext);
+
+        duk_pop_2(this->jsGlobalContext); // Cleanup
+
         // Load app script
         if (this->scriptPath.length() > 0) {
             if (duk_peval_file(this->jsGlobalContext, app::getAssetPath(this->scriptPath).generic_string().c_str()) != 0) {
@@ -170,11 +182,9 @@ namespace mural
     void JavaScriptView::tickAndDraw()
     {
         // RAF
-        duk_push_global_object(this->jsGlobalContext);
-        duk_get_prop_string(this->jsGlobalContext, -1, MURAL_JS_NAMESPACE);
-        duk_get_prop_string(this->jsGlobalContext, -1, "tickAnimFrame");
+        jsPushRef(this->jsGlobalContext, this->jsTickFunction);
         duk_call(this->jsGlobalContext, 0);
-        duk_pop_n(this->jsGlobalContext, 3);
+        duk_pop(this->jsGlobalContext);
 
         // Draw to screen
         if (this->screenRenderingContext) {

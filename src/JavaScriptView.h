@@ -21,6 +21,7 @@ namespace mural
     class JavaScriptView
     {
         duk_context *jsGlobalContext;
+        int jsTickFunction;
 
         std::string scriptPath;
 

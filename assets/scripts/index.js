@@ -1,9 +1,23 @@
-window.canvas = document.createElement('canvas');
+(function() { 'use strict';
 
-var canvas = document.getElementById('canvas'),
-    context = canvas.getContext('2d');
+    window.canvas = document.createElement('canvas');
 
-document.addEventListener('keydown', function(e) {
-    print('e.keyCode: ' + e.keyCode);
-    print('e.code: ' + e.code);
-});
+    var canvas = document.getElementById('canvas'),
+        context = canvas.getContext('2d');
+
+    var lastCode = 'NONE';
+    document.addEventListener('keydown', function(e) {
+        lastCode = e.code;
+    });
+
+    context.fillStyle = '#808';
+    (function animate() {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.fillText(getAverageFPS().toFixed(2), canvas.width - 80, 20);
+
+        context.fillText('KEY: ' + lastCode, canvas.width * 0.5 - 60, canvas.height * 0.5);
+
+        requestAnimationFrame(animate);
+    })();
+
+})();
