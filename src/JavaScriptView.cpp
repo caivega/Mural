@@ -15,6 +15,7 @@
 #include "Canvas/BindingCanvas.h"
 #include "Canvas/BindingCanvasContext.h"
 #include "Utils/UtilFunctions.h"
+#include "LocalStorage.h"
 
 #include "KeyMap.h"
 
@@ -74,6 +75,7 @@ namespace mural
         registerModule(js_register_Canvas, "Canvas");
         registerModule(js_register_CanvasContext, "CanvasContext");
         registerModule(js_register_Utils, "Utils");
+        registerModule(js_register_LocalStorage, "LocalStorage");
     }
 
     JavaScriptView::~JavaScriptView()
