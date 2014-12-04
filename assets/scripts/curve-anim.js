@@ -1,5 +1,3 @@
-window.canvas = document.createElement('canvas');
-
 var canvas = document.getElementById('canvas');
 
 // Functions
