@@ -216,6 +216,8 @@ window.top = window.parent = window;
     // window.XMLHttpRequest = __MURAL__.HttpRequest;
     // window.WebSocket = __MURAL__.WebSocket;
 
+    window.canvas = new __MURAL__.Canvas();
+
     (function(window) {
         var handler = {
             get: function (targ, key, recv) {
