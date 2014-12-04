@@ -133,6 +133,8 @@ namespace mural
         void translate(float x, float y);
         void rotate(float radians);
         void scale(float x, float y);
+        void transform(float m11, float m12, float m21, float m22, float dx, float dy);
+        void setTransform(float m11, float m12, float m21, float m22, float dx, float dy);
 
         void clearRect(float x, float y, float w, float h);
 

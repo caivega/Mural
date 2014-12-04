@@ -249,6 +249,20 @@ namespace mural
         gl::scale(s);
     }
 
+    void CanvasContext::transform(float m11, float m12, float m21, float m22, float dx, float dy)
+    {
+        MatrixAffine2f m(m11, m12, m21, m22, dx, dy);
+        state->transform *= m;
+        gl::multModelView(Matrix44f(m));
+    }
+
+    void CanvasContext::setTransform(float m11, float m12, float m21, float m22, float dx, float dy)
+    {
+        gl::multModelView(Matrix44f(state->transform.invertCopy()));
+        state->transform.set(m11, m12, m21, m22, dx, dy);
+        gl::multModelView(Matrix44f(state->transform));
+    }
+
     void CanvasContext::clearRect(float x, float y, float w, float h)
     {
         // Clear paths
@@ -267,8 +281,6 @@ namespace mural
     {
         prepare();
 
-        gl::multModelView(Matrix44f(state->transform));
-
         gl::SaveColorState saveColor;
         gl::color(state->strokeStyle);
         gl::drawStrokedRect(Rectf(x, y, x + w, y + h));
@@ -279,8 +291,6 @@ namespace mural
     void CanvasContext::fillRect(float x, float y, float w, float h)
     {
         prepare();
-
-        gl::multModelView(Matrix44f(state->transform));
 
         gl::SaveColorState saveColor;
         gl::color(state->fillStyle);

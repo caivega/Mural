@@ -36,6 +36,8 @@ namespace mural
         { "translate",  w_CanvasContext_prototype_translate,    2 },
         { "rotate",     w_CanvasContext_prototype_rotate,       1 },
         { "scale",      w_CanvasContext_prototype_scale,        2 },
+        { "transform",  w_CanvasContext_prototype_transform,    6 },
+        { "setTransform",  w_CanvasContext_prototype_setTransform,    6 },
         { "clearRect",  w_CanvasContext_prototype_clearRect,    4 },
         { NULL, NULL, 0 }
     };
@@ -304,6 +306,34 @@ namespace mural
 
         auto inst = getNativePointer<CanvasContext>(ctx);
         inst->scale(x, y);
+
+        return 0;
+    }
+    int w_CanvasContext_prototype_transform(duk_context *ctx)
+    {
+        double m11 = duk_require_number(ctx, 0);
+        double m12 = duk_require_number(ctx, 1);
+        double m21 = duk_require_number(ctx, 2);
+        double m22 = duk_require_number(ctx, 3);
+        double dx = duk_require_number(ctx, 4);
+        double dy = duk_require_number(ctx, 5);
+
+        auto inst = getNativePointer<CanvasContext>(ctx);
+        inst->transform(m11, m12, m21, m22, dx, dy);
+
+        return 0;
+    }
+    int w_CanvasContext_prototype_setTransform(duk_context *ctx)
+    {
+        double m11 = duk_require_number(ctx, 0);
+        double m12 = duk_require_number(ctx, 1);
+        double m21 = duk_require_number(ctx, 2);
+        double m22 = duk_require_number(ctx, 3);
+        double dx = duk_require_number(ctx, 4);
+        double dy = duk_require_number(ctx, 5);
+
+        auto inst = getNativePointer<CanvasContext>(ctx);
+        inst->setTransform(m11, m12, m21, m22, dx, dy);
 
         return 0;
     }
