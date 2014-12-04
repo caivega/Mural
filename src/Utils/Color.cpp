@@ -149,16 +149,29 @@ namespace mural
         }
     }
 
-    std::string colorRGBAToString(float r, float g, float b)
+    std::string colorRGBAToString(float r, float g, float b, float a)
     {
         std::stringstream stream;
+        std::string result;
 
-        stream << std::setfill ('0') << std::setw(2) << std::hex << (int)(r * 255.0f);
-        stream << std::setfill ('0') << std::setw(2) << std::hex << (int)(g * 255.0f);
-        stream << std::setfill ('0') << std::setw(2) << std::hex << (int)(b * 255.0f);
-        
-        std::string result("0x");
-        
-        return result += stream.str();
+        // Alpha not set
+        if (a < 0.0f) {
+            stream << std::setfill ('0') << std::setw(2) << std::hex << (int)(r * 255.0f);
+            stream << std::setfill ('0') << std::setw(2) << std::hex << (int)(g * 255.0f);
+            stream << std::setfill ('0') << std::setw(2) << std::hex << (int)(b * 255.0f);
+
+            result = "0x";
+            result += stream.str();
+        }
+        else {
+            result = "rgba(" +
+                std::to_string((int)(r * 255.0f)) + ", " +
+                std::to_string((int)(g * 255.0f)) + ", " +
+                std::to_string((int)(b * 255.0f)) + ", " +
+                std::to_string(a).substr(0, 4) +
+            ")";
+        }
+
+        return result;
     }
 }

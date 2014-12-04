@@ -13,7 +13,7 @@ namespace mural
 {
     void colorHSLAToColorRGBA(float H, float S, float L, float A, float& rr, float& gg, float& bb, float& aa);
     void stringToColorRGBA(const std::string& color, float& r, float& g, float& b, float& a);
-    std::string colorRGBAToString(float r, float g, float b);
+    std::string colorRGBAToString(float r, float g, float b, float a = -1.0f);
 }
 
 #endif
