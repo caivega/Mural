@@ -214,8 +214,24 @@ window.top = window.parent = window;
     // window.Audio = __MURAL__.Audio;
     // window.Video = __MURAL__.Video;
     // window.XMLHttpRequest = __MURAL__.HttpRequest;
-    // window.localStorage = new __MURAL__.LocalStorage();
     // window.WebSocket = __MURAL__.WebSocket;
+
+    (function(window) {
+        var handler = {
+            get: function (targ, key, recv) {
+                return targ[key] || targ.getItem(key);
+            },
+            set: function (targ, key, val, recv) {
+                targ.setItem(key, val);
+                return true;
+            },
+            deleteProperty: function (targ, key) {
+                return false;
+            }
+        };
+        var localStorage = new __MURAL__.LocalStorage();
+        window.localStorage = new Proxy(localStorage, handler);
+    })(window);
 
     window.Event = window.MouseEvent = window.KeyboardEvent = __MURAL__.Event;
 
