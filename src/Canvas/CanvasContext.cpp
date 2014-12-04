@@ -10,6 +10,7 @@
 #include "BindingCanvas.h"
 #include "AppViewController.h"
 #include "../Utils/Color.h"
+#include "../Utils/FileUtil.h"
 
 namespace mural
 {
@@ -391,6 +392,34 @@ namespace mural
     float CanvasContext::getGlobalAlpha()
     {
         return state->globalAlpha;
+    }
+
+    void CanvasContext::setFont(const std::string &fontName)
+    {
+        float fontSize = 10.0f;
+        std::string font = "sans-serif";
+
+        StringList parts = splitString(fontName, " ");
+        if (parts.size() < 1) {
+            return;
+        }
+
+        // First param is font size?
+        if (parts[0].find("px") != std::string::npos || parts[0].find("pt") != std::string::npos) {
+            fontSize = (float)std::stoi(parts[0].substr(0, parts[0].size() - 2));
+        }
+        font = (parts.size() > 1 ? parts[1] : parts[0]);
+
+        try {
+            state->font = Font(font, fontSize);
+        } catch (ci::FontInvalidNameExc e) {
+            state->font = Font::getDefault();
+        }
+    }
+
+    std::string CanvasContext::getFont()
+    {
+        return state->font.getName();
     }
 
     void CanvasContext::resize(int width, int height)

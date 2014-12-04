@@ -151,6 +151,8 @@ namespace mural
         std::string getFillStyle();
         void setGlobalAlpha(float a);
         float getGlobalAlpha();
+        void setFont(const std::string& fontName);
+        std::string getFont();
 
         void resize(int width = -1, int height = -1);
         int getWidth() { return width; }
