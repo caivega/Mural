@@ -2,7 +2,7 @@
 ---
 This is an experimental project which implements [CanvasRenderingContext2D][CanvasRenderingContext2D] using amazing [Cinder][Cinder] framework and [duktape][duktape]. 
 
-It's design to be something like **Ejecta for Desktop**. The ONLY reason that I start this instead of using [Node-webkit][Node-webkit] is the executable file size. Nearly 100m size for a simple game which I want to share with friends sounds crazy and no one want to download another **Chrome** just to play a it.
+It's design to be something like **Ejecta for Desktop**. The ONLY reason that I start this instead of using [Node-webkit][Node-webkit] is the executable file size. Nearly 100m size for a simple game which I want to share with friends sounds crazy and no one want to download another **Chromium** just for playing a tiny game.
 
 I'm very proud of the result, even it's not completed, lots of features not supported actually. The compiled executable file is about 2m and less than 1m gzipped (I know it's not internet thing :D).
 
@@ -10,7 +10,8 @@ I'm very proud of the result, even it's not completed, lots of features not supp
 ### General DOM stuff
 See `assets/scripts/mural.js`
 ### LocalStorage
-Not implemented yet, but already under development.
+1. Support both `localStorage.setItem('key', 'value');` and `localStorage['key'] = 'value'` syntax
+2. Save JSON data to the system-appropriate writable directory which for the use of logs, preference files(`~/Application Support` on MacOSX and `you_app_folder` on Windows)
 ### Canvas Style
 Basic window settings are supported by using `canvas.style`:
 ```
@@ -64,12 +65,12 @@ I always prefer [Trello][trello] for project management, the tasks list can be f
 2. Create a `apps` folder at the root
 3. Clone the repo into `apps`: `git clone https://github.com/pixelpicosean/Mural.git`
 4. Open project file and have fun
+
 *Development using Cinder v0.8.6, the dev version not tested yet*
 
 ## Hacking
 It's better to compile in release mode and directly modify `index.js` in `assets/scripts` to see the result.
 If you want to help develop, please run in debug mode and see what's happening.
-Note that the release version will simple ignore issue (even fatal errors) but will log everything including script syntax in debug mode.
 
 ## Supported Platforms
 Currently only support Windows and OSX._([Cinder](Cinder) only support Windows, OSX and iOS)_

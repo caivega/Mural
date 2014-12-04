@@ -234,10 +234,10 @@ namespace mural
         splitChars.push_back('\0'); // have to construct null-containing strings carefully
         exePath = SplitString(exePath, splitChars)[0];
     #endif
-        
+
         StringList pathElements = splitString(exePath, pathSplit);
         String exeName = pathElements[pathElements.size()-1];
-        
+
         return exeName;
     }
 
