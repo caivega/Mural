@@ -194,7 +194,8 @@ namespace mural
         // Draw to screen
         if (this->screenRenderingContext) {
             gl::setViewport(ci::app::getWindowBounds());
-            gl::clear(this->screenRenderingContext->canvas->backgroundColor, false);
+            gl::setMatrices(screenRenderingContext->renderingCam);
+            gl::clear(screenRenderingContext->canvas->backgroundColor, false);
             gl::draw(screenRenderingContext->getTexture(), ci::app::getWindowBounds());
         }
     }
