@@ -26,7 +26,8 @@ namespace mural
     public:
         void initWithScript(const String& path, int width = 640, int height = 480);
 
-        void tickAndDraw();
+        void update();
+        void draw();
 
         int getWidth() const;
         void setWidth(int w);

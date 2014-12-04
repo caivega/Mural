@@ -59,7 +59,8 @@ namespace mural
         // Methods
         void loadScriptAtPath(const String& path);
         void boot();
-        void tickAndDraw();
+        void update();
+        void draw();
 
         // Event callbacks
         void mouseEvent(const char *type, ci::app::MouseEvent event);

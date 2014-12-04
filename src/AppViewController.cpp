@@ -21,16 +21,22 @@ namespace mural
         view = new JavaScriptView(width, height);
         view->loadScriptAtPath(path);
     }
-    void AppViewController::tickAndDraw()
+    void AppViewController::update()
     {
         if (view) {
             if (booted) {
-                view->tickAndDraw();
+                view->update();
             }
             else {
                 booted = true;
                 view->boot();
             }
+        }
+    }
+    void AppViewController::draw()
+    {
+        if (view && booted) {
+            view->draw();
         }
     }
     int AppViewController::getWidth() const

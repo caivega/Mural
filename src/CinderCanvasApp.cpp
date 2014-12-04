@@ -17,6 +17,7 @@ public:
     void keyDown(app::KeyEvent event);
     void keyUp(app::KeyEvent event);
 
+    void update();
 	void draw();
 };
 
@@ -63,12 +64,19 @@ void CinderCanvasApp::keyUp(app::KeyEvent event)
     }
 }
 
-void CinderCanvasApp::draw()
+void CinderCanvasApp::update()
 {
     theAppController.averageFPS = getAverageFps();
 
     if (theAppController.view) {
-        theAppController.tickAndDraw();
+        theAppController.update();
+    }
+}
+
+void CinderCanvasApp::draw()
+{
+    if (theAppController.view) {
+        theAppController.draw();
     }
 }
 

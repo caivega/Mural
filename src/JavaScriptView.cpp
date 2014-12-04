@@ -181,22 +181,19 @@ namespace mural
 //        LoadImage();
     }
 
-    void JavaScriptView::tickAndDraw()
+    void JavaScriptView::update()
     {
         // RAF
         jsPushRef(this->jsGlobalContext, this->jsTickFunction);
         duk_call(this->jsGlobalContext, 0);
         duk_pop(this->jsGlobalContext);
+    }
 
+    void JavaScriptView::draw()
+    {
         // Draw to screen
         if (this->screenRenderingContext) {
-            // Reset viewport and camera
-            float w = (float)ci::app::getWindowWidth();
-            float h = (float)ci::app::getWindowHeight();
-            cam.setOrtho(0.0f, w, h, 0.0f, -1.0f, 1.0f);
-
             gl::setViewport(ci::app::getWindowBounds());
-            gl::setMatrices(cam);
             gl::clear(this->screenRenderingContext->canvas->backgroundColor, false);
             gl::draw(screenRenderingContext->getTexture(), ci::app::getWindowBounds());
         }
