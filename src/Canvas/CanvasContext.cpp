@@ -282,7 +282,7 @@ namespace mural
         prepare();
 
         gl::SaveColorState saveColor;
-        gl::color(state->strokeStyle);
+        gl::color(state->strokeStyle.r, state->strokeStyle.g, state->strokeStyle.b, state->strokeStyle.a * state->globalAlpha);
         gl::drawStrokedRect(Rectf(x, y, x + w, y + h));
 
         present();
@@ -293,7 +293,7 @@ namespace mural
         prepare();
 
         gl::SaveColorState saveColor;
-        gl::color(state->fillStyle);
+        gl::color(state->fillStyle.r, state->fillStyle.g, state->fillStyle.b, state->fillStyle.a * state->globalAlpha);
         gl::drawSolidRect(Rectf(x, y, x + w, y + h));
 
         present();
@@ -304,7 +304,7 @@ namespace mural
         prepare();
 
         gl::SaveColorState saveColor;
-        gl::color(state->strokeStyle);
+        gl::color(state->strokeStyle.r, state->strokeStyle.g, state->strokeStyle.b, state->strokeStyle.a * state->globalAlpha);
         gl::drawString(text, Vec2f(x, y), state->strokeStyle, state->font);
 
         present();
@@ -315,7 +315,7 @@ namespace mural
         prepare();
 
         gl::SaveColorState saveColor;
-        gl::color(state->fillStyle);
+        gl::color(state->fillStyle.r, state->fillStyle.g, state->fillStyle.b, state->fillStyle.a * state->globalAlpha);
         gl::drawString(text, Vec2f(x, y), state->fillStyle, state->font);
 
         present();
@@ -332,6 +332,7 @@ namespace mural
             gl::setViewport(renderingBuffer.getBounds());
             gl::setMatrices(renderingCam);
         }
+        gl::enableAlphaBlending();
     }
 
     void CanvasContext::present()
@@ -364,34 +365,36 @@ namespace mural
 
     void CanvasContext::setStrokeStyle(const std::string& c)
     {
-        float a = 1.0f;
-        stringToColorRGBA(c, state->strokeStyle.r, state->strokeStyle.g, state->strokeStyle.b, a);
+        stringToColorRGBA(c, state->strokeStyle.r, state->strokeStyle.g, state->strokeStyle.b, state->strokeStyle.a);
+        state->strokeStyleStr = c;
     }
 
-    void CanvasContext::setStrokeStyle(float r, float g, float b)
+    void CanvasContext::setStrokeStyle(float r, float g, float b, float a)
     {
-        state->strokeStyle.set(r, g, b);
+        state->strokeStyle.set(r, g, b, a);
+        state->strokeStyleStr = colorRGBAToString(r, g, b, a);
     }
 
     std::string CanvasContext::getStrokeStyle()
     {
-        return colorRGBAToString(state->strokeStyle.r, state->strokeStyle.g, state->strokeStyle.b);
+        return state->strokeStyleStr;
     }
 
     void CanvasContext::setFillStyle(const std::string& c)
     {
-        float a = 1.0f;
-        stringToColorRGBA(c, state->fillStyle.r, state->fillStyle.g, state->fillStyle.b, a);
+        stringToColorRGBA(c, state->fillStyle.r, state->fillStyle.g, state->fillStyle.b, state->fillStyle.a);
+        state->fillStyleStr = c;
     }
 
-    void CanvasContext::setFillStyle(float r, float g, float b)
+    void CanvasContext::setFillStyle(float r, float g, float b, float a)
     {
-        state->fillStyle.set(r, g, b);
+        state->fillStyle.set(r, g, b, a);
+        state->fillStyleStr = colorRGBAToString(r, g, b, a);
     }
 
     std::string CanvasContext::getFillStyle()
     {
-        return colorRGBAToString(state->fillStyle.r, state->fillStyle.g, state->fillStyle.b);
+        return state->fillStyleStr;
     }
 
     void CanvasContext::setGlobalAlpha(float a)

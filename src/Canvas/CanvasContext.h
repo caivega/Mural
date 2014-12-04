@@ -47,8 +47,10 @@ namespace mural
 
     struct CanvasState {
         CompositeOperation globalCompositeOperation = CompositeOperation::kCompositeOperationSourceOver;
-        Color fillStyle = Color::black();
-        Color strokeStyle = Color::black();
+        ColorA fillStyle = Color::black();
+        std::string strokeStyleStr = "#000000";
+        ColorA strokeStyle = Color::black();
+        std::string fillStyleStr = "#000000";
         float globalAlpha = 1.0f;
 
         float lineWidth = 1.0f;
@@ -65,6 +67,7 @@ namespace mural
             globalCompositeOperation = other.globalCompositeOperation;
             fillStyle = other.fillStyle;
             strokeStyle = other.strokeStyle;
+            strokeStyleStr = other.strokeStyleStr;
             globalAlpha = other.globalAlpha;
 
             lineWidth = other.lineWidth;
@@ -146,10 +149,10 @@ namespace mural
         void setLineWidth(float width);
         float getLineWidth();
         void setStrokeStyle(const std::string& color);
-        void setStrokeStyle(float r, float g, float b);
+        void setStrokeStyle(float r, float g, float b, float a = 1.0f);
         std::string getStrokeStyle();
         void setFillStyle(const std::string& color);
-        void setFillStyle(float r, float g, float b);
+        void setFillStyle(float r, float g, float b, float a = 1.0f);
         std::string getFillStyle();
         void setGlobalAlpha(float a);
         float getGlobalAlpha();

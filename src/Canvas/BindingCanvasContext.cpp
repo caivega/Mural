@@ -370,9 +370,7 @@ namespace mural
     {
         const char *c = duk_require_string(ctx, 0);
         auto inst = getNativePointer<CanvasContext>(ctx);
-        float r, g, b, a;
-        stringToColorRGBA(c, r, g, b, a);
-        inst->setStrokeStyle(r, g, b);
+        inst->setStrokeStyle(c);
 
         return 0;
     }
@@ -387,9 +385,7 @@ namespace mural
     {
         const char *c = duk_require_string(ctx, 0);
         auto inst = getNativePointer<CanvasContext>(ctx);
-        float r, g, b, a;
-        stringToColorRGBA(c, r, g, b, a);
-        inst->setFillStyle(r, g, b);
+        inst->setFillStyle(c);
 
         return 0;
     }
