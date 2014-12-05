@@ -7,11 +7,14 @@ It's design to be something like **Ejecta for Desktop**. The ONLY reason that I 
 I'm very proud of the result, even it's not completed, lots of features not supported actually. The compiled executable file is about 2m and less than 1m gzipped (I know it's not internet thing :D).
 
 ## Supported APIs
+
 ### General DOM stuff
 See `assets/scripts/mural.js`
+
 ### LocalStorage
 1. Support both `localStorage.setItem('key', 'value');` and `localStorage['key'] = 'value'` syntax
 2. Save JSON data to the system-appropriate writable directory which for the use of logs, preference files(`~/Application Support` on MacOSX and `you_app_folder` on Windows)
+
 ### Canvas Style
 Basic window settings are supported by using `canvas.style`:
 ```
@@ -38,6 +41,8 @@ canvas.style.backgroundColor = '#808';
 - [x] bezierCurveTo
 - [x] arcTo
 - [x] quadraticCurveTo
+- [x] setTrasform
+- [x] transform
 - [ ] font
 - [ ] globalCompositeOperation
 - [ ] imageSmoothingEnabled
@@ -51,8 +56,6 @@ canvas.style.backgroundColor = '#808';
 - [ ] texAlign
 - [ ] textBaseline
 - [ ] measureText
-- [ ] setTrasform
-- [ ] transform
 - [ ] createLinearGradient
 - [ ] createRadialGradient
 - [ ] createPattern
