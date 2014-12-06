@@ -2,7 +2,7 @@
 ---
 This is an experimental project which implements [CanvasRenderingContext2D][CanvasRenderingContext2D] using amazing [Cinder][Cinder] framework and [duktape][duktape]. 
 
-It's design to be something like **Ejecta for Desktop**. The ONLY reason that I start this instead of using [Node-webkit][Node-webkit] is the executable file size. Nearly 100m size for a simple game which I want to share with friends sounds crazy and no one want to download another **Chromium** just for playing a tiny game.
+It's design to be something like __Ejecta for Desktop__. The ONLY reason that I start this instead of using [Node-webkit][Node-webkit] is the executable file size. Nearly 100m size for a simple game which I want to share with friends sounds crazy and no one want to download another __Chromium__ just for playing a tiny game.
 
 I'm very proud of the result, even it's not completed, lots of features not supported actually. The compiled executable file is about 2m and less than 1m gzipped (I know it's not internet thing :D).
 
@@ -11,9 +11,12 @@ I'm very proud of the result, even it's not completed, lots of features not supp
 ### General DOM stuff
 See `assets/scripts/mural.js`
 
+### Mouse and Keyboard
+The `document` object will receive `MouseEvent` and `KeyEvent`, and support both `addEventListener` and `onmousemove` syntax. (Note that `MouseEvent` and `KeyEvent` are just aliases of `Event` class)
+
 ### LocalStorage
 1. Support both `localStorage.setItem('key', 'value');` and `localStorage['key'] = 'value'` syntax
-2. Save JSON data to the system-appropriate writable directory which for the use of logs, preference files(`~/Application Support` on MacOSX and `you_app_folder` on Windows)
+2. Save JSON data to the system-appropriate writable directory which for the use of logs, preference files. (`~/Application Support` on MacOSX and `you_app_folder` on Windows)
 
 ### Canvas Style
 Basic window settings are supported by using `canvas.style`:
@@ -24,6 +27,7 @@ canvas.style.height = '180px';
 // Change default window background color
 canvas.style.backgroundColor = '#808';
 ```
+
 ### CanvasRenderingContext2D
 - [x] strokeStyle, fillStyle (only color support for now)
 - [x] globalAlpha
@@ -69,23 +73,17 @@ I always prefer [Trello][trello] for project management, the tasks list can be f
 3. Clone the repo into `apps`: `git clone https://github.com/pixelpicosean/Mural.git`
 4. Open project file and have fun
 
-*Development using Cinder v0.8.6, the dev version not tested yet*
+_Development using Cinder v0.8.6, the dev version not tested yet_
 
 ## Hacking
 It's better to compile in release mode and directly modify `index.js` in `assets/scripts` to see the result.
 If you want to help develop, please run in debug mode and see what's happening.
 
 ## Supported Platforms
-Currently only support Windows and OSX._([Cinder](Cinder) only support Windows, OSX and iOS)_
-For other platforms plz try:
-- [Ejecta][Ejecta](iOS)
-- [Ejecta-X][Ejecta-X](Android)
-- [Cocoonjs][Cocoonjs](iOS & Android)
-- [Node-webkit][Node-webkit](Windows, OSX and Linux)
+Currently only support Windows and OSX. _([Cinder](Cinder) only support Windows, OSX and iOS)_
 
 ## Note
-Currently JavaScript API is not **safe**. By saying not **safe** I mean any miss use will immediatly **crash** the app.
-Also the JavaScript is running under `strict` mode which is mostly the reason of a **crash** :P
+`Release` mode is __not safe__, problems will simply __crash__ it. But errors will be logged into console in `Debug` mode.
 
 ---
 
