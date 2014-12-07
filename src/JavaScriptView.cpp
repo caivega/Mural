@@ -173,6 +173,7 @@ namespace mural
 
         glDisable(GL_DEPTH_TEST);
         gl::enableAlphaBlending();
+        gl::enableVerticalSync();
 
         glEnable(GL_LINE_SMOOTH);
         glEnable(GL_POLYGON_SMOOTH);
