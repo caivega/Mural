@@ -236,7 +236,9 @@ window.top = window.parent = window;
         window.localStorage = new Proxy(localStorage, handler);
     })(window);
 
+    // Setup window events
     window.Event = window.MouseEvent = window.KeyboardEvent = __MURAL__.Event;
+    __MURAL__.eventMixin.call(window);
 
     window.location = { href: 'index' };
 
@@ -396,6 +398,10 @@ window.top = window.parent = window;
             evt.code = code;
             evt.metaKey = metaKey;
             document.dispatchEvent(evt);
+        },
+
+        dispatchNamedEvent: function(type) {
+            document.dispatchEvent(document.createEvent(type));
         }
     };
     __MURAL__.eventMixin.call(window.document);
