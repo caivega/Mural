@@ -22,7 +22,9 @@ namespace mural
             jsPushRef(ctx, inst->jsObjectRef);
             duk_push_string(ctx, "dispatchEvent");
             duk_peval_string(ctx, evtCode);
-            duk_call_prop(ctx, -3, 1);
+            if (duk_pcall_prop(ctx, -3, 1) != 0) {
+                printf("%s\n", duk_to_string(ctx, -1));
+            }
             duk_pop(ctx);
         };
 
