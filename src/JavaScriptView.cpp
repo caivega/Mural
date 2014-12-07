@@ -170,8 +170,13 @@ namespace mural
 
         // Setup OpenGL for drawing
         gl::setViewport(Area(0, 0, width, height));
+
         glDisable(GL_DEPTH_TEST);
         gl::enableAlphaBlending();
+
+        glEnable(GL_LINE_SMOOTH);
+        glEnable(GL_POLYGON_SMOOTH);
+
         gl::clear(ColorA::white(), false);
 
         // [Tests]
