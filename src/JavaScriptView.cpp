@@ -185,6 +185,16 @@ namespace mural
 //        AsyncImageLoader();
 //        ColorUtil();
 //        LoadImage();
+
+        // Fire load events
+        duk_push_global_object(jsGlobalContext);
+        duk_get_prop_string(jsGlobalContext, -1, "document"); // window, document
+        duk_push_string(jsGlobalContext, "dispatchNamedEvent"); // window, document, dispatchNamedEvent
+        duk_push_string(jsGlobalContext, "DOMContentLoaded");
+
+        duk_pcall_prop(jsGlobalContext, -3, 1);
+
+        duk_pop_3(jsGlobalContext);
     }
 
     void JavaScriptView::update()
