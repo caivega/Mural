@@ -217,7 +217,7 @@ window.top = window.parent = window;
     // window.XMLHttpRequest = __MURAL__.HttpRequest;
     // window.WebSocket = __MURAL__.WebSocket;
 
-    window.canvas = new __MURAL__.Canvas();
+    window.__default__canvas__ = new __MURAL__.Canvas();
 
     (function(window) {
         var handler = {
@@ -343,7 +343,7 @@ window.top = window.parent = window;
 
         getElementById: function(id) {
             if (id === 'canvas') {
-                return window.canvas;
+                return window.__default__canvas__;
             }
             return null;
         },
