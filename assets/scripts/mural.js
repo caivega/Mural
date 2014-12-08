@@ -210,14 +210,16 @@ window.top = window.parent = window;
 
     // The native Image, Audio, HttpRequest and LocalStorage class mimic the real elements
     window.Image = window.HTMLImageElement = __MURAL__.Image;
+
+    __MURAL__.eventMixin.call(__MURAL__.Canvas.prototype);
     window.HTMLCanvasElement = __MURAL__.Canvas;
     window.CanvasRenderingContext2D = __MURAL__.CanvasContext;
+    window.__default__canvas__ = new __MURAL__.Canvas();
+
     // window.Audio = __MURAL__.Audio;
     // window.Video = __MURAL__.Video;
     // window.XMLHttpRequest = __MURAL__.HttpRequest;
     // window.WebSocket = __MURAL__.WebSocket;
-
-    window.__default__canvas__ = new __MURAL__.Canvas();
 
     (function(window) {
         var handler = {
@@ -390,6 +392,9 @@ window.top = window.parent = window;
             evt.movementY = movementY;
 
             document.dispatchEvent(evt);
+            if (window.__default__canvas__) {
+                window.__default__canvas__.dispatchEvent(evt);
+            }
         },
 
         dispatchKeyEvent: function(type, keyCode, code, metaKey) {
@@ -398,6 +403,9 @@ window.top = window.parent = window;
             evt.code = code;
             evt.metaKey = metaKey;
             document.dispatchEvent(evt);
+            if (window.__default__canvas__) {
+                window.__default__canvas__.dispatchEvent(evt);
+            }
         },
 
         dispatchNamedEvent: function(type) {
