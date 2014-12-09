@@ -4,25 +4,21 @@
  */
 (function() { 'use strict';
 
-    function draw() {
-        var ctx = document.getElementById('canvas').getContext('2d');
-        ctx.translate(75, 75);
+    var context = document.getElementById('canvas').getContext('2d');
 
-        for (var i = 1; i < 6; i++) { // Loop through rings (from inside to out)
-            ctx.save();
-            ctx.fillStyle = 'rgb(' + (51 * i) + ',' + (255 - 51 * i) + ',255)';
+    context.fillStyle = '#0f0';
+    context.beginPath();
+    context.arc(130, 100, 40, 0, Math.PI * 2, true);
+    context.fill();
 
-            for (var j = 0; j < i * 6; j++) { // draw individual dots
-                ctx.rotate(Math.PI * 2 / (i * 6));
-                ctx.beginPath();
-                ctx.arc(0, i * 12.5, 5, 0, Math.PI * 2, true);
-                ctx.fill();
-            }
+    context.fillStyle = '#f00';
+    context.beginPath();
+    context.arc(100, 150, 40, 0, Math.PI * 2, true);
+    context.fill();
 
-            ctx.restore();
-        }
-    }
-
-    draw();
+    context.fillStyle = '#00f';
+    context.beginPath();
+    context.arc(160, 150, 40, 0, Math.PI * 2, true);
+    context.fill();
 
 })();

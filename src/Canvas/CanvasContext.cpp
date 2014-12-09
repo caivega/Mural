@@ -22,7 +22,7 @@ namespace mural
         state = &stateStack[stateIndex];
 
         state->globalCompositeOperation = CompositeOperation::kCompositeOperationSourceOver;
-        state->fillStyle = Color::black();
+        state->fillStyle = ColorA(0.0f, 0.0f, 0.0f, 1.0f);
         state->strokeStyle = Color::black();
         state->globalAlpha = 1.0f;
 
@@ -162,7 +162,7 @@ namespace mural
         prepare();
 
         gl::SaveColorState saveColor;
-        gl::color(state->strokeStyle.r, state->strokeStyle.g, state->strokeStyle.b, state->globalAlpha);
+        gl::color(state->strokeStyle.r, state->strokeStyle.g, state->strokeStyle.b, state->strokeStyle.a * state->globalAlpha);
         for (auto it = paths.begin(); it != paths.end(); ++it) {
             if (!it->empty()) {
                 gl::draw(*it);
@@ -176,8 +176,8 @@ namespace mural
     {
         prepare();
 
-        gl::SaveColorState saveColor;
-        gl::color(state->fillStyle.r, state->fillStyle.g, state->fillStyle.b, state->globalAlpha);
+//        gl::SaveColorState saveColor;
+        gl::color(state->fillStyle.r, state->fillStyle.g, state->fillStyle.b, state->fillStyle.a * state->globalAlpha);
         for (auto it = paths.begin(); it != paths.end(); ++it) {
             if (!it->empty()) {
                 gl::drawSolid(*it);
@@ -333,6 +333,8 @@ namespace mural
             gl::setMatrices(renderingCam);
         }
         gl::enableAlphaBlending();
+
+        glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA); // source-over
     }
 
     void CanvasContext::present()

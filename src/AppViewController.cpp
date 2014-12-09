@@ -20,14 +20,17 @@ namespace mural
     {
         view = new JavaScriptView(width, height);
         view->loadScriptAtPath(path);
-        view->boot();
-
-        this->booted = true;
     }
     void AppViewController::update()
     {
-        if (view && booted) {
-            view->update();
+        if (view) {
+            if (booted) {
+                view->update();
+            }
+            else {
+                view->boot();
+                booted = true;
+            }
         }
     }
     void AppViewController::draw()
