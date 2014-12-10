@@ -52,7 +52,7 @@ namespace mural
 
         state->globalCompositeOperation = CompositeOperation::kCompositeOperationSourceOver;
         state->fillStyle = ColorA(0.0f, 0.0f, 0.0f, 1.0f);
-        state->strokeStyle = Color::black();
+        state->strokeStyle = ColorA(0.0f, 0.0f, 0.0f, 1.0f);
         state->globalAlpha = 1.0f;
 
         state->lineWidth = 1.0f;
@@ -205,7 +205,7 @@ namespace mural
     {
         prepare();
 
-//        gl::SaveColorState saveColor;
+        gl::SaveColorState saveColor;
         gl::color(state->fillStyle.r, state->fillStyle.g, state->fillStyle.b, state->fillStyle.a * state->globalAlpha);
         for (auto it = paths.begin(); it != paths.end(); ++it) {
             if (!it->empty()) {
