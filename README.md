@@ -47,8 +47,8 @@ canvas.style.backgroundColor = '#808';
 - [x] quadraticCurveTo
 - [x] setTrasform
 - [x] transform
+- [x] globalCompositeOperation
 - [ ] font
-- [ ] globalCompositeOperation
 - [ ] imageSmoothingEnabled
 - [ ] lineCap
 - [ ] lineJoin
