@@ -363,7 +363,7 @@ namespace mural
         }
         gl::enableAlphaBlending();
 
-        glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA); // source-over
+        glBlendFunc(CompositeOperationFuncs[state->globalCompositeOperation].source, CompositeOperationFuncs[state->globalCompositeOperation].destination);
     }
 
     void CanvasContext::present()
@@ -436,6 +436,23 @@ namespace mural
     float CanvasContext::getGlobalAlpha()
     {
         return state->globalAlpha;
+    }
+
+    void CanvasContext::setGlobalCompositeOperation(const std::string &op)
+    {
+        if (OpMap.find(op) != OpMap.end()) {
+            state->globalCompositeOperation = OpMap.at(op);
+        }
+    }
+
+    std::string CanvasContext::getGlobalCompositeOperation()
+    {
+        for (auto k = OpMap.begin(); k != OpMap.end(); ++k) {
+            if (k->second == state->globalCompositeOperation) {
+                return k->first;
+            }
+        }
+        return "source-over";
     }
 
     void CanvasContext::setFont(const std::string &fontName)
