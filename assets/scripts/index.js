@@ -4,21 +4,15 @@
  */
 (function() { 'use strict';
 
-    var context = document.getElementById('canvas').getContext('2d');
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
 
-    context.fillStyle = '#0f0';
-    context.beginPath();
-    context.arc(130, 100, 40, 0, Math.PI * 2, true);
-    context.fill();
+    ctx.globalCompositeOperation = 'xor';
 
-    context.fillStyle = '#f00';
-    context.beginPath();
-    context.arc(100, 150, 40, 0, Math.PI * 2, true);
-    context.fill();
+    ctx.fillStyle = '#00f';
+    ctx.fillRect(10, 10, 100, 100);
 
-    context.fillStyle = '#00f';
-    context.beginPath();
-    context.arc(160, 150, 40, 0, Math.PI * 2, true);
-    context.fill();
+    ctx.fillStyle = '#f00';
+    ctx.fillRect(50, 50, 100, 100);
 
 })();
