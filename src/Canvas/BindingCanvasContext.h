@@ -56,6 +56,8 @@ namespace mural
     int w_CanvasContext_prototype_get_fillStyle(duk_context *ctx);
     int w_CanvasContext_prototype_set_globalAlpha(duk_context *ctx);
     int w_CanvasContext_prototype_get_globalAlpha(duk_context *ctx);
+    int w_CanvasContext_prototype_set_globalCompositeOperation(duk_context *ctx);
+    int w_CanvasContext_prototype_get_globalCompositeOperation(duk_context *ctx);
     int w_CanvasContext_prototype_set_font(duk_context *ctx);
     int w_CanvasContext_prototype_get_font(duk_context *ctx);
 

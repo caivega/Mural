@@ -44,6 +44,8 @@ namespace mural
         kCompositeOperationSourceOut,
         kCompositeOperationDestinationAtop
     } CompositeOperation;
+    typedef struct { GLenum source; GLenum destination; float alphaFactor; } CompositeOperationFunc;
+    extern const CompositeOperationFunc CompositeOperationFuncs[];
 
     struct CanvasState {
         CompositeOperation globalCompositeOperation = CompositeOperation::kCompositeOperationSourceOver;
@@ -156,6 +158,8 @@ namespace mural
         std::string getFillStyle();
         void setGlobalAlpha(float a);
         float getGlobalAlpha();
+        void setGlobalCompositeOperation(const std::string& op);
+        std::string getGlobalCompositeOperation();
         void setFont(const std::string& fontName);
         std::string getFont();
 

@@ -14,6 +14,35 @@
 
 namespace mural
 {
+    const CompositeOperationFunc CompositeOperationFuncs[] = {
+        [kCompositeOperationSourceOver] = { GL_ONE, GL_ONE_MINUS_SRC_ALPHA, 1 },
+        [kCompositeOperationLighter] = { GL_ONE, GL_ONE_MINUS_SRC_ALPHA, 0 },
+        [kCompositeOperationDarker] = { GL_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA, 1 },
+        [kCompositeOperationDestinationOut] = { GL_ZERO, GL_ONE_MINUS_SRC_ALPHA, 1 },
+        [kCompositeOperationDestinationOver] = { GL_ONE_MINUS_DST_ALPHA, GL_ONE, 1 },
+        [kCompositeOperationSourceAtop] = { GL_DST_ALPHA, GL_ONE_MINUS_SRC_ALPHA, 1 },
+        [kCompositeOperationXOR] = { GL_ONE_MINUS_DST_ALPHA, GL_ONE_MINUS_SRC_ALPHA, 1 },
+        [kCompositeOperationCopy] = { GL_ONE, GL_ZERO, 1 },
+        [kCompositeOperationSourceIn] = { GL_DST_ALPHA, GL_ZERO, 1 },
+        [kCompositeOperationDestinationIn] = { GL_ZERO, GL_SRC_ALPHA, 1 },
+        [kCompositeOperationSourceOut] = { GL_ONE_MINUS_DST_ALPHA, GL_ZERO, 1 },
+        [kCompositeOperationDestinationAtop] = { GL_ONE_MINUS_DST_ALPHA, GL_SRC_ALPHA, 1 }
+    };
+    const std::map<const std::string, CompositeOperation> OpMap = {
+        { "source-over", kCompositeOperationSourceOver },
+        { "lighter", kCompositeOperationLighter },
+        { "darker", kCompositeOperationDarker },
+        { "destination-out", kCompositeOperationDestinationOut },
+        { "destination-over", kCompositeOperationDestinationOver },
+        { "source-atop", kCompositeOperationSourceAtop },
+        { "xor", kCompositeOperationXOR },
+        { "copy", kCompositeOperationCopy },
+        { "source-in", kCompositeOperationSourceIn },
+        { "destination-in", kCompositeOperationDestinationIn },
+        { "source-out", kCompositeOperationSourceOut },
+        { "destination-atop", kCompositeOperationDestinationAtop }
+    };
+
     CanvasContext::CanvasContext(bool isScreenContext):
         canvas(nullptr)
     {

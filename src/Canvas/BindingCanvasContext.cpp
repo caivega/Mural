@@ -411,6 +411,21 @@ namespace mural
 
         return 1;
     }
+    int w_CanvasContext_prototype_set_globalCompositeOperation(duk_context *ctx)
+    {
+        const char *op = duk_require_string(ctx, 0);
+        auto inst = getNativePointer<CanvasContext>(ctx);
+        inst->setGlobalCompositeOperation(op);
+
+        return 0;
+    }
+    int w_CanvasContext_prototype_get_globalCompositeOperation(duk_context *ctx)
+    {
+        auto inst = getNativePointer<CanvasContext>(ctx);
+        duk_push_string(ctx, inst->getGlobalCompositeOperation().c_str());
+
+        return 1;
+    }
     int w_CanvasContext_prototype_set_font(duk_context *ctx)
     {
         std::string font = duk_require_string(ctx, 0);
@@ -437,6 +452,7 @@ namespace mural
         MU_BIND_SET_GET(CanvasContext, strokeStyle);
         MU_BIND_SET_GET(CanvasContext, fillStyle);
         MU_BIND_SET_GET(CanvasContext, globalAlpha);
+        MU_BIND_SET_GET(CanvasContext, globalCompositeOperation);
         MU_BIND_SET_GET(CanvasContext, font);
 
         MU_FINISH_BINDING(CanvasContext);
