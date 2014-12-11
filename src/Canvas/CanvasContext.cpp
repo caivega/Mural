@@ -335,7 +335,16 @@ namespace mural
 
         gl::SaveColorState saveColor;
         gl::color(state->strokeStyle.r, state->strokeStyle.g, state->strokeStyle.b, state->strokeStyle.a * state->globalAlpha);
-        gl::drawString(text, Vec2f(x, y), state->strokeStyle, state->font);
+
+        if (state->textAlign == TextAlign::kTextAlignLeft) {
+            gl::drawString(text, Vec2f(x, y), state->strokeStyle, state->font);
+        }
+        else if (state->textAlign == TextAlign::kTextAlignCenter) {
+            gl::drawStringCentered(text, Vec2f(x, y), state->strokeStyle, state->font);
+        }
+        else if (state->textAlign == TextAlign::kTextAlignRight) {
+            gl::drawStringRight(text, Vec2f(x, y), state->strokeStyle, state->font);
+        }
 
         present();
     }
