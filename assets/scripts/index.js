@@ -7,12 +7,14 @@
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext('2d');
 
-    ctx.globalCompositeOperation = 'xor';
+    ctx.fillStyle = '#f0f';
+    ctx.font = '48px Verdana';
 
-    ctx.fillStyle = '#00f';
-    ctx.fillRect(10, 10, 100, 100);
-
-    ctx.fillStyle = '#f00';
-    ctx.fillRect(50, 50, 100, 100);
+    ctx.textAlign = 'left';
+    ctx.fillText('Align to left', canvas.width * 0.5, 120);
+    ctx.textAlign = 'center';
+    ctx.fillText('Align to center', canvas.width * 0.5, 240);
+    ctx.textAlign = 'right';
+    ctx.fillText('Align to right', canvas.width * 0.5, 360);
 
 })();
