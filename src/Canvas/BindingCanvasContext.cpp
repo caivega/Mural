@@ -441,6 +441,21 @@ namespace mural
 
         return 1;
     }
+    int w_CanvasContext_prototype_set_textAlign(duk_context *ctx)
+    {
+        std::string align = duk_require_string(ctx, 0);
+        auto inst = getNativePointer<CanvasContext>(ctx);
+        inst->setTextAlign(align);
+
+        return 0;
+    }
+    int w_CanvasContext_prototype_get_textAlign(duk_context *ctx)
+    {
+        auto inst = getNativePointer<CanvasContext>(ctx);
+        duk_push_string(ctx, inst->getTextAlign().c_str());
+
+        return 1;
+    }
 
     duk_ret_t js_register_CanvasContext(duk_context *ctx)
     {
@@ -454,6 +469,7 @@ namespace mural
         MU_BIND_SET_GET(CanvasContext, globalAlpha);
         MU_BIND_SET_GET(CanvasContext, globalCompositeOperation);
         MU_BIND_SET_GET(CanvasContext, font);
+        MU_BIND_SET_GET(CanvasContext, textAlign);
 
         MU_FINISH_BINDING(CanvasContext);
 
