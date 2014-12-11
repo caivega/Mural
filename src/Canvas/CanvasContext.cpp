@@ -61,6 +61,7 @@ namespace mural
         state->miterLimit = 10.0f;
 
         state->font = Font::getDefault();
+        state->textAlign = TextAlign::kTextAlignLeft;
 
         state->transform = MatrixAffine2f::identity();
         paths.push_back(Path2d());
@@ -345,7 +346,16 @@ namespace mural
 
         gl::SaveColorState saveColor;
         gl::color(state->fillStyle.r, state->fillStyle.g, state->fillStyle.b, state->fillStyle.a * state->globalAlpha);
-        gl::drawString(text, Vec2f(x, y), state->fillStyle, state->font);
+
+        if (state->textAlign == TextAlign::kTextAlignLeft) {
+            gl::drawString(text, Vec2f(x, y), state->fillStyle, state->font);
+        }
+        else if (state->textAlign == TextAlign::kTextAlignCenter) {
+            gl::drawStringCentered(text, Vec2f(x, y), state->fillStyle, state->font);
+        }
+        else if (state->textAlign == TextAlign::kTextAlignRight) {
+            gl::drawStringRight(text, Vec2f(x, y), state->fillStyle, state->font);
+        }
 
         present();
     }
@@ -481,6 +491,36 @@ namespace mural
     std::string CanvasContext::getFont()
     {
         return state->font.getName();
+    }
+
+    void CanvasContext::setTextAlign(const std::string &textAlign)
+    {
+        if (textAlign == "left" || textAlign == "start") {
+            state->textAlign = TextAlign::kTextAlignLeft;
+        }
+        else if (textAlign == "center") {
+            state->textAlign = TextAlign::kTextAlignCenter;
+        }
+        else if (textAlign == "right" || textAlign == "end") {
+            state->textAlign = TextAlign::kTextAlignRight;
+        }
+    }
+
+    std::string CanvasContext::getTextAlign()
+    {
+        switch (state->textAlign) {
+            case TextAlign::kTextAlignLeft:
+                return "left";
+                break;
+            case TextAlign::kTextAlignCenter:
+                return "center";
+                break;
+            case TextAlign::kTextAlignRight:
+                return "right";
+                break;
+            default:
+                return "left";
+        }
     }
 
     void CanvasContext::resize(int width, int height)

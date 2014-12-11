@@ -31,6 +31,12 @@ namespace mural
     } LineJoin;
 
     typedef enum {
+        kTextAlignLeft,
+        kTextAlignCenter,
+        kTextAlignRight
+    } TextAlign;
+
+    typedef enum {
         kCompositeOperationSourceOver,
         kCompositeOperationLighter,
         kCompositeOperationDarker,
@@ -61,6 +67,7 @@ namespace mural
         float miterLimit = 10.0f;
 
         Font font = Font::getDefault();
+        TextAlign textAlign = TextAlign::kTextAlignLeft;
 
         MatrixAffine2f transform = MatrixAffine2f::identity();
 
@@ -78,6 +85,7 @@ namespace mural
             miterLimit = other.miterLimit;
 
             font = other.font;
+            textAlign = other.textAlign;
 
             transform = other.transform;
         }
@@ -162,6 +170,8 @@ namespace mural
         std::string getGlobalCompositeOperation();
         void setFont(const std::string& fontName);
         std::string getFont();
+        void setTextAlign(const std::string& textAlign);
+        std::string getTextAlign();
 
         void resize(int width = -1, int height = -1);
         int getWidth() { return width; }
