@@ -12,7 +12,7 @@ I'm very proud of the result, even it's not completed, lots of features not supp
 See `assets/scripts/mural.js`
 
 ### Mouse and Keyboard
-The `document` object will receive `MouseEvent` and `KeyEvent`, and support both `addEventListener` and `onmousemove` syntax. (Note that `MouseEvent` and `KeyEvent` are just aliases of `Event` class)
+The `document` and `HTMLCanvasElement` objects will receive `MouseEvent` and `KeyEvent`, and support both `addEventListener` and `onmousemove` syntax. (Note that `MouseEvent` and `KeyEvent` are just aliases of `Event` class)
 
 ### LocalStorage
 1. Support both `localStorage.setItem('key', 'value');` and `localStorage['key'] = 'value'` syntax
@@ -48,7 +48,10 @@ canvas.style.backgroundColor = '#808';
 - [x] setTrasform
 - [x] transform
 - [x] globalCompositeOperation
-- [ ] font
+- [x] font
+- [x] texAlign
+- [ ] textBaseline
+- [ ] measureText
 - [ ] imageSmoothingEnabled
 - [ ] lineCap
 - [ ] lineJoin
@@ -57,9 +60,6 @@ canvas.style.backgroundColor = '#808';
 - [ ] shadowColor
 - [ ] shadowOffsetX
 - [ ] shadowOffsetY
-- [ ] texAlign
-- [ ] textBaseline
-- [ ] measureText
 - [ ] createLinearGradient
 - [ ] createRadialGradient
 - [ ] createPattern
