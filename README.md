@@ -50,6 +50,9 @@ canvas.style.backgroundColor = '#808';
 - [x] globalCompositeOperation
 - [x] font
 - [x] texAlign
+- [ ] createImageData
+- [ ] getImageData
+- [ ] putImageData
 - [ ] textBaseline
 - [ ] measureText
 - [ ] imageSmoothingEnabled

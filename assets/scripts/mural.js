@@ -208,6 +208,52 @@ window.top = window.parent = window;
         }
     };
 
+    (function(window) {
+        var TypedArray = function(length) {
+            this.__buf = Duktape.Buffer(length);
+        };
+        Object.defineProperty(TypedArray.prototype, 'name', {
+            get: function() {
+                return 'TypedArray';
+            }
+        });
+        Object.defineProperty(TypedArray.prototype, 'BYTES_PER_ELEMENT', {
+            get: function() {
+                return 1;
+            }
+        });
+        Object.defineProperty(TypedArray.prototype, 'buffer', {
+            get: function() {
+                return this.__buf;
+            }
+        });
+        Object.defineProperty(TypedArray.prototype, 'byteLength', {
+            get: function() {
+                return this.__buf.length;
+            }
+        });
+        Object.defineProperty(TypedArray.prototype, 'byteOffset', {
+            get: function() {
+                return 0;
+            }
+        });
+        Object.defineProperty(TypedArray.prototype, 'length', {
+            get: function() {
+                return this.__buf.length / this.BYTES_PER_ELEMENT;
+            }
+        });
+
+        var Uint8ClampedArray = function(length) {
+            TypedArray.call(this);
+        };
+        Object.defineProperty(Uint8ClampedArray.prototype, 'name', {
+            get: function() {
+                return 'Uint8ClampedArray';
+            }
+        });
+        window.Uint8ClampedArray = Uint8ClampedArray;
+    })(window);
+
     // The native Image, Audio, HttpRequest and LocalStorage class mimic the real elements
     window.Image = window.HTMLImageElement = __MURAL__.Image;
 
@@ -350,6 +396,10 @@ window.top = window.parent = window;
                 return window.__default__canvas__;
             }
             return null;
+        },
+
+        querySelector: function(id) {
+            return document.getElementById(id);
         },
 
         getElementsByTagName: function(tagName) {
