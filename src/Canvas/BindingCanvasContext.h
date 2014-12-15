@@ -48,6 +48,8 @@ namespace mural
 
     int w_CanvasContext_prototype_clearRect(duk_context *ctx);
 
+    int w_CanvasContext_prototype_createImageData(duk_context *ctx);
+
     int w_CanvasContext_prototype_set_lineWidth(duk_context *ctx);
     int w_CanvasContext_prototype_get_lineWidth(duk_context *ctx);
     int w_CanvasContext_prototype_set_strokeStyle(duk_context *ctx);

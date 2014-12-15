@@ -39,6 +39,7 @@ namespace mural
         { "transform",  w_CanvasContext_prototype_transform,    6 },
         { "setTransform",  w_CanvasContext_prototype_setTransform,    6 },
         { "clearRect",  w_CanvasContext_prototype_clearRect,    4 },
+        { "createImageData",  w_CanvasContext_prototype_createImageData,    2 },
         { NULL, NULL, 0 }
     };
 
@@ -349,6 +350,28 @@ namespace mural
         inst->clearRect(x, y, w, h);
 
         return 0;
+    }
+
+    int w_CanvasContext_prototype_createImageData(duk_context *ctx)
+    {
+        // TODO: ImageData object should also be acceptable parameter
+        int w = duk_require_int(ctx, 0);
+        int h = duk_require_int(ctx, 1);
+
+        // Create an ImageData object
+        duk_idx_t imageData = duk_push_object(ctx); // imageData
+
+        duk_idx_t idx = duk_push_array(ctx); // imageData, array
+        for (int y = 0; y < h; ++y) {
+            for (int x = 0; x < w; ++x) {
+                duk_push_uint(ctx, 0);
+                duk_put_prop_index(ctx, idx, y * w + x);
+            }
+        }
+
+        duk_put_prop_string(ctx, imageData, "data"); // imageData
+
+        return 1;
     }
 
     int w_CanvasContext_prototype_set_lineWidth(duk_context *ctx)

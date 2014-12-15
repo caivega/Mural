@@ -17,4 +17,7 @@
     ctx.textAlign = 'right';
     ctx.fillText('Align to right', canvas.width * 0.5, 360);
 
+    var data = ctx.createImageData(8, 4);
+    print(data.data.length);
+
 })();
