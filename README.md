@@ -1,5 +1,5 @@
 # Mural
----
+
 This is an experimental project which implements [CanvasRenderingContext2D][CanvasRenderingContext2D] using amazing [Cinder][Cinder] framework and [duktape][duktape]. 
 
 It's design to be something like __Ejecta for Desktop__. The ONLY reason that I start this instead of using [Node-webkit][Node-webkit] is the executable file size. Nearly 100m size for a simple game which I want to share with friends sounds crazy and no one want to download another __Chromium__ just for playing a tiny game.
@@ -9,16 +9,20 @@ I'm very proud of the result, even it's not completed, lots of features not supp
 ## Supported APIs
 
 ### General DOM stuff
+
 See `assets/scripts/mural.js`
 
 ### Mouse and Keyboard
+
 The `document` and `HTMLCanvasElement` objects will receive `MouseEvent` and `KeyEvent`, and support both `addEventListener` and `onmousemove` syntax. (Note that `MouseEvent` and `KeyEvent` are just aliases of `Event` class)
 
 ### LocalStorage
+
 1. Support both `localStorage.setItem('key', 'value');` and `localStorage['key'] = 'value'` syntax
 2. Save JSON data to the system-appropriate writable directory which for the use of logs, preference files. (`~/Application Support` on MacOSX and `you_app_folder` on Windows)
 
 ### Canvas Style
+
 Basic window settings are supported by using `canvas.style`:
 ```
 // Change window width/height
@@ -29,6 +33,7 @@ canvas.style.backgroundColor = '#808';
 ```
 
 ### CanvasRenderingContext2D
+
 - [x] strokeStyle, fillStyle (only color support for now)
 - [x] globalAlpha
 - [x] lineWidth
@@ -50,7 +55,7 @@ canvas.style.backgroundColor = '#808';
 - [x] globalCompositeOperation
 - [x] font
 - [x] texAlign
-- [ ] createImageData
+- [x] createImageData
 - [ ] getImageData
 - [ ] putImageData
 - [ ] textBaseline
@@ -68,9 +73,11 @@ canvas.style.backgroundColor = '#808';
 - [ ] createPattern
 
 ## Progress of developing
+
 I always prefer [Trello][trello] for project management, the tasks list can be found here [Mural at Trello][mural-trello]
 
 ## Build and Run
+
 1. Download Cinder from [http://libcinder.org/download/](http://libcinder.org/download/) and unzip it
 2. Create a `apps` folder at the root
 3. Clone the repo into `apps`: `git clone https://github.com/pixelpicosean/Mural.git`
@@ -79,13 +86,16 @@ I always prefer [Trello][trello] for project management, the tasks list can be f
 _Development using Cinder v0.8.6, the dev version not tested yet_
 
 ## Hacking
+
 It's better to compile in release mode and directly modify `index.js` in `assets/scripts` to see the result.
 If you want to help develop, please run in debug mode and see what's happening.
 
 ## Supported Platforms
+
 Currently only support Windows and OSX. _([Cinder](Cinder) only support Windows, OSX and iOS)_
 
 ## Note
+
 `Release` mode is __not safe__, problems will simply __crash__ it. But errors will be logged into console in `Debug` mode.
 
 ---
