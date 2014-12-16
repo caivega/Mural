@@ -398,6 +398,20 @@ namespace mural
         return texture;
     }
 
+    Surface CanvasContext::getImageData(int sx, int sy, int sw, int sh)
+    {
+        prepare();
+
+        Surface s(sw, sh, true);
+
+        glFlush();
+        glReadPixels(sx, sy, sw, sh, GL_RGBA, GL_UNSIGNED_BYTE, s.getData());
+
+        present();
+
+        return s;
+    }
+
     void CanvasContext::setLineWidth(float width)
     {
         prepare();

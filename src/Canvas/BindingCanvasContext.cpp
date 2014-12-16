@@ -40,6 +40,8 @@ namespace mural
         { "setTransform",  w_CanvasContext_prototype_setTransform,    6 },
         { "clearRect",  w_CanvasContext_prototype_clearRect,    4 },
         { "createImageData",  w_CanvasContext_prototype_createImageData,    2 },
+        { "getImageData",  w_CanvasContext_prototype_getImageData,    4 },
+        { "putImageData",  w_CanvasContext_prototype_putImageData,    2 },
         { NULL, NULL, 0 }
     };
 
@@ -363,14 +365,57 @@ namespace mural
 
         duk_idx_t idx = duk_push_array(ctx); // imageData, array
         for (int y = 0; y < h; ++y) {
-            for (int x = 0; x < w; ++x) {
+            for (int x = 0; x < w * 4; ++x) {
                 duk_push_uint(ctx, 0);
                 duk_put_prop_index(ctx, idx, y * w + x);
+                duk_push_uint(ctx, 0);
+                duk_put_prop_index(ctx, idx, y * w + x + 1);
+                duk_push_uint(ctx, 0);
+                duk_put_prop_index(ctx, idx, y * w + x + 2);
+                duk_push_uint(ctx, 0);
+                duk_put_prop_index(ctx, idx, y * w + x + 3);
             }
         }
 
         duk_put_prop_string(ctx, imageData, "data"); // imageData
 
+        return 1;
+    }
+
+    int w_CanvasContext_prototype_getImageData(duk_context *ctx)
+    {
+        int sx = duk_require_int(ctx, 0);
+        int sy = duk_require_int(ctx, 1);
+        int sw = duk_require_int(ctx, 2);
+        int sh = duk_require_int(ctx, 3);
+
+        auto inst = getNativePointer<CanvasContext>(ctx);
+        auto data = inst->getImageData(sx, sy, sw, sh).getData();
+
+        // Create an ImageData object
+        duk_idx_t imageData = duk_push_object(ctx); // imageData
+
+        duk_idx_t idx = duk_push_array(ctx); // imageData, array
+        for (int y = 0; y < sh; ++y) {
+            for (int x = 0; x < sw * 4; ++x) {
+                duk_push_uint(ctx, data[y * sw + x]);
+                duk_put_prop_index(ctx, idx, y * sw + x);
+                duk_push_uint(ctx, data[y * sw + x + 1]);
+                duk_put_prop_index(ctx, idx, y * sw + x + 1);
+                duk_push_uint(ctx, data[y * sw + x + 2]);
+                duk_put_prop_index(ctx, idx, y * sw + x + 2);
+                duk_push_uint(ctx, data[y * sw + x + 3]);
+                duk_put_prop_index(ctx, idx, y * sw + x + 3);
+            }
+        }
+
+        duk_put_prop_string(ctx, imageData, "data"); // imageData
+
+        return 1;
+    }
+
+    int w_CanvasContext_prototype_putImageData(duk_context *ctx)
+    {
         return 1;
     }
 

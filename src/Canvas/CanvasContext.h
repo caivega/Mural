@@ -151,6 +151,8 @@ namespace mural
 
         void clearRect(float x, float y, float w, float h);
 
+        Surface getImageData(int sx, int sy, int sw, int sh);
+
         void prepare();
         void present();
 
