@@ -8,16 +8,11 @@
     var ctx = canvas.getContext('2d');
 
     ctx.fillStyle = '#f0f';
-    ctx.font = '48px Verdana';
+    ctx.fillRect(0, 0, 1, 1);
 
-    ctx.textAlign = 'left';
-    ctx.fillText('Align to left', canvas.width * 0.5, 120);
-    ctx.textAlign = 'center';
-    ctx.fillText('Align to center', canvas.width * 0.5, 240);
-    ctx.textAlign = 'right';
-    ctx.fillText('Align to right', canvas.width * 0.5, 360);
-
-    var data = ctx.createImageData(8, 4);
-    print(data.data.length);
+    var data = ctx.getImageData(0, 0, 2, 2);
+    for (var i = 0; i < data.data.length; i++) {
+        print(data.data[i]);
+    }
 
 })();
